@@ -58,7 +58,10 @@ export function getSandboxRootPath(): string {
   if (configuredRoot) {
     return path.isAbsolute(configuredRoot)
       ? configuredRoot
-      : path.join(process.cwd(), configuredRoot);
+      : path.join(
+          /* turbopackIgnore: true */ process.cwd(),
+          configuredRoot,
+        );
   }
   return path.join(os.tmpdir(), "excel-sandbox");
 }
