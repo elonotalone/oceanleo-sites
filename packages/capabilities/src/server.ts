@@ -3,13 +3,12 @@ import "server-only";
 import {
   TENANTS,
   tenantForSiteKey,
-  type AppProfile,
   type TenantDefinition,
 } from "@oceanleo/tenant-registry";
 
 type TrustedManifest = TenantDefinition["manifest"];
 
-export const CAPABILITY_REGISTRY_VERSION = "2026-07-21.1" as const;
+export const CAPABILITY_REGISTRY_VERSION = "2026-07-21.2" as const;
 
 export type CapabilityId =
   | "shell:render"
@@ -118,104 +117,150 @@ export function assertCapability(
   }
 }
 
-export type SecretReferenceId =
-  | "website.github-token"
-  | "website.vercel-token"
-  | "website.cloudflare-token"
-  | "website.supabase-management-token"
-  | "website.server-ssh-key"
-  | "website.railway-token"
-  | "website.aliyun-access-key-id"
-  | "website.aliyun-access-key-secret";
-
-export interface SecretReference {
-  readonly id: SecretReferenceId;
+interface SecretDefinition {
+  readonly tenantSiteKey: string;
   readonly envName: string;
-  readonly profile: "website-privileged";
+  readonly profile: TenantDefinition["profile"];
   readonly capability: CapabilityId;
 }
 
-const WEBSITE_SECRET_REFERENCES: readonly SecretReference[] = Object.freeze([
-  {
-    id: "website.github-token",
+const SECRET_DEFINITIONS = Object.freeze({
+  "website.github-token": Object.freeze({
+    tenantSiteKey: "website",
     envName: "WEBSITE_GITHUB_TOKEN",
     profile: "website-privileged",
     capability: "website:source-edit",
-  },
-  {
-    id: "website.vercel-token",
+  }),
+  "website.vercel-token": Object.freeze({
+    tenantSiteKey: "website",
     envName: "WEBSITE_VERCEL_TOKEN",
     profile: "website-privileged",
     capability: "website:deploy",
-  },
-  {
-    id: "website.cloudflare-token",
+  }),
+  "website.cloudflare-token": Object.freeze({
+    tenantSiteKey: "website",
     envName: "WEBSITE_CLOUDFLARE_API_TOKEN",
     profile: "website-privileged",
     capability: "website:domain-admin",
-  },
-  {
-    id: "website.supabase-management-token",
+  }),
+  "website.supabase-management-token": Object.freeze({
+    tenantSiteKey: "website",
     envName: "WEBSITE_SUPABASE_MANAGEMENT_TOKEN",
     profile: "website-privileged",
     capability: "website:vault",
-  },
-  {
-    id: "website.server-ssh-key",
+  }),
+  "website.server-ssh-key": Object.freeze({
+    tenantSiteKey: "website",
     envName: "WEBSITE_SERVER_SSH_KEY",
     profile: "website-privileged",
     capability: "website:server-admin",
-  },
-  {
-    id: "website.railway-token",
+  }),
+  "website.railway-token": Object.freeze({
+    tenantSiteKey: "website",
     envName: "WEBSITE_RAILWAY_TOKEN",
     profile: "website-privileged",
     capability: "website:provider-oauth",
-  },
-  {
-    id: "website.aliyun-access-key-id",
+  }),
+  "website.aliyun-access-key-id": Object.freeze({
+    tenantSiteKey: "website",
     envName: "WEBSITE_ALIYUN_ACCESS_KEY_ID",
     profile: "website-privileged",
     capability: "website:provider-oauth",
-  },
-  {
-    id: "website.aliyun-access-key-secret",
+  }),
+  "website.aliyun-access-key-secret": Object.freeze({
+    tenantSiteKey: "website",
     envName: "WEBSITE_ALIYUN_ACCESS_KEY_SECRET",
     profile: "website-privileged",
     capability: "website:provider-oauth",
-  },
-]);
+  }),
+} satisfies Readonly<Record<string, SecretDefinition>>);
 
-for (const reference of WEBSITE_SECRET_REFERENCES) {
-  if (reference.envName.startsWith("NEXT_PUBLIC_")) {
-    throw new Error(`Secret reference ${reference.id} is browser-exposed.`);
+export type SecretReferenceId = keyof typeof SECRET_DEFINITIONS;
+
+export interface SecretReference {
+  readonly id: SecretReferenceId;
+}
+
+const SECRET_REFERENCE_IDS = Object.freeze(
+  Object.keys(SECRET_DEFINITIONS) as SecretReferenceId[],
+);
+const SECRET_REFERENCES: readonly SecretReference[] = Object.freeze(
+  SECRET_REFERENCE_IDS.map((id) => Object.freeze({ id })),
+);
+const NO_SECRET_REFERENCES: readonly SecretReference[] = Object.freeze([]);
+
+for (const referenceId of SECRET_REFERENCE_IDS) {
+  const definition = SECRET_DEFINITIONS[referenceId];
+  if (definition.envName.startsWith("NEXT_PUBLIC_")) {
+    throw new Error(`Secret reference ${referenceId} is browser-exposed.`);
   }
+  const tenant = tenantForSiteKey(definition.tenantSiteKey);
+  if (!tenant || tenant.profile !== definition.profile) {
+    throw new Error(
+      `Secret reference ${referenceId} has no matching trusted tenant profile.`,
+    );
+  }
+  if (!capabilitiesForTenant(tenant).includes(definition.capability)) {
+    throw new Error(
+      `Secret reference ${referenceId} requires an ungranted capability.`,
+    );
+  }
+}
+
+function assertTrustedTenant(tenant: TenantDefinition): void {
+  if (!TENANTS.includes(tenant)) {
+    throw new CapabilityDeniedError("Secret resolution requires a trusted tenant.");
+  }
+}
+
+function secretDefinitionForId(referenceId: unknown): SecretDefinition {
+  if (
+    typeof referenceId !== "string" ||
+    !Object.prototype.hasOwnProperty.call(SECRET_DEFINITIONS, referenceId)
+  ) {
+    throw new CapabilityDeniedError("Unknown secret reference ID.");
+  }
+  return SECRET_DEFINITIONS[referenceId as SecretReferenceId];
 }
 
 export function secretReferencesForTenant(
   tenant: TenantDefinition,
 ): readonly SecretReference[] {
-  return tenant.profile === "website-privileged"
-    ? WEBSITE_SECRET_REFERENCES
-    : Object.freeze([]);
+  assertTrustedTenant(tenant);
+  const references = SECRET_REFERENCES.filter(({ id }) => {
+    const definition = SECRET_DEFINITIONS[id];
+    return (
+      definition.tenantSiteKey === String(tenant.manifest.siteKey) &&
+      definition.profile === tenant.profile
+    );
+  });
+  if (references.length === 0) return NO_SECRET_REFERENCES;
+  for (const { id } of references) {
+    assertCapability(tenant, SECRET_DEFINITIONS[id].capability);
+  }
+  return Object.freeze(references);
 }
 
 export function resolveSecretReference(
-  reference: SecretReference,
-  profile: AppProfile,
+  tenant: TenantDefinition,
+  referenceId: SecretReferenceId,
   environment: Readonly<Record<string, string | undefined>> = process.env,
 ): string {
+  assertTrustedTenant(tenant);
+  const definition = secretDefinitionForId(referenceId);
   if (
-    profile !== reference.profile ||
-    reference.envName.startsWith("NEXT_PUBLIC_")
+    definition.tenantSiteKey !== String(tenant.manifest.siteKey) ||
+    definition.profile !== tenant.profile ||
+    definition.envName.startsWith("NEXT_PUBLIC_")
   ) {
     throw new CapabilityDeniedError(
-      `Secret reference ${reference.id} is not available to ${profile}.`,
+      `Secret reference ${String(referenceId)} is not available to this tenant profile.`,
     );
   }
-  const value = environment[reference.envName];
+  assertCapability(tenant, definition.capability);
+  const value = environment[definition.envName];
   if (!value) {
-    throw new Error(`Required secret reference ${reference.id} is unresolved.`);
+    throw new Error(`Required secret reference ${referenceId} is unresolved.`);
   }
   return value;
 }

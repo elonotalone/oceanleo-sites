@@ -8,10 +8,10 @@ import {
 } from "@oceanleo/tenant-registry";
 import type { Metadata, MetadataRoute } from "next";
 import { headers } from "next/headers";
-import { notFound } from "next/navigation";
 import { NextResponse, type NextRequest } from "next/server";
 
 import {
+  mergeVary,
   tenantCanonicalUrl,
   tenantHealthResult,
   tenantResponseHeaders,
@@ -23,8 +23,90 @@ export async function currentTenant(
 ): Promise<TenantDefinition> {
   const requestHeaders = await headers();
   const resolution = resolveTenantRequest(requestHeaders.get("host"), profile);
-  if (!resolution.ok) notFound();
+  if (!resolution.ok) {
+    const { notFound } = await import("next/navigation");
+    return notFound();
+  }
   return resolution.tenant;
+}
+
+export interface TenantIsolationContext {
+  readonly profile: AppProfile;
+  readonly tenant?: TenantDefinition;
+}
+
+const SAFE_TENANT_CACHE_CONTROL =
+  tenantResponseHeaders("no-store")["Cache-Control"];
+
+function cacheControlIsTenantSafe(value: string | null): boolean {
+  if (!value) return false;
+  const directives = value.split(",").map((directive) => {
+    const separator = directive.indexOf("=");
+    return {
+      name: directive
+        .slice(0, separator < 0 ? undefined : separator)
+        .trim()
+        .toLowerCase(),
+      parameterized: separator >= 0,
+    };
+  });
+  const hasBareDirective = (name: string) =>
+    directives.some(
+      (directive) => directive.name === name && !directive.parameterized,
+    );
+  const hasDirective = (name: string) =>
+    directives.some((directive) => directive.name === name);
+  return (
+    (hasBareDirective("private") || hasBareDirective("no-store")) &&
+    !hasDirective("public") &&
+    !hasDirective("s-maxage")
+  );
+}
+
+export function tenantIsolationHeaders(
+  initialHeaders: HeadersInit | undefined,
+  context: TenantIsolationContext,
+): Headers {
+  if (context.tenant && context.tenant.profile !== context.profile) {
+    throw new TypeError("Tenant isolation context has mismatched profiles.");
+  }
+
+  const isolated = new Headers(initialHeaders);
+  isolated.set("Vary", mergeVary(isolated.get("Vary"), "Host"));
+  if (!cacheControlIsTenantSafe(isolated.get("Cache-Control"))) {
+    isolated.set("Cache-Control", SAFE_TENANT_CACHE_CONTROL);
+  }
+  isolated.set("X-Content-Type-Options", "nosniff");
+  isolated.set("X-OceanLeo-App-Profile", context.profile);
+  if (context.tenant) {
+    isolated.set(
+      "X-OceanLeo-Tenant",
+      String(context.tenant.manifest.siteKey),
+    );
+  } else {
+    isolated.delete("X-OceanLeo-Tenant");
+  }
+  return isolated;
+}
+
+function applyTenantIsolation(
+  response: NextResponse,
+  context: TenantIsolationContext,
+): NextResponse {
+  const isolated = tenantIsolationHeaders(response.headers, context);
+  isolated.forEach((value, name) => {
+    response.headers.set(name, value);
+  });
+  if (!context.tenant) response.headers.delete("X-OceanLeo-Tenant");
+  return response;
+}
+
+function canonicalAliasLocation(
+  request: NextRequest,
+  canonicalHost: string,
+): string {
+  const source = new URL(request.url);
+  return `https://${canonicalHost}${source.pathname}${source.search}`;
 }
 
 export function tenantProxyResponse(
@@ -33,29 +115,33 @@ export function tenantProxyResponse(
 ): NextResponse {
   const resolution = resolveTenantRequest(request.headers.get("host"), profile);
   if (!resolution.ok) {
-    return NextResponse.json(
-      {
-        error: resolution.reason,
-        status: resolution.status,
-      },
-      {
-        status: resolution.status,
-        headers: {
-          ...tenantResponseHeaders("no-store"),
-          "X-Content-Type-Options": "nosniff",
+    return applyTenantIsolation(
+      NextResponse.json(
+        {
+          error: resolution.reason,
+          status: resolution.status,
         },
-      },
+        {
+          status: resolution.status,
+          headers: tenantResponseHeaders("no-store"),
+        },
+      ),
+      { profile },
     );
   }
 
-  const response = NextResponse.next();
-  response.headers.set("Vary", "Host");
-  response.headers.set(
-    "X-OceanLeo-Tenant",
-    String(resolution.tenant.manifest.siteKey),
-  );
-  response.headers.set("X-OceanLeo-App-Profile", profile);
-  return response;
+  const context = { profile, tenant: resolution.tenant } as const;
+  if (resolution.matchedDomain.kind === "alias") {
+    return applyTenantIsolation(
+      NextResponse.redirect(
+        canonicalAliasLocation(request, resolution.tenant.canonicalHost),
+        308,
+      ),
+      context,
+    );
+  }
+
+  return applyTenantIsolation(NextResponse.next(), context);
 }
 
 export function tenantHealthResponse(

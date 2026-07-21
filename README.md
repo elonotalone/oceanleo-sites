@@ -60,5 +60,15 @@ bash /opt/cursor-workspaces/oceandino/scripts/agent-io-guard.sh run-heavy -- \
 `generated/route-handler-inventory.json`; `pnpm inventory:check` validates the
 schema, invariants, and byte-for-byte determinism.
 
-This repository does not own domain cutover, Vercel project mutation, database
-migration, or retirement of existing site repositories.
+## Deployment and domain cutover
+
+The checked-in two-profile controller under `deploy/` owns only Vercel target
+project creation, redacted exact-source environment sync, explicit same-SHA W0
+deployment, and reversible same-team domain moves. It is dry-run by default,
+uses `vercel-ops`, keeps every legacy project, never writes DNS, and requires
+an explicit `--execute` flag for each mutation.
+
+See `deploy/README.md` for wave order, gates, atomic ledger semantics,
+environment key-name contracts, rollback ownership, and focused verification.
+Database migration and retirement of existing site repositories remain out of
+scope.

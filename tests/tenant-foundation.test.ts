@@ -173,7 +173,14 @@ test("secret references are privileged, server-only names", () => {
   assert.deepEqual(secretReferencesForTenant(agent), []);
   const references = secretReferencesForTenant(website);
   assert.equal(references.length, 8);
-  assert.ok(references.every((reference) => !reference.envName.startsWith("NEXT_PUBLIC_")));
+  assert.ok(
+    references.every(
+      (reference) =>
+        Object.isFrozen(reference) &&
+        Object.keys(reference).length === 1 &&
+        Object.keys(reference)[0] === "id",
+    ),
+  );
   assert.ok(
     JSON.stringify(TENANTS).includes("WEBSITE_VERCEL_TOKEN") === false,
     "tenant manifests must not contain secret references",
@@ -183,18 +190,18 @@ test("secret references are privileged, server-only names", () => {
     (candidate) => candidate.id === "website.vercel-token",
   );
   assert.ok(reference);
-  const fixtureEnvironment = { [reference.envName]: "fixture" };
+  const fixtureEnvironment = { WEBSITE_VERCEL_TOKEN: "fixture" };
   assert.equal(
     resolveSecretReference(
-      reference,
-      "website-privileged",
+      website,
+      reference.id,
       fixtureEnvironment,
     ),
     "fixture",
   );
   assert.throws(
     () =>
-      resolveSecretReference(reference, "standard", fixtureEnvironment),
+      resolveSecretReference(agent, reference.id, fixtureEnvironment),
     CapabilityDeniedError,
   );
 });

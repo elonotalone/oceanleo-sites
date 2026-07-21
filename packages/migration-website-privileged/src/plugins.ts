@@ -4,24 +4,25 @@ import {
 } from "@oceanleo/plugin-runtime";
 
 import {
-  WEBSITE_HANDLER_PATHS,
+  WEBSITE_HANDLER_DESCRIPTORS,
   websiteHandlerCapability,
   websitePluginPattern,
 } from "./handlers";
+import {
+  WEBSITE_WORKSPACE_PARITY_EVIDENCE,
+  websiteWorkspaceHandler,
+} from "./workspace";
 
-const handlerRoutes = WEBSITE_HANDLER_PATHS.map(
-  (route, index): PluginRouteDeclaration => ({
+const handlerRoutes = WEBSITE_HANDLER_DESCRIPTORS.map(
+  (descriptor, index): PluginRouteDeclaration => ({
     id: `website.handler.${String(index + 1).padStart(2, "0")}`,
-    kind: route.endsWith("/stream") ? "stream" : "api",
+    kind: descriptor.route.endsWith("/stream") ? "stream" : "api",
     surface: "api",
-    pattern: websitePluginPattern(route),
-    methods: ["*"],
-    capability: websiteHandlerCapability(route),
-    parity: {
-      status: "pending",
-      source: `website:front/app${route}/route.ts`,
-      evidence: [],
-    },
+    pattern: websitePluginPattern(descriptor.route),
+    methods: descriptor.methods,
+    capability: websiteHandlerCapability(descriptor.route),
+    parity: descriptor.parity,
+    handler: descriptor.handler,
   }),
 );
 
@@ -36,17 +37,18 @@ export const WEBSITE_PRIVILEGED_PLUGIN_BATCH = definePluginBatch({
       siteKey: "website",
       routes: [
         {
-          id: "website.workspace.pending",
+          id: "website.workspace",
           kind: "page",
           surface: "page",
           pattern: "/workspace/:path*",
           methods: ["GET", "HEAD"],
           capability: "website:source-edit",
           parity: {
-            status: "pending",
-            source: "website:front/app/workspace",
-            evidence: [],
+            status: "verified",
+            source: "website:front/app/workspace/page.tsx",
+            evidence: WEBSITE_WORKSPACE_PARITY_EVIDENCE,
           },
+          handler: websiteWorkspaceHandler(),
         },
         ...handlerRoutes,
       ],

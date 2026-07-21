@@ -2,7 +2,10 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { ALL_BATCH_INVENTORIES } from "../src/inventory";
+import {
+  ALL_BATCH_INVENTORIES,
+  ALL_PLUGIN_BATCHES,
+} from "../src/inventory";
 import {
   STANDARD_PLUGIN_BATCHES,
   standardPluginDispatcher,
@@ -39,29 +42,43 @@ test("profile entrypoints have disjoint package import graphs", async () => {
   assert.deepEqual(websitePrivilegedPluginDispatcher.tenantKeys, ["website"]);
 });
 
-test("one inventory aggregator consumes six disjoint declaration seams", () => {
+test("one inventory aggregator follows all reviewed plugin batch outputs", () => {
+  const reviewedBatchIds = [
+    "office",
+    "media",
+    "knowledge",
+    "creation",
+    "platform",
+    "website-privileged",
+  ];
+  assert.deepEqual(
+    ALL_PLUGIN_BATCHES.map((batch) => batch.id),
+    reviewedBatchIds,
+  );
   assert.deepEqual(
     ALL_BATCH_INVENTORIES.map((declaration) => declaration.batchId),
-    [
-      "office",
-      "media",
-      "knowledge",
-      "creation",
-      "platform",
-      "website-privileged",
-    ],
+    reviewedBatchIds,
   );
-  assert.equal(
-    new Set(
-      ALL_BATCH_INVENTORIES.flatMap(
-        (declaration) => declaration.tenantKeys,
-      ),
-    ).size,
-    31,
+
+  const pluginTenants = ALL_PLUGIN_BATCHES.flatMap((batch) =>
+    batch.plugins.map((plugin) => plugin.siteKey),
   );
-  assert.equal(
-    ALL_BATCH_INVENTORIES.flatMap((declaration) => declaration.entries)
-      .length,
-    78,
+  const inventoryTenants = ALL_BATCH_INVENTORIES.flatMap(
+    (declaration) => declaration.tenantKeys,
   );
+  assert.equal(new Set(pluginTenants).size, pluginTenants.length);
+  assert.equal(new Set(inventoryTenants).size, inventoryTenants.length);
+  assert.deepEqual([...inventoryTenants].sort(), [...pluginTenants].sort());
+
+  for (const [index, batch] of ALL_PLUGIN_BATCHES.entries()) {
+    const declaration = ALL_BATCH_INVENTORIES[index];
+    assert.ok(declaration);
+    assert.equal(declaration.profile, batch.profile);
+    assert.equal(declaration.migrationBatch, batch.migrationBatch);
+    assert.equal(declaration.ownerPath, batch.ownerPath);
+    assert.deepEqual(
+      [...declaration.tenantKeys].sort(),
+      batch.plugins.map((plugin) => plugin.siteKey).sort(),
+    );
+  }
 });

@@ -2,6 +2,46 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://oceanleo.com/schemas/route-handler-inventory.v1.json",
   "title": "OceanLeo route and handler inventory",
+  "definitions": {
+    "capability": {
+      "enum": [
+        "shell:render",
+        "artifact:read",
+        "artifact:write",
+        "workspace:session",
+        "workbench:advanced",
+        "browser:cloud",
+        "website:launch",
+        "website:source-edit",
+        "website:deploy",
+        "website:domain-admin",
+        "website:vault",
+        "website:server-admin",
+        "website:provider-oauth"
+      ]
+    },
+    "evidencePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "method": {
+      "enum": [
+        "GET",
+        "HEAD",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "OPTIONS",
+        "*"
+      ]
+    },
+    "routePattern": {
+      "type": "string",
+      "pattern": "^(?:/|/:[A-Za-z][A-Za-z0-9_]*\\*|/(?:[A-Za-z0-9._~-]+|:[A-Za-z][A-Za-z0-9_]*)(?:/(?:[A-Za-z0-9._~-]+|:[A-Za-z][A-Za-z0-9_]*))*(?:/:[A-Za-z][A-Za-z0-9_]*\\*)?)$"
+    }
+  },
   "type": "object",
   "additionalProperties": false,
   "required": ["schema", "sourceRevision", "summary", "entries"],
@@ -10,8 +50,7 @@
       "const": "oceanleo.route-handler-inventory.v1"
     },
     "sourceRevision": {
-      "type": "string",
-      "minLength": 1
+      "const": "terminal-acceptance-2026-07-21.3"
     },
     "summary": {
       "type": "object",
@@ -78,7 +117,10 @@
             "pattern": "^[a-z0-9-]+$"
           },
           "route": {
-            "type": ["string", "null"]
+            "oneOf": [
+              { "$ref": "#/definitions/routePattern" },
+              { "type": "null" }
+            ]
           },
           "kind": {
             "enum": [
@@ -90,12 +132,12 @@
           },
           "methods": {
             "type": "array",
-            "items": { "type": "string", "minLength": 1 },
+            "items": { "$ref": "#/definitions/method" },
             "uniqueItems": true
           },
           "capabilities": {
             "type": "array",
-            "items": { "type": "string", "minLength": 1 },
+            "items": { "$ref": "#/definitions/capability" },
             "uniqueItems": true
           },
           "extensionId": {
@@ -123,12 +165,131 @@
               "source": { "type": "string", "minLength": 1 },
               "evidence": {
                 "type": "array",
-                "items": { "type": "string", "minLength": 1 },
+                "items": { "$ref": "#/definitions/evidencePath" },
                 "uniqueItems": true
               }
             }
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": { "const": "plugin-extension" }
+              },
+              "required": ["kind"]
+            },
+            "then": {
+              "properties": {
+                "route": { "type": "null" },
+                "extensionId": { "type": "string", "minLength": 1 },
+                "methods": { "type": "array", "maxItems": 0 }
+              }
+            },
+            "else": {
+              "properties": {
+                "route": { "$ref": "#/definitions/routePattern" },
+                "methods": { "type": "array", "minItems": 1 }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": { "const": "metadata" }
+              },
+              "required": ["kind"]
+            },
+            "then": {
+              "properties": {
+                "extensionId": { "type": "null" }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": { "const": "page" }
+              },
+              "required": ["kind"]
+            },
+            "then": {
+              "properties": {
+                "methods": {
+                  "type": "array",
+                  "items": { "enum": ["GET", "HEAD"] },
+                  "contains": { "const": "GET" }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": { "enum": ["page", "route-handler"] },
+                "parity": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "const": "foundation" }
+                  },
+                  "required": ["status"]
+                }
+              },
+              "required": ["kind", "parity"]
+            },
+            "then": {
+              "properties": {
+                "extensionId": { "type": "null" }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": { "enum": ["page", "route-handler"] },
+                "parity": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "enum": ["pending", "partial", "verified", "retired"]
+                    }
+                  },
+                  "required": ["status"]
+                }
+              },
+              "required": ["kind", "parity"]
+            },
+            "then": {
+              "properties": {
+                "extensionId": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "parity": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "enum": ["verified", "retired"] }
+                  },
+                  "required": ["status"]
+                }
+              },
+              "required": ["parity"]
+            },
+            "then": {
+              "properties": {
+                "parity": {
+                  "type": "object",
+                  "properties": {
+                    "evidence": { "type": "array", "minItems": 1 }
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     }
   }

@@ -1,0 +1,698 @@
+{
+  "schemaVersion": "oceanleo.two-project-cutover.v1",
+  "manifestVersion": "2026-07-21.1",
+  "discovery": {
+    "sitesTsv": "/opt/cursor-workspaces/oceandino/scripts/oceanleo-sites.tsv",
+    "provider": "vercel-ops",
+    "reviewedAt": "2026-07-21T15:00:00Z",
+    "teamId": "team_Jk2R4jQ9GDtSbG2oOXqTRum9",
+    "customDomainCount": 37,
+    "legacyProjectCount": 31
+  },
+  "source": {
+    "repositoryRoot": "/root/projects/oceanleo-sites",
+    "githubRepository": "elonotalone/oceanleo-sites",
+    "branch": "main"
+  },
+  "targets": {
+    "standard": {
+      "profile": "standard",
+      "projectName": "oceanleo-sites-standard",
+      "teamId": "team_Jk2R4jQ9GDtSbG2oOXqTRum9",
+      "rootDirectory": "apps/standard",
+      "framework": "nextjs",
+      "nodeVersion": "24.x",
+      "productionBranch": "main",
+      "gitRepository": {
+        "type": "github",
+        "owner": "elonotalone",
+        "repo": "oceanleo-sites"
+      },
+      "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+      "buildCommand": "cd ../.. && pnpm build:standard",
+      "environment": {
+        "required": [
+          "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
+          "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
+          "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL"
+        ],
+        "forbidden": [
+          "DASHSCOPE_API_KEY",
+          "OCEANLEO_PLATFORM_SSH_HOST",
+          "OCEANLEO_PLATFORM_SSH_PORT",
+          "OCEANLEO_PLATFORM_SSH_PRIVATE_KEY",
+          "OCEANLEO_PLATFORM_SSH_USER",
+          "OPENAI_API_KEY",
+          "OPENAI_BASE_URL",
+          "OPENAI_MODEL",
+          "WEBSITE_ALIYUN_ACCESS_KEY_ID",
+          "WEBSITE_ALIYUN_ACCESS_KEY_SECRET",
+          "WEBSITE_CLOUDFLARE_API_TOKEN",
+          "WEBSITE_GITHUB_TOKEN",
+          "WEBSITE_RAILWAY_TOKEN",
+          "WEBSITE_SERVER_SSH_KEY",
+          "WEBSITE_SUPABASE_MANAGEMENT_TOKEN",
+          "WEBSITE_VERCEL_TOKEN"
+        ]
+      }
+    },
+    "website-privileged": {
+      "profile": "website-privileged",
+      "projectName": "oceanleo-sites-website-privileged",
+      "teamId": "team_Jk2R4jQ9GDtSbG2oOXqTRum9",
+      "rootDirectory": "apps/website-privileged",
+      "framework": "nextjs",
+      "nodeVersion": "24.x",
+      "productionBranch": "main",
+      "gitRepository": {
+        "type": "github",
+        "owner": "elonotalone",
+        "repo": "oceanleo-sites"
+      },
+      "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+      "buildCommand": "cd ../.. && pnpm build:website-privileged",
+      "environment": {
+        "required": [
+          "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
+          "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
+          "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
+          "WEBSITE_ALIYUN_ACCESS_KEY_ID",
+          "WEBSITE_ALIYUN_ACCESS_KEY_SECRET",
+          "WEBSITE_CLOUDFLARE_API_TOKEN",
+          "WEBSITE_GITHUB_TOKEN",
+          "WEBSITE_RAILWAY_TOKEN",
+          "WEBSITE_SERVER_SSH_KEY",
+          "WEBSITE_SUPABASE_MANAGEMENT_TOKEN",
+          "WEBSITE_VERCEL_TOKEN"
+        ],
+        "forbidden": [
+          "SUPABASE_SERVICE_ROLE_KEY",
+          "TRIAL_CHAT_EMAIL",
+          "TRIAL_CHAT_PASSWORD"
+        ]
+      }
+    }
+  },
+  "legacyProjects": [
+    {
+      "siteKey": "agent",
+      "projectName": "skill",
+      "projectId": "prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo",
+      "repository": "agent"
+    },
+    {
+      "siteKey": "website",
+      "projectName": "website",
+      "projectId": "prj_pTBArlyTCa46sVq6n9R8enGIdho8",
+      "repository": "website"
+    },
+    {
+      "siteKey": "ecommerce",
+      "projectName": "ecommerce-assets",
+      "projectId": "prj_CxdDA2wwLchBWhifVuCIXvWZQb6z",
+      "repository": "ecommerce-assets"
+    },
+    {
+      "siteKey": "ppt",
+      "projectName": "ppt-maker",
+      "projectId": "prj_fg9lw6bqU6y8fdrlho4tRQ1lqks4",
+      "repository": "ppt-maker"
+    },
+    {
+      "siteKey": "excel",
+      "projectName": "excel-ai",
+      "projectId": "prj_BMpaAMd1l93r4AGlgO67nFc0SJF3",
+      "repository": "excel-ai"
+    },
+    {
+      "siteKey": "word",
+      "projectName": "word-ai",
+      "projectId": "prj_Ls4e3jgAbyfULtKsIQUUhfAzqwxe",
+      "repository": "word-ai"
+    },
+    {
+      "siteKey": "converter",
+      "projectName": "converter-suite",
+      "projectId": "prj_irJcqq4OYf6QuxqWOma7Is5M09iZ",
+      "repository": "converter-suite"
+    },
+    {
+      "siteKey": "aihuman",
+      "projectName": "aihuman-studio",
+      "projectId": "prj_STY31vfacHf9EwT94xsoEpySSU0S",
+      "repository": "aihuman-studio"
+    },
+    {
+      "siteKey": "image",
+      "projectName": "image",
+      "projectId": "prj_dH7qSVH47xmryN0Fkg1zaMRlk0p0",
+      "repository": "image"
+    },
+    {
+      "siteKey": "video",
+      "projectName": "video",
+      "projectId": "prj_fL2HXBjq1vy3Lg8M9pynSz0oLBDX",
+      "repository": "video"
+    },
+    {
+      "siteKey": "resume",
+      "projectName": "resume",
+      "projectId": "prj_pHf6q3mNk7SL1zY2VZJSBO6MMGL0",
+      "repository": "resume"
+    },
+    {
+      "siteKey": "bizdev",
+      "projectName": "bizdev",
+      "projectId": "prj_9f2LiGjl60KPGz1UKpkxY1YFwggG",
+      "repository": "bizdev"
+    },
+    {
+      "siteKey": "logo",
+      "projectName": "logo",
+      "projectId": "prj_KfpZVQSA9F1DgamGXEYweKjLZfwR",
+      "repository": "logo"
+    },
+    {
+      "siteKey": "interior",
+      "projectName": "interior",
+      "projectId": "prj_iD0gbYfgb2WSAgmIWo8d1FbtLN8r",
+      "repository": "interior"
+    },
+    {
+      "siteKey": "chat",
+      "projectName": "chat",
+      "projectId": "prj_hrsYhiD7JsdCQBbFlRFbkThnNDt8",
+      "repository": "chat"
+    },
+    {
+      "siteKey": "threed",
+      "projectName": "threed",
+      "projectId": "prj_pRg3mRmEGBwq9o4i13HpF3K7lENQ",
+      "repository": "threed"
+    },
+    {
+      "siteKey": "music",
+      "projectName": "music",
+      "projectId": "prj_UDTSmZjOw9m6OQ7vFoeGFMtEPCbI",
+      "repository": "music"
+    },
+    {
+      "siteKey": "meeting",
+      "projectName": "meeting",
+      "projectId": "prj_ofG2j6zreM8Ai32tZZwSO8MBt7H4",
+      "repository": "meeting"
+    },
+    {
+      "siteKey": "paper",
+      "projectName": "paper",
+      "projectId": "prj_dZUDcrgdqIKnD5nXV3v8R36gXDyB",
+      "repository": "paper"
+    },
+    {
+      "siteKey": "law",
+      "projectName": "law",
+      "projectId": "prj_Mh2rmPFaGhkxv3s6bU2LqZUDPEDV",
+      "repository": "law"
+    },
+    {
+      "siteKey": "study",
+      "projectName": "study",
+      "projectId": "prj_jSiaQIQBIp2mNt1tQhRnlkIohKBI",
+      "repository": "study"
+    },
+    {
+      "siteKey": "edu",
+      "projectName": "edu",
+      "projectId": "prj_YHIsv2LvNhiMR8jszFJdGphkbWQv",
+      "repository": "edu"
+    },
+    {
+      "siteKey": "novel",
+      "projectName": "novel",
+      "projectId": "prj_aIrZeIvHdgP78zsdFqDmuWZt1AIt",
+      "repository": "novel"
+    },
+    {
+      "siteKey": "script",
+      "projectName": "script",
+      "projectId": "prj_LyRLZyrI2KN4byYAZedsfuF3j1FF",
+      "repository": "script"
+    },
+    {
+      "siteKey": "design",
+      "projectName": "design",
+      "projectId": "prj_AqsWpNFVnmQB5kEuak9RRhjP6uLz",
+      "repository": "design"
+    },
+    {
+      "siteKey": "make",
+      "projectName": "make",
+      "projectId": "prj_n1ugKK5Vbcol7jZptQkEoCJf9VPf",
+      "repository": "make"
+    },
+    {
+      "siteKey": "search",
+      "projectName": "search",
+      "projectId": "prj_R6ZnDNb4PXbkBKqHz7caGccl7CCX",
+      "repository": "search"
+    },
+    {
+      "siteKey": "money",
+      "projectName": "money",
+      "projectId": "prj_8nqgiHjeRgmackwJ9u1GyC31f5SD",
+      "repository": "money"
+    },
+    {
+      "siteKey": "aitools",
+      "projectName": "aitools",
+      "projectId": "prj_c00tOhsH7bYuoXQdggRd4i8YELV3",
+      "repository": "aitools"
+    },
+    {
+      "siteKey": "asset",
+      "projectName": "asset",
+      "projectId": "prj_ZETpQJA1DIDuLNT2f5eZSKwCAbQH",
+      "repository": "asset"
+    },
+    {
+      "siteKey": "game",
+      "projectName": "game",
+      "projectId": "prj_f57D46LMVqerRVbH4pD8zLFjyA6q",
+      "repository": "game"
+    }
+  ],
+  "waves": [
+    {
+      "id": "W1",
+      "name": "asset canary",
+      "tenants": [
+        {
+          "siteKey": "asset",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "asset.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "W2",
+      "name": "office",
+      "tenants": [
+        {
+          "siteKey": "ppt",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "ppt.oceanleo.com",
+              "kind": "alias",
+              "configuration": {
+                "gitBranch": null,
+                "redirect": "slide.oceanleo.com",
+                "redirectStatusCode": 308
+              }
+            },
+            {
+              "host": "slide.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "excel",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "excel.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "word",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "word.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "converter",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "converter.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "resume",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "resume.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "W3",
+      "name": "media",
+      "tenants": [
+        {
+          "siteKey": "aihuman",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "aihuman.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "image",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "myselfie.oceanleo.com",
+              "kind": "alias"
+            },
+            {
+              "host": "remove.oceanleo.com",
+              "kind": "alias"
+            },
+            {
+              "host": "image.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "video",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "studio.oceanleo.com",
+              "kind": "alias"
+            },
+            {
+              "host": "video.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "logo",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "logo.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "interior",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "interior.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "threed",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "threed.oceanleo.com",
+              "kind": "alias"
+            },
+            {
+              "host": "3d.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "W4",
+      "name": "knowledge",
+      "tenants": [
+        {
+          "siteKey": "bizdev",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "bizdev.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "meeting",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "meeting.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "paper",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "paper.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "law",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "law.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "study",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "study.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "edu",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "edu.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "W5",
+      "name": "creation",
+      "tenants": [
+        {
+          "siteKey": "ecommerce",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "e-commerce.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "novel",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "novel.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "script",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "script.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "design",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "design.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "make",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "make.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "W6",
+      "name": "remaining platform",
+      "tenants": [
+        {
+          "siteKey": "agent",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "skill.oceanleo.com",
+              "kind": "alias"
+            },
+            {
+              "host": "agent.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "chat",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "chat.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "music",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "music.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "search",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "search.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "money",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "money.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "aitools",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "aitools.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        },
+        {
+          "siteKey": "game",
+          "profile": "standard",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "game.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "W7",
+      "name": "website privileged",
+      "tenants": [
+        {
+          "siteKey": "website",
+          "profile": "website-privileged",
+          "specializedPath": "/workspace",
+          "domains": [
+            {
+              "host": "website.oceanleo.com",
+              "kind": "canonical"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

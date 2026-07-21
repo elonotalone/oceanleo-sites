@@ -1,4 +1,14 @@
 import type { CapabilityId } from "@oceanleo/capabilities/server";
+import type {
+  PluginMethod,
+  PluginParity,
+  PluginRouteHandler,
+} from "@oceanleo/plugin-runtime";
+
+import { CORE_WEBSITE_HANDLERS } from "./ported-core";
+import { GENERATION_WEBSITE_HANDLERS } from "./ported-generation";
+import { PROVIDER_WEBSITE_HANDLERS } from "./ported-provider";
+import { SITE_WEBSITE_HANDLERS } from "./ported-sites";
 
 export const WEBSITE_HANDLER_PATHS: readonly string[] = Object.freeze([
   "/api/cursor-agent",
@@ -52,6 +62,170 @@ export const WEBSITE_HANDLER_PATHS: readonly string[] = Object.freeze([
 
 if (WEBSITE_HANDLER_PATHS.length !== 47) {
   throw new Error("Website privileged batch must retain all 47 handler paths.");
+}
+
+const WEBSITE_HANDLER_METHODS: Readonly<
+  Record<string, readonly PluginMethod[]>
+> = Object.freeze({
+  "/api/cursor-agent": ["POST"],
+  "/api/cursor-agent/[id]": ["GET"],
+  "/api/cursor-agent/models": ["GET"],
+  "/api/deploy": ["POST"],
+  "/api/deploy/[id]/status": ["GET"],
+  "/api/domain/brainstorm": ["POST"],
+  "/api/domain/purchase": ["POST"],
+  "/api/domain/search": ["GET"],
+  "/api/generate-site": ["POST"],
+  "/api/generate-site/stream": ["POST"],
+  "/api/github/repos": ["GET"],
+  "/api/oauth/aliyun": ["POST"],
+  "/api/oauth/cloudflare": ["POST"],
+  "/api/oauth/github": ["GET"],
+  "/api/oauth/railway": ["POST"],
+  "/api/oauth/supabase": ["GET"],
+  "/api/oauth/vercel": ["GET"],
+  "/api/preview/quota": ["POST"],
+  "/api/servers": ["GET", "POST", "DELETE"],
+  "/api/servers/[id]/test": ["POST"],
+  "/api/servers/provision": ["GET", "POST"],
+  "/api/setup/check-db": ["GET"],
+  "/api/setup/init-db": ["POST"],
+  "/api/sites": ["GET", "PATCH", "DELETE"],
+  "/api/sites/[id]/backend": ["GET", "POST"],
+  "/api/sites/[id]/backend/deploy": ["POST"],
+  "/api/sites/[id]/backend/ops": ["GET", "POST"],
+  "/api/sites/[id]/domain": ["GET", "POST", "DELETE"],
+  "/api/sites/[id]/domain/dns": ["GET"],
+  "/api/sites/[id]/domain/purchase-and-bind": ["POST"],
+  "/api/sites/[id]/env": ["GET", "PUT", "POST", "DELETE"],
+  "/api/sites/[id]/overrides/sync": ["POST"],
+  "/api/sites/[id]/toggle": ["POST"],
+  "/api/sites/[id]/transfer-out": ["POST"],
+  "/api/sites/[id]/vibe-code": ["GET", "POST"],
+  "/api/sites/[id]/vibe-code-hosted": ["GET", "POST"],
+  "/api/sites/[id]/vibe-code/pr": ["GET", "POST"],
+  "/api/sites/[id]/virtual-config": ["GET", "PUT"],
+  "/api/sites/import": ["POST"],
+  "/api/sites/platform-deploy": ["POST"],
+  "/api/templates": ["GET"],
+  "/api/user-templates": ["GET", "POST"],
+  "/api/user-templates/[id]": ["GET", "PATCH", "DELETE"],
+  "/api/user-templates/[id]/snapshot": ["POST", "DELETE"],
+  "/api/vault": ["GET", "DELETE"],
+  "/api/vault/diagnose": ["GET"],
+  "/api/vercel/projects": ["GET"],
+});
+
+const PORTED_HANDLERS: Readonly<Record<string, PluginRouteHandler>> =
+  Object.freeze({
+    ...CORE_WEBSITE_HANDLERS,
+    ...PROVIDER_WEBSITE_HANDLERS,
+    ...SITE_WEBSITE_HANDLERS,
+    ...GENERATION_WEBSITE_HANDLERS,
+  });
+
+const PENDING_BLOCKERS: Readonly<Record<string, string>> = Object.freeze({
+  "/api/deploy":
+    "requires the deploy pipeline, provider refresh, template-slot resolution, and background completion contract",
+  "/api/servers":
+    "requires encrypted SSH credentials and the server-ssh connection/prerequisite implementation",
+  "/api/servers/[id]/test":
+    "requires the server-ssh connection, Docker, and prerequisite probe implementation",
+  "/api/servers/provision":
+    "requires Alibaba instance provisioning plus SSH bootstrap and long-running progress behavior",
+  "/api/sites/[id]/backend":
+    "requires encrypted server credentials and server-ssh backend discovery",
+  "/api/sites/[id]/backend/deploy":
+    "requires the complete remote-server deploy pipeline and prerequisite reporting",
+  "/api/sites/[id]/backend/ops":
+    "requires remote process, log, restart, and health operations over server-ssh",
+  "/api/sites/[id]/domain/purchase-and-bind":
+    "requires registration polling followed by transactional Cloudflare/Vercel binding",
+  "/api/sites/[id]/overrides/sync":
+    "requires GitHub tree commits plus template-slot merge and deployment synchronization",
+  "/api/sites/[id]/toggle":
+    "requires Cloudflare and Aliyun DNS-provider mutation with rollback state",
+  "/api/sites/[id]/transfer-out":
+    "requires platform source export and ownership transfer into a user GitHub repository",
+  "/api/sites/[id]/vibe-code-hosted":
+    "requires source discovery and Cursor execution against a privileged remote SSH checkout",
+  "/api/sites/[id]/vibe-code/pr":
+    "requires encrypted GitHub credentials and pull-request diff/merge lifecycle parity",
+  "/api/sites/import":
+    "requires GitHub/Vercel/remote-server ownership discovery and credential validation",
+});
+
+export interface WebsiteHandlerDescriptor {
+  readonly route: string;
+  readonly methods: readonly PluginMethod[];
+  readonly handler?: PluginRouteHandler;
+  readonly parity: PluginParity;
+  readonly blocker?: string;
+}
+
+export const WEBSITE_HANDLER_DESCRIPTORS: readonly WebsiteHandlerDescriptor[] =
+  Object.freeze(
+    WEBSITE_HANDLER_PATHS.map((route) => {
+      const hasHandler = Object.hasOwn(PORTED_HANDLERS, route);
+      const handler = hasHandler ? PORTED_HANDLERS[route] : undefined;
+      const blocker = PENDING_BLOCKERS[route];
+      const methods = WEBSITE_HANDLER_METHODS[route];
+      if (!methods) {
+        throw new Error(`${route}: missing exact legacy method inventory.`);
+      }
+      if (!hasHandler && !blocker) {
+        throw new Error(`${route}: missing handler or pending blocker.`);
+      }
+      if (hasHandler && blocker) {
+        throw new Error(`${route}: cannot be both ported and blocked.`);
+      }
+      return Object.freeze({
+        route,
+        methods: Object.freeze([...methods]),
+        handler,
+        blocker,
+        parity: Object.freeze({
+          status: hasHandler ? "verified" : "pending",
+          source: `website:front/app${route}/route.ts`,
+          evidence: Object.freeze(
+            hasHandler
+              ? [
+                  "packages/migration-website-privileged/src/ported-core.ts",
+                  "packages/migration-website-privileged/src/ported-provider.ts",
+                  "packages/migration-website-privileged/src/ported-sites.ts",
+                  "packages/migration-website-privileged/src/ported-generation.ts",
+                  "packages/migration-website-privileged/tests/website-privileged.test.ts",
+                ]
+              : [
+                  "packages/migration-website-privileged/src/handlers.ts",
+                  "packages/migration-website-privileged/tests/website-privileged.test.ts",
+                ],
+          ),
+        }),
+      }) satisfies WebsiteHandlerDescriptor;
+    }),
+  );
+
+export const WEBSITE_VERIFIED_HANDLER_PATHS = Object.freeze(
+  WEBSITE_HANDLER_DESCRIPTORS.filter(
+    ({ parity }) => parity.status === "verified",
+  ).map(({ route }) => route),
+);
+
+export const WEBSITE_PENDING_HANDLER_INVENTORY = Object.freeze(
+  WEBSITE_HANDLER_DESCRIPTORS.filter(
+    ({ parity }) => parity.status === "pending",
+  ).map(({ route, methods, blocker }) =>
+    Object.freeze({ route, methods, blocker: blocker! }),
+  ),
+);
+
+if (
+  WEBSITE_VERIFIED_HANDLER_PATHS.length +
+    WEBSITE_PENDING_HANDLER_INVENTORY.length !==
+  WEBSITE_HANDLER_PATHS.length
+) {
+  throw new Error("Website handler parity inventory must partition all paths.");
 }
 
 export function websiteHandlerCapability(

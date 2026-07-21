@@ -3,7 +3,7 @@ import type { CapabilityId } from "@oceanleo/capabilities/server";
 export const INVENTORY_SCHEMA =
   "oceanleo.route-handler-inventory.v1" as const;
 export const INVENTORY_SOURCE_REVISION =
-  "migration-seams-2026-07-21.2" as const;
+  "terminal-acceptance-2026-07-21.3" as const;
 
 export type ParityStatus =
   | "foundation"
