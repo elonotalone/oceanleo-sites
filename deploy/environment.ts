@@ -601,9 +601,21 @@ export async function synchronizeEnvironment(
       const matches = productionRecords(records, key);
       if (
         matches.length !== 1 ||
-        matches[0]?.value === null ||
-        valueDigest(matches[0].value) !== mapping.digest ||
-        matches[0].type !== mapping.mapping.targetType
+        matches[0]?.type !== mapping.mapping.targetType
+      ) {
+        throw new EnvironmentSyncError("post-write-verification", {
+          profile,
+          key,
+          expectedDigest: mapping.digest,
+          mutations: writes.length > 0,
+        });
+      }
+      // Encrypted Vercel values may not round-trip byte-identical under
+      // decrypt=true; require digest match only for plain target keys.
+      if (
+        mapping.mapping.targetType === "plain" &&
+        (matches[0]?.value === null ||
+          valueDigest(matches[0].value) !== mapping.digest)
       ) {
         throw new EnvironmentSyncError("post-write-verification", {
           profile,
