@@ -282,9 +282,9 @@ class FakeProvider implements CutoverProvider {
   async probe(request: ProbeRequest): Promise<ProbeResponse> {
     const url = new URL(request.url);
     if (url.host.endsWith(".vercel.app")) {
-      const profile = url.host.startsWith("standard")
-        ? "standard"
-        : "website-privileged";
+      const profile = url.host.includes("website-privileged")
+        ? "website-privileged"
+        : "standard";
       return {
         status: 404,
         headers: {

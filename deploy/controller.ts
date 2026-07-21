@@ -364,8 +364,11 @@ export class CutoverController {
   ): Promise<void> {
     for (const profile of PROFILES) {
       const deployment = deployments[profile];
+      // Deployment-scoped *.vercel.app URLs are SSO-protected on these
+      // projects; W0 must probe the production project alias instead.
+      const productionHost = `${this.loaded.manifest.targets[profile].projectName}.vercel.app`;
       const response = await this.provider.probe({
-        url: `https://${deployment.url}/api/health`,
+        url: `https://${productionHost}/api/health`,
         redirect: "manual",
       });
       const json = isRecord(response.json) ? response.json : {};
@@ -378,6 +381,8 @@ export class CutoverController {
         throw new CutoverGateError("w0-probe", {
           profile,
           status: response.status,
+          deploymentUrl: deployment.url,
+          productionHost,
         });
       }
     }
