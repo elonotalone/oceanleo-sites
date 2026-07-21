@@ -17,8 +17,12 @@
     "@oceanleo/runtime": "workspace:*",
     "@oceanleo/tenant-registry": "workspace:*",
     "@oceanleo/ui": "catalog:",
+    "mammoth": "^1.11.0",
     "next": "^16.2.10",
+    "pdf-parse": "^2.4.5",
+    "pdf2json": "^4.0.2",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }
 }
