@@ -291,7 +291,7 @@
         {
           "siteKey": "asset",
           "profile": "standard",
-          "specializedPath": "/workspace",
+          "specializedPath": "/materials",
           "domains": [
             {
               "host": "asset.oceanleo.com",
@@ -658,7 +658,7 @@
         {
           "siteKey": "aitools",
           "profile": "standard",
-          "specializedPath": "/workspace",
+          "specializedPath": "/all",
           "domains": [
             {
               "host": "aitools.oceanleo.com",
@@ -669,7 +669,7 @@
         {
           "siteKey": "game",
           "profile": "standard",
-          "specializedPath": "/workspace",
+          "specializedPath": "/play/metalslug",
           "domains": [
             {
               "host": "game.oceanleo.com",
@@ -698,6 +698,7 @@
     }
   ],
   "notes": [
-    "Operator-held website privileged provider tokens remain optional until supplied out-of-band; they are blocked mappings with no legacy Vercel source."
+    "Operator-held website privileged provider tokens remain optional until supplied out-of-band; they are blocked mappings with no legacy Vercel source.",
+    "Utility tenants smoke specialized paths that exist in migration-platform routes (asset/materials, aitools/all, game/play), not a generic /workspace."
   ]
 }

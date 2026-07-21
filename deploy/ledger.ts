@@ -161,11 +161,13 @@ export function assertLedgerCompatible(
   }
 }
 
-/** True when no domain wave has left the initial pending state. */
+/** True when no domain wave has completed or is mid-move (pending/rolled-back only). */
 export function isPreDomainMoveLedger(ledger: CutoverLedger): boolean {
+  const waveOk = new Set(["pending", "rolled-back"]);
+  const domainOk = new Set(["pending", "rolled-back"]);
   return (
-    WAVE_IDS.every((wave) => ledger.waves[wave]?.state === "pending") &&
-    Object.values(ledger.domains).every((domain) => domain.state === "pending")
+    WAVE_IDS.every((wave) => waveOk.has(ledger.waves[wave]?.state)) &&
+    Object.values(ledger.domains).every((domain) => domainOk.has(domain.state))
   );
 }
 
@@ -186,8 +188,17 @@ export function rematerializePreDomainMoveLedger(
   const next = createInitialLedger(loaded, sourceSha, now);
   next.createdAt = existing.createdAt;
   for (const profile of ["standard", "website-privileged"] as const) {
-    const projectId = existing.targets[profile]?.projectId;
-    if (projectId) next.targets[profile].projectId = projectId;
+    const prior = existing.targets[profile];
+    if (!prior) continue;
+    if (prior.projectId) next.targets[profile].projectId = prior.projectId;
+    // Keep SHA-matching deployment receipts so W0 does not redeploy unnecessarily.
+    if (
+      prior.deployment &&
+      prior.deployment.sourceSha === sourceSha &&
+      prior.deployment.state === "READY"
+    ) {
+      next.targets[profile].deployment = { ...prior.deployment };
+    }
   }
   return next;
 }
