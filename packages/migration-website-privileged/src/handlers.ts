@@ -130,11 +130,11 @@ const PORTED_HANDLERS: Readonly<Record<string, PluginRouteHandler>> =
 
 const PENDING_BLOCKERS: Readonly<Record<string, string>> = Object.freeze({
   "/api/deploy":
-    "requires createRepoFromTemplate/applyTemplatePlaceholders, Supabase Management project APIs, token-refresh wiring, and the Next.js after() background completion contract from the full deploy pipeline",
+    "legacy POST runs runDeployPipeline inside Next after(); still missing createRepoFromTemplate/applyTemplatePlaceholders/deleteFile, Supabase Management createProject+wait+keys+SQL, github/vercel/supabase token refreshers, and the after()/background completion contract (vault helpers alone are insufficient)",
   "/api/sites/[id]/backend":
-    "POST needs Aliyun SWAS deployBackend (RunCommand) plus Railway deployFromGitHub async workers and SSH forward into backend/deploy; not just vault/OpenSSH probes",
+    "GET is a simple status read, but verified parity needs POST too: Aliyun SWAS RunCommand+waitForCommand+deployBackend, full Railway deployFromGitHub worker, and SSH forward into /backend/deploy — aliyun-swas/platform-host currently stop at provision/OpenSSH ops probes",
   "/api/sites/[id]/backend/deploy":
-    "requires the complete remote SSH deploy chain (prereq install, clone, PM2/venv, Caddy, Cloudflare DNS, webhook, Vercel BACKEND_URL) beyond connection/ops helpers",
+    "legacy POST needs installPrerequisites/findAvailablePort/deployBackend/setupCaddy/setupWebhookReceiver over SSH plus Cloudflare A-record, GitHub webhook, Vercel BACKEND_URL, and cursor-rules writes; platform-host only exposes test/prereq-check/status/restart/runUserSshCommand",
 });
 
 export interface WebsiteHandlerDescriptor {
