@@ -241,3 +241,207 @@ export async function createFirewallRules(
   );
   return data.FirewallRuleIds || [];
 }
+
+
+export async function validateCredentials(
+  accessKeyId: string,
+  accessKeySecret: string,
+  regionId = "cn-hangzhou",
+): Promise<boolean> {
+  try {
+    await listRegions(accessKeyId, accessKeySecret);
+    void regionId;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export interface AliyunCommandResult {
+  InvokeId: string;
+}
+
+export async function runRemoteCommand(
+  accessKeyId: string,
+  accessKeySecret: string,
+  regionId: string,
+  instanceId: string,
+  command: string,
+  timeout = 600,
+): Promise<string> {
+  const data = await swasCall<AliyunCommandResult>(
+    accessKeyId,
+    accessKeySecret,
+    "RunCommand",
+    regionId,
+    {
+      InstanceId: instanceId,
+      CommandContent: Buffer.from(command).toString("base64"),
+      Type: "RunShellScript",
+      Timeout: String(timeout),
+      Name: `website-deploy-${Date.now()}`,
+    },
+  );
+  return data.InvokeId;
+}
+
+export interface InvocationResult {
+  InvokeId: string;
+  InvokeStatus: string;
+  Output: string;
+  ErrorInfo: string;
+}
+
+export async function getCommandResult(
+  accessKeyId: string,
+  accessKeySecret: string,
+  regionId: string,
+  instanceId: string,
+  invokeId: string,
+): Promise<InvocationResult | null> {
+  const data = await swasCall<{ InvocationResult?: InvocationResult }>(
+    accessKeyId,
+    accessKeySecret,
+    "DescribeInvocationResult",
+    regionId,
+    {
+      InstanceId: instanceId,
+      InvokeId: invokeId,
+    },
+  );
+  return data.InvocationResult ?? null;
+}
+
+export async function waitForCommand(
+  accessKeyId: string,
+  accessKeySecret: string,
+  regionId: string,
+  instanceId: string,
+  invokeId: string,
+  maxWaitMs = 300_000,
+): Promise<InvocationResult> {
+  const start = Date.now();
+  while (Date.now() - start < maxWaitMs) {
+    const result = await getCommandResult(
+      accessKeyId,
+      accessKeySecret,
+      regionId,
+      instanceId,
+      invokeId,
+    );
+    if (
+      result &&
+      (result.InvokeStatus === "Finished" || result.InvokeStatus === "Failed")
+    ) {
+      return result;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 5_000));
+  }
+  throw new Error("Command execution timed out");
+}
+
+export interface AliyunDeployResult {
+  instanceId: string;
+  publicIp: string;
+  backendUrl: string;
+}
+
+export async function deployBackend(
+  accessKeyId: string,
+  accessKeySecret: string,
+  opts: {
+    regionId: string;
+    imageId: string;
+    planId: string;
+    period?: number;
+    repoUrl: string;
+    branch?: string;
+    backendDir?: string;
+    port?: number;
+    envVars?: Record<string, string>;
+  },
+): Promise<AliyunDeployResult> {
+  const instanceIds = await createInstance(
+    accessKeyId,
+    accessKeySecret,
+    opts.regionId,
+    opts.imageId,
+    opts.planId,
+    opts.period || 1,
+  );
+  const instanceId = instanceIds[0]!;
+  const instance = await waitForInstanceRunning(
+    accessKeyId,
+    accessKeySecret,
+    opts.regionId,
+    instanceId,
+  );
+  const port = opts.port || 8000;
+
+  await createFirewallRules(
+    accessKeyId,
+    accessKeySecret,
+    opts.regionId,
+    instanceId,
+    [{ port: `${port}/${port}`, protocol: "TCP" }],
+  );
+
+  const envExports = opts.envVars
+    ? Object.entries(opts.envVars)
+        .map(([key, value]) => `export ${key}="${value}"`)
+        .join("\n")
+    : "";
+  const dir = opts.backendDir || "back-end";
+  const branch = opts.branch || "main";
+
+  const deployScript = `#!/bin/bash
+set -e
+apt-get update -y && apt-get install -y docker.io docker-compose-plugin git
+systemctl enable docker && systemctl start docker
+git clone --branch ${branch} --single-branch ${opts.repoUrl} /opt/app
+cd /opt/app/${dir}
+${envExports}
+cat > .env << 'ENVEOF'
+${opts.envVars ? Object.entries(opts.envVars).map(([k, v]) => `${k}=${v}`).join("\n") : ""}
+PORT=${port}
+ENVEOF
+if [ -f docker-compose.yml ] || [ -f docker-compose.yaml ] || [ -f compose.yml ]; then
+  docker compose up -d
+elif [ -f Dockerfile ]; then
+  docker build -t website-backend .
+  docker run -d --restart unless-stopped -p ${port}:${port} --env-file .env website-backend
+elif [ -f requirements.txt ]; then
+  apt-get install -y python3 python3-pip python3-venv
+  python3 -m venv /opt/venv
+  /opt/venv/bin/pip install -r requirements.txt
+  nohup /opt/venv/bin/uvicorn main:app --host 0.0.0.0 --port ${port} > /var/log/backend.log 2>&1 &
+elif [ -f package.json ]; then
+  curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+  apt-get install -y nodejs
+  npm install
+  nohup npm start > /var/log/backend.log 2>&1 &
+fi`;
+
+  const invokeId = await runRemoteCommand(
+    accessKeyId,
+    accessKeySecret,
+    opts.regionId,
+    instanceId,
+    deployScript,
+    600,
+  );
+  await waitForCommand(
+    accessKeyId,
+    accessKeySecret,
+    opts.regionId,
+    instanceId,
+    invokeId,
+    600_000,
+  );
+
+  return {
+    instanceId,
+    publicIp: instance.PublicIpAddress,
+    backendUrl: `http://${instance.PublicIpAddress}:${port}`,
+  };
+}

@@ -9,9 +9,9 @@
     "entries": 656,
     "parity": {
       "foundation": 155,
-      "pending": 4,
+      "pending": 0,
       "partial": 0,
-      "verified": 497,
+      "verified": 501,
       "retired": 0
     }
   },
@@ -3868,7 +3868,7 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "legacy:website",
         "evidence": [
           "packages/migration-website-privileged/src/catalog.ts",
@@ -13897,7 +13897,9 @@
         "status": "verified",
         "source": "website:front/app/api/cursor-agent/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -13925,7 +13927,9 @@
         "status": "verified",
         "source": "website:front/app/api/cursor-agent/[id]/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -13953,7 +13957,9 @@
         "status": "verified",
         "source": "website:front/app/api/cursor-agent/models/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -13978,10 +13984,17 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/deploy/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-backend.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-orchestration.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14004,7 +14017,9 @@
         "status": "verified",
         "source": "website:front/app/api/deploy/[id]/status/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14032,7 +14047,9 @@
         "status": "verified",
         "source": "website:front/app/api/domain/brainstorm/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14060,7 +14077,9 @@
         "status": "verified",
         "source": "website:front/app/api/domain/purchase/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14088,7 +14107,9 @@
         "status": "verified",
         "source": "website:front/app/api/domain/search/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14116,7 +14137,9 @@
         "status": "verified",
         "source": "website:front/app/api/generate-site/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14144,7 +14167,9 @@
         "status": "verified",
         "source": "website:front/app/api/generate-site/stream/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14172,7 +14197,9 @@
         "status": "verified",
         "source": "website:front/app/api/github/repos/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14200,7 +14227,9 @@
         "status": "verified",
         "source": "website:front/app/api/oauth/aliyun/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14228,7 +14257,9 @@
         "status": "verified",
         "source": "website:front/app/api/oauth/cloudflare/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14256,7 +14287,9 @@
         "status": "verified",
         "source": "website:front/app/api/oauth/github/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14284,7 +14317,9 @@
         "status": "verified",
         "source": "website:front/app/api/oauth/railway/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14312,7 +14347,9 @@
         "status": "verified",
         "source": "website:front/app/api/oauth/supabase/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14340,7 +14377,9 @@
         "status": "verified",
         "source": "website:front/app/api/oauth/vercel/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14368,7 +14407,9 @@
         "status": "verified",
         "source": "website:front/app/api/preview/quota/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14398,7 +14439,9 @@
         "status": "verified",
         "source": "website:front/app/api/servers/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14426,7 +14469,9 @@
         "status": "verified",
         "source": "website:front/app/api/servers/[id]/test/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14455,7 +14500,9 @@
         "status": "verified",
         "source": "website:front/app/api/servers/provision/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14483,7 +14530,9 @@
         "status": "verified",
         "source": "website:front/app/api/setup/check-db/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14511,7 +14560,9 @@
         "status": "verified",
         "source": "website:front/app/api/setup/init-db/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14541,7 +14592,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14567,10 +14620,17 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/sites/[id]/backend/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-backend.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-orchestration.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14590,10 +14650,17 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/sites/[id]/backend/deploy/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-backend.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-orchestration.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14617,7 +14684,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/backend/ops/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14647,7 +14716,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/domain/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14675,7 +14746,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/domain/dns/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14703,7 +14776,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/domain/purchase-and-bind/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14734,7 +14809,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/env/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14762,7 +14839,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/overrides/sync/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14790,7 +14869,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/toggle/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14818,7 +14899,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/transfer-out/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14847,7 +14930,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/vibe-code/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14876,7 +14961,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/vibe-code-hosted/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14905,7 +14992,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/vibe-code/pr/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14934,7 +15023,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/[id]/virtual-config/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14962,7 +15053,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/import/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -14990,7 +15083,9 @@
         "status": "verified",
         "source": "website:front/app/api/sites/platform-deploy/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -15018,7 +15113,9 @@
         "status": "verified",
         "source": "website:front/app/api/templates/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -15047,7 +15144,9 @@
         "status": "verified",
         "source": "website:front/app/api/user-templates/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -15077,7 +15176,9 @@
         "status": "verified",
         "source": "website:front/app/api/user-templates/[id]/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -15106,7 +15207,9 @@
         "status": "verified",
         "source": "website:front/app/api/user-templates/[id]/snapshot/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -15135,7 +15238,9 @@
         "status": "verified",
         "source": "website:front/app/api/vault/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -15163,7 +15268,9 @@
         "status": "verified",
         "source": "website:front/app/api/vault/diagnose/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
@@ -15191,7 +15298,9 @@
         "status": "verified",
         "source": "website:front/app/api/vercel/projects/route.ts",
         "evidence": [
+          "packages/migration-website-privileged/src/ported-backend.ts",
           "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-deploy.ts",
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",

@@ -63,15 +63,15 @@ test("website inventory partitions all 47 handlers into verified and blocked pat
   assert.equal(WEBSITE_HANDLER_PATHS.length, 47);
   assert.equal(WEBSITE_HANDLER_DESCRIPTORS.length, 47);
   assert.equal(handlers.length, 47);
-  assert.equal(WEBSITE_VERIFIED_HANDLER_PATHS.length, 44);
-  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 3);
+  assert.equal(WEBSITE_VERIFIED_HANDLER_PATHS.length, 47);
+  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 0);
   assert.equal(
     handlers.filter((entry) => entry.parity.status === "verified").length,
-    44,
+    47,
   );
   assert.equal(
     handlers.filter((entry) => entry.parity.status === "pending").length,
-    3,
+    0,
   );
   assert.ok(
     WEBSITE_HANDLER_DESCRIPTORS.every(
@@ -86,7 +86,7 @@ test("website inventory partitions all 47 handlers into verified and blocked pat
   assert.ok(
     WEBSITE_PENDING_HANDLER_INVENTORY.every(
       ({ blocker }) => blocker.length >= 40,
-    ),
+    ) || WEBSITE_PENDING_HANDLER_INVENTORY.length === 0,
   );
   for (const entry of handlers) {
     const descriptor = WEBSITE_HANDLER_DESCRIPTORS.find(
@@ -150,23 +150,17 @@ test("verified handlers dispatch while blocked handlers retain exact params", as
     else process.env.CURSOR_API_KEY = previousCursorKey;
   }
 
-  const pending = await dispatcher.dispatch({
-    tenant,
-    pathname: "/api/sites/site-7/backend/deploy",
-    surface: "api",
-    request: new Request(
-      "https://website.oceanleo.com/api/sites/site-7/backend/deploy",
-      { method: "POST" },
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/deploy"),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/[id]/backend"),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes(
+      "/api/sites/[id]/backend/deploy",
     ),
-  });
-  assert.equal(pending.kind, "pending");
-  if (pending.kind === "pending") {
-    assert.deepEqual(pending.params, { id: "site-7" });
-    assert.equal(
-      pending.source,
-      "website:front/app/api/sites/[id]/backend/deploy/route.ts",
-    );
-  }
+  );
 
   assert.ok(
     WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/servers"),
@@ -206,25 +200,25 @@ test("verified handlers dispatch while blocked handlers retain exact params", as
     WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/[id]/transfer-out"),
   );
   assert.ok(WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/import"));
+  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 0);
   assert.equal(
-    WEBSITE_PENDING_HANDLER_INVENTORY.some(
+    typeof WEBSITE_HANDLER_DESCRIPTORS.find(
       ({ route }) => route === "/api/deploy",
-    ),
-    true,
+    )?.handler,
+    "function",
   );
   assert.equal(
-    WEBSITE_PENDING_HANDLER_INVENTORY.some(
+    typeof WEBSITE_HANDLER_DESCRIPTORS.find(
       ({ route }) => route === "/api/sites/[id]/backend",
-    ),
-    true,
+    )?.handler,
+    "function",
   );
   assert.equal(
-    WEBSITE_PENDING_HANDLER_INVENTORY.some(
+    typeof WEBSITE_HANDLER_DESCRIPTORS.find(
       ({ route }) => route === "/api/sites/[id]/backend/deploy",
-    ),
-    true,
+    )?.handler,
+    "function",
   );
-  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 3);
   assert.equal(
     typeof WEBSITE_HANDLER_DESCRIPTORS.find(
       ({ route }) => route === "/api/sites/[id]/toggle",

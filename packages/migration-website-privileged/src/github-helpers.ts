@@ -449,3 +449,358 @@ export async function getDefaultBranchSha(
   const branchData = (await branchResponse.json()) as Record<string, any>;
   return { branch, sha: branchData.commit?.sha || "" };
 }
+
+
+export interface RefreshedTokens {
+  access_token: string;
+  refresh_token: string;
+}
+
+export async function validateGithubToken(token: string): Promise<boolean> {
+  try {
+    const response = await fetchWithTimeout("https://api.github.com/user", {
+      headers: githubHeaders(token),
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
+export async function refreshGithubAccessToken(
+  refreshToken: string,
+): Promise<RefreshedTokens> {
+  const clientId = process.env.GITHUB_CLIENT_ID;
+  const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+  if (!clientId || !clientSecret) {
+    throw new Error("GITHUB_CLIENT_ID / CLIENT_SECRET not configured");
+  }
+  const response = await fetchWithTimeout(
+    "https://github.com/login/oauth/access_token",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+        client_id: clientId,
+        client_secret: clientSecret,
+      }),
+    },
+  );
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`GitHub token refresh failed (${response.status}): ${body}`);
+  }
+  const data = (await response.json()) as Record<string, any>;
+  if (data.error || !data.access_token) {
+    throw new Error(
+      `GitHub token refresh error: ${data.error_description || data.error || "no access_token"}`,
+    );
+  }
+  return {
+    access_token: data.access_token as string,
+    refresh_token: (data.refresh_token as string) || refreshToken,
+  };
+}
+
+export interface GitHubCreateRepoResult {
+  repoFullName: string;
+  repoUrl: string;
+  htmlUrl: string;
+}
+
+export async function createRepoFromTemplate(
+  token: string,
+  templateOwner: string,
+  templateRepo: string,
+  owner: string,
+  name: string,
+  isPrivate = true,
+): Promise<GitHubCreateRepoResult> {
+  const response = await fetchWithTimeout(
+    `https://api.github.com/repos/${templateOwner}/${templateRepo}/generate`,
+    {
+      method: "POST",
+      headers: {
+        ...githubHeaders(token),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        owner,
+        name,
+        private: isPrivate,
+        include_all_branches: false,
+      }),
+    },
+  );
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`GitHub create repo failed (${response.status}): ${err}`);
+  }
+  const data = (await response.json()) as Record<string, any>;
+  return {
+    repoFullName: data.full_name,
+    repoUrl: data.clone_url,
+    htmlUrl: data.html_url,
+  };
+}
+
+export async function deleteFile(
+  token: string,
+  owner: string,
+  repo: string,
+  path: string,
+  message: string,
+): Promise<void> {
+  const getRes = await fetchWithTimeout(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
+    { headers: githubHeaders(token) },
+  );
+  if (!getRes.ok) return;
+  const existing = (await getRes.json()) as Record<string, any> | any[];
+  if (Array.isArray(existing)) {
+    for (const file of existing) {
+      if (file.type === "file" || file.type === "dir") {
+        await deleteFile(token, owner, repo, file.path, message);
+      }
+    }
+    return;
+  }
+  const delRes = await fetchWithTimeout(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
+    {
+      method: "DELETE",
+      headers: githubHeaders(token),
+      body: JSON.stringify({ message, sha: existing.sha }),
+    },
+  );
+  if (!delRes.ok && delRes.status !== 404) {
+    console.warn(`GitHub delete ${path} failed: ${delRes.status}`);
+  }
+}
+
+export async function applyTemplatePlaceholders(
+  token: string,
+  owner: string,
+  repo: string,
+  replacements: Record<string, string>,
+): Promise<number> {
+  const manifest = await getFileContent(
+    token,
+    owner,
+    repo,
+    ".website-template.json",
+  );
+  if (!manifest) return 0;
+  let parsed: { files?: string[] };
+  try {
+    parsed = JSON.parse(manifest.content) as { files?: string[] };
+  } catch {
+    return 0;
+  }
+  const files = parsed.files || [];
+  let replaced = 0;
+  for (const filePath of files) {
+    const file = await getFileContent(token, owner, repo, filePath);
+    if (!file) continue;
+    let newContent = file.content;
+    for (const [key, value] of Object.entries(replacements)) {
+      newContent = newContent.split(`{{${key}}}`).join(value);
+    }
+    if (newContent === file.content) continue;
+    await updateFileContent(
+      token,
+      owner,
+      repo,
+      filePath,
+      newContent,
+      "Apply template placeholders",
+    );
+    replaced += 1;
+  }
+  return replaced;
+}
+
+export interface OverrideSlot {
+  id: string;
+  default: string;
+  type?: string;
+}
+
+export interface ApplyOverridesResult {
+  overridesFile: boolean;
+  filesTextReplaced: number;
+  readmeInjected: boolean;
+  readerInjected: boolean;
+}
+
+export async function applyOverridesToRepo(
+  token: string,
+  owner: string,
+  repo: string,
+  overrides: Record<string, string>,
+  slots: OverrideSlot[],
+): Promise<ApplyOverridesResult> {
+  const result: ApplyOverridesResult = {
+    overridesFile: false,
+    filesTextReplaced: 0,
+    readmeInjected: false,
+    readerInjected: false,
+  };
+  if (!overrides || Object.keys(overrides).length === 0) return result;
+
+  try {
+    const json = JSON.stringify(
+      {
+        version: 1,
+        generatedAt: new Date().toISOString(),
+        overrides,
+      },
+      null,
+      2,
+    );
+    await updateFileContent(
+      token,
+      owner,
+      repo,
+      "public/website-overrides.json",
+      json,
+      "chore(website): add visual-edit overrides snapshot",
+    );
+    result.overridesFile = true;
+  } catch (err) {
+    console.warn("[deploy] applyOverrides: failed to write overrides.json:", err);
+  }
+
+  try {
+    const reader = `// Auto-generated by website at deploy time.
+import overridesJson from "../public/website-overrides.json";
+
+type OverridesShape = { version: number; generatedAt: string; overrides: Record<string, string> };
+
+const data = overridesJson as OverridesShape;
+
+export function getOverride(slotId: string, fallback = ""): string {
+  return data.overrides?.[slotId] ?? fallback;
+}
+
+export function allOverrides(): Record<string, string> {
+  return { ...(data.overrides || {}) };
+}
+`;
+    await updateFileContent(
+      token,
+      owner,
+      repo,
+      "lib/website-overrides.ts",
+      reader,
+      "chore(website): add overrides reader helper",
+    );
+    result.readerInjected = true;
+  } catch (err) {
+    console.warn("[deploy] applyOverrides: failed to write reader:", err);
+  }
+
+  const manifest = await getFileContent(
+    token,
+    owner,
+    repo,
+    ".website-template.json",
+  );
+  let files: string[] = [];
+  if (manifest) {
+    try {
+      const parsed = JSON.parse(manifest.content) as Record<string, unknown>;
+      if (Array.isArray(parsed.editableFiles)) {
+        files = parsed.editableFiles as string[];
+      } else if (Array.isArray(parsed.files)) {
+        files = parsed.files as string[];
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+  if (files.length === 0) {
+    files = [
+      "app/page.tsx",
+      "app/[locale]/page.tsx",
+      "app/layout.tsx",
+      "components/Hero.tsx",
+      "components/Features.tsx",
+      "components/CTA.tsx",
+      "src/app/page.tsx",
+    ];
+  }
+
+  const changes: Array<{ id: string; from: string; to: string }> = [];
+  for (const slot of slots) {
+    const override = overrides[slot.id];
+    if (typeof override !== "string") continue;
+    if (!slot.default || !override || override === slot.default) continue;
+    if (slot.default.length < 3) continue;
+    changes.push({ id: slot.id, from: slot.default, to: override });
+  }
+
+  if (changes.length > 0) {
+    for (const filePath of files) {
+      const file = await getFileContent(token, owner, repo, filePath);
+      if (!file) continue;
+      let newContent = file.content;
+      let fileTouched = false;
+      for (const change of changes) {
+        const re = new RegExp(escapeRegex(change.from), "g");
+        if (re.test(newContent)) {
+          newContent = newContent.replace(re, change.to);
+          fileTouched = true;
+        }
+      }
+      if (fileTouched && newContent !== file.content) {
+        await updateFileContent(
+          token,
+          owner,
+          repo,
+          filePath,
+          newContent,
+          "chore(website): apply visual-edit overrides",
+        );
+        result.filesTextReplaced += 1;
+      }
+    }
+  }
+
+  try {
+    const existing = await getFileContent(
+      token,
+      owner,
+      repo,
+      "MYCREATOR_OVERRIDES.md",
+    );
+    if (!existing) {
+      const readme = `# Mycreator visual-edit overrides
+
+This repository was generated by Mycreator. During deploy we wrote your
+visual-edit overrides into \`public/website-overrides.json\` and
+\`lib/website-overrides.ts\`.
+
+Generated at: ${new Date().toISOString()}
+`;
+      await updateFileContent(
+        token,
+        owner,
+        repo,
+        "MYCREATOR_OVERRIDES.md",
+        readme,
+        "docs(website): document visual-edit overrides",
+      );
+      result.readmeInjected = true;
+    }
+  } catch (err) {
+    console.warn("[deploy] applyOverrides: failed to write README:", err);
+  }
+
+  return result;
+}

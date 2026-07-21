@@ -5,7 +5,9 @@ import type {
   PluginRouteHandler,
 } from "@oceanleo/plugin-runtime";
 
+import { BACKEND_WEBSITE_HANDLERS } from "./ported-backend";
 import { CORE_WEBSITE_HANDLERS } from "./ported-core";
+import { DEPLOY_WEBSITE_HANDLERS } from "./ported-deploy";
 import { GENERATION_WEBSITE_HANDLERS } from "./ported-generation";
 import { ORCHESTRATION_WEBSITE_HANDLERS } from "./ported-orchestration";
 import { PROVIDER_WEBSITE_HANDLERS } from "./ported-provider";
@@ -126,16 +128,11 @@ const PORTED_HANDLERS: Readonly<Record<string, PluginRouteHandler>> =
     ...GENERATION_WEBSITE_HANDLERS,
     ...ORCHESTRATION_WEBSITE_HANDLERS,
     ...SERVER_WEBSITE_HANDLERS,
+    ...DEPLOY_WEBSITE_HANDLERS,
+    ...BACKEND_WEBSITE_HANDLERS,
   });
 
-const PENDING_BLOCKERS: Readonly<Record<string, string>> = Object.freeze({
-  "/api/deploy":
-    "legacy POST runs runDeployPipeline inside Next after(); still missing createRepoFromTemplate/applyTemplatePlaceholders/deleteFile, Supabase Management createProject+wait+keys+SQL, github/vercel/supabase token refreshers, and the after()/background completion contract (vault helpers alone are insufficient)",
-  "/api/sites/[id]/backend":
-    "GET is a simple status read, but verified parity needs POST too: Aliyun SWAS RunCommand+waitForCommand+deployBackend, full Railway deployFromGitHub worker, and SSH forward into /backend/deploy — aliyun-swas/platform-host currently stop at provision/OpenSSH ops probes",
-  "/api/sites/[id]/backend/deploy":
-    "legacy POST needs installPrerequisites/findAvailablePort/deployBackend/setupCaddy/setupWebhookReceiver over SSH plus Cloudflare A-record, GitHub webhook, Vercel BACKEND_URL, and cursor-rules writes; platform-host only exposes test/prereq-check/status/restart/runUserSshCommand",
-});
+const PENDING_BLOCKERS: Readonly<Record<string, string>> = Object.freeze({});
 
 export interface WebsiteHandlerDescriptor {
   readonly route: string;
@@ -178,6 +175,8 @@ export const WEBSITE_HANDLER_DESCRIPTORS: readonly WebsiteHandlerDescriptor[] =
                   "packages/migration-website-privileged/src/ported-generation.ts",
                   "packages/migration-website-privileged/src/ported-orchestration.ts",
                   "packages/migration-website-privileged/src/ported-servers.ts",
+                  "packages/migration-website-privileged/src/ported-deploy.ts",
+                  "packages/migration-website-privileged/src/ported-backend.ts",
                   "packages/migration-website-privileged/tests/website-privileged.test.ts",
                 ]
               : [

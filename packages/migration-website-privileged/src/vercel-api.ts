@@ -323,3 +323,160 @@ export async function deleteSupabaseProject(
     throw new Error(`Failed to delete Supabase project: ${response.status}`);
   }
 }
+
+
+export interface VercelRefreshedTokens {
+  access_token: string;
+  refresh_token: string;
+  team_id: string | null;
+}
+
+export async function validateVercelToken(
+  token: string,
+  teamId?: string | null,
+): Promise<boolean> {
+  const isIntegration = isVercelIntegrationToken(token);
+  const tryEndpoint = async (url: string): Promise<boolean> => {
+    try {
+      const response = await fetchWithTimeout(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  };
+
+  if (isIntegration) {
+    if (teamId) {
+      if (
+        await tryEndpoint(
+          `${VERCEL_API}/v1/projects?teamId=${teamId}&limit=1`,
+        )
+      ) {
+        return true;
+      }
+    }
+    if (
+      await tryEndpoint(
+        `${VERCEL_API}/v1/integrations/configurations?view=account`,
+      )
+    ) {
+      return true;
+    }
+    return tryEndpoint(`${VERCEL_API}/v1/projects?limit=1`);
+  }
+
+  const url = teamId
+    ? `${VERCEL_API}/v2/user?teamId=${teamId}`
+    : `${VERCEL_API}/v2/user`;
+  return tryEndpoint(url);
+}
+
+export async function detectVercelTeamId(
+  token: string,
+): Promise<string | null> {
+  if (!isVercelIntegrationToken(token)) return null;
+
+  for (const view of ["account", "team"]) {
+    try {
+      const response = await fetchWithTimeout(
+        `${VERCEL_API}/v1/integrations/configurations?view=${view}`,
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      if (response.ok) {
+        const data = (await response.json()) as Record<string, any> | any[];
+        const configs = Array.isArray(data)
+          ? data
+          : data.configurations || [];
+        for (const cfg of configs) {
+          if (cfg.teamId) return cfg.teamId as string;
+        }
+      }
+    } catch {
+      /* continue */
+    }
+  }
+
+  for (const probe of ["_", "personal", "probe"]) {
+    try {
+      const response = await fetchWithTimeout(
+        `${VERCEL_API}/v1/projects?teamId=${probe}&limit=1`,
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      if (!response.ok) {
+        const body = await response.text();
+        const match = body.match(/"teamId"\s*:\s*"(team_[^"]+)"/);
+        if (match) return match[1]!;
+      }
+    } catch {
+      /* continue */
+    }
+  }
+  return null;
+}
+
+export async function refreshVercelAccessToken(
+  refreshToken: string,
+): Promise<VercelRefreshedTokens> {
+  const clientId = process.env.VERCEL_CLIENT_ID;
+  const clientSecret = process.env.VERCEL_CLIENT_SECRET;
+  if (!clientId || !clientSecret) {
+    throw new Error("VERCEL_CLIENT_ID / CLIENT_SECRET not configured");
+  }
+  const response = await fetch(
+    "https://api.vercel.com/v2/oauth/access_token",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+        client_id: clientId,
+        client_secret: clientSecret,
+      }),
+    },
+  );
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`Vercel token refresh failed (${response.status}): ${body}`);
+  }
+  const data = (await response.json()) as Record<string, any>;
+  if (!data.access_token) {
+    throw new Error("Vercel token refresh returned no access_token");
+  }
+  return {
+    access_token: data.access_token as string,
+    refresh_token: (data.refresh_token as string) || refreshToken,
+    team_id: (data.team_id as string) || null,
+  };
+}
+
+export async function waitForDeployment(
+  token: string,
+  projectId: string,
+  teamId?: string | null,
+  maxWaitMs = 300_000,
+): Promise<string | null> {
+  const start = Date.now();
+  while (Date.now() - start < maxWaitMs) {
+    const url = teamId
+      ? `${VERCEL_API}/v6/deployments?projectId=${projectId}&limit=1&teamId=${teamId}`
+      : `${VERCEL_API}/v6/deployments?projectId=${projectId}&limit=1`;
+    const response = await fetchWithTimeout(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (response.ok) {
+      const data = (await response.json()) as Record<string, any>;
+      const deployment = data.deployments?.[0];
+      if (deployment?.state === "READY") {
+        return `https://${deployment.url}`;
+      }
+      if (deployment?.state === "ERROR") {
+        throw new Error("Vercel deployment failed");
+      }
+    }
+    await new Promise((resolve) => setTimeout(resolve, 10_000));
+  }
+  return null;
+}
