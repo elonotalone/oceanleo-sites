@@ -63,15 +63,15 @@ test("website inventory partitions all 47 handlers into verified and blocked pat
   assert.equal(WEBSITE_HANDLER_PATHS.length, 47);
   assert.equal(WEBSITE_HANDLER_DESCRIPTORS.length, 47);
   assert.equal(handlers.length, 47);
-  assert.equal(WEBSITE_VERIFIED_HANDLER_PATHS.length, 36);
-  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 11);
+  assert.equal(WEBSITE_VERIFIED_HANDLER_PATHS.length, 39);
+  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 8);
   assert.equal(
     handlers.filter((entry) => entry.parity.status === "verified").length,
-    36,
+    39,
   );
   assert.equal(
     handlers.filter((entry) => entry.parity.status === "pending").length,
-    11,
+    8,
   );
   assert.ok(
     WEBSITE_HANDLER_DESCRIPTORS.every(
@@ -177,6 +177,21 @@ test("verified handlers dispatch while blocked handlers retain exact params", as
   );
   assert.ok(
     WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/[id]/vibe-code/pr"),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes(
+      "/api/sites/[id]/overrides/sync",
+    ),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/[id]/transfer-out"),
+  );
+  assert.ok(WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/import"));
+  assert.equal(
+    WEBSITE_PENDING_HANDLER_INVENTORY.some(
+      ({ route }) => route === "/api/deploy",
+    ),
+    true,
   );
   assert.equal(
     typeof WEBSITE_HANDLER_DESCRIPTORS.find(

@@ -376,3 +376,155 @@ fi`,
     fileCount: cleaned.length,
   };
 }
+
+/** Remove a platform-hosted site's files (used by transfer-out / delete). */
+export async function teardownPlatformSite(
+  target: RootConsoleTarget,
+  slug: string,
+): Promise<void> {
+  const safeSlug = slugifyHost(slug);
+  if (!safeSlug) return;
+  const root = `${PLATFORM_SITES_ROOT}/${safeSlug}`;
+  const lock = `${PLATFORM_SITES_ROOT}/.${safeSlug}.lock`;
+  await runRootConsoleShellCommand(
+    target,
+    `set -e
+exec 9>${shellSingleQuote(lock)}
+flock -x 9
+rm -rf ${shellSingleQuote(root)} ${shellSingleQuote(root)}.stage-* ${shellSingleQuote(root)}.backup-*`,
+    30_000,
+  );
+}
+
+/** Read the current file tree of a platform site (for transfer-out to GitHub). */
+export async function readPlatformSiteTree(
+  target: RootConsoleTarget,
+  slug: string,
+): Promise<PlatformFile[]> {
+  const safeSlug = slugifyHost(slug);
+  if (!safeSlug) throw new Error("Invalid site slug for platform hosting");
+  const root = `${PLATFORM_SITES_ROOT}/${safeSlug}`;
+  const rootQ = shellSingleQuote(root);
+  const lockQ = shellSingleQuote(`${PLATFORM_SITES_ROOT}/.${safeSlug}.lock`);
+  const script = `
+set -e
+exec 9>${lockQ}
+flock -s 9
+cd ${rootQ} 2>/dev/null || exit 0
+find . -type f -size -5M 2>/dev/null | while read -r f; do
+  rel="\${f#./}"
+  printf '%s\\t' "$rel"
+  base64 -w0 "$f"
+  printf '\\n'
+done`;
+  const res = await runRootConsoleShellCommand(target, script, 120_000);
+  if (res.code !== 0) {
+    throw new Error(res.stderr || "Failed to read site files");
+  }
+  const out: PlatformFile[] = [];
+  for (const line of res.stdout.split("\n")) {
+    const tab = line.indexOf("\t");
+    if (tab <= 0) continue;
+    const relPath = line.slice(0, tab).trim();
+    const contentBase64 = line.slice(tab + 1).trim();
+    if (relPath && contentBase64) out.push({ path: relPath, contentBase64 });
+  }
+  return out;
+}
+
+/**
+ * Probe a user-owned SSH host (import remote_server). Uses OpenSSH + sshpass
+ * so we do not depend on the ssh2 native package.
+ */
+export async function testUserSshConnection(
+  creds: SSHCredentials,
+): Promise<{ ok: boolean; error?: string; osInfo?: string }> {
+  try {
+    const result = await runUserSshCommand(
+      creds,
+      "cat /etc/os-release | head -3",
+      10_000,
+    );
+    if (result.code !== 0) {
+      return { ok: false, error: result.stderr || "Non-zero exit code" };
+    }
+    return { ok: true, osInfo: result.stdout.trim() };
+  } catch (error) {
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
+}
+
+async function runUserSshCommand(
+  creds: SSHCredentials,
+  command: string,
+  timeoutMs: number,
+): Promise<CommandResult> {
+  if (creds.authType === "key") {
+    if (!creds.privateKey) {
+      throw new Error("SSH private key is required for key auth");
+    }
+    return runSshCommand(
+      {
+        ...creds,
+        privateKey: creds.privateKey,
+      },
+      command,
+      timeoutMs,
+    );
+  }
+
+  if (!creds.password) {
+    throw new Error("SSH password is required for password auth");
+  }
+
+  return new Promise<CommandResult>((resolve, reject) => {
+    const child = spawn(
+      "sshpass",
+      [
+        "-p",
+        creds.password!,
+        "ssh",
+        "-p",
+        String(creds.port),
+        "-o",
+        "StrictHostKeyChecking=no",
+        "-o",
+        "UserKnownHostsFile=/dev/null",
+        `${creds.username}@${creds.host}`,
+        command,
+      ],
+      { stdio: ["ignore", "pipe", "pipe"] },
+    );
+    let stdout = "";
+    let stderr = "";
+    let settled = false;
+    const finish = (handler: () => void) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      handler();
+    };
+    const timer = setTimeout(() => {
+      child.kill("SIGTERM");
+      setTimeout(() => child.kill("SIGKILL"), 5_000).unref();
+      finish(() =>
+        reject(new Error(`SSH command timed out after ${timeoutMs}ms`)),
+      );
+    }, timeoutMs);
+    child.stdout.on("data", (chunk) => {
+      stdout += String(chunk);
+    });
+    child.stderr.on("data", (chunk) => {
+      stderr += String(chunk);
+    });
+    child.on("error", (error) => {
+      finish(() => reject(error));
+    });
+    child.on("close", (code) => {
+      finish(() => resolve({ code: code ?? 1, stdout, stderr }));
+    });
+  });
+}

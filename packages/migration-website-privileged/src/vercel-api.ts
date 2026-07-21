@@ -2,6 +2,160 @@ import { fetchWithTimeout } from "./runtime";
 
 const VERCEL_API = "https://api.vercel.com";
 
+export function isVercelIntegrationToken(token: string): boolean {
+  return token.startsWith("vca_") || token.startsWith("vci_");
+}
+
+async function resolveVercelDashboardSlug(
+  token: string,
+  teamId?: string | null,
+): Promise<string> {
+  try {
+    if (teamId) {
+      const response = await fetchWithTimeout(
+        `${VERCEL_API}/v2/teams/${teamId}`,
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      if (response.ok) {
+        const data = (await response.json()) as Record<string, any>;
+        if (data.slug) return data.slug as string;
+      }
+    }
+    if (!isVercelIntegrationToken(token)) {
+      const response = await fetchWithTimeout(`${VERCEL_API}/v2/user`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.ok) {
+        const data = (await response.json()) as Record<string, any>;
+        const user = data.user || data;
+        if (user.username) return user.username as string;
+      }
+    }
+  } catch {
+    /* ignore */
+  }
+  return "~";
+}
+
+export interface CreateProjectResult {
+  projectId: string;
+  projectName: string;
+  projectUrl: string;
+  resolvedTeamId: string | null | undefined;
+  repoId: number | null;
+}
+
+export async function createProject(
+  token: string,
+  name: string,
+  repoFullName: string,
+  teamId?: string | null,
+): Promise<CreateProjectResult> {
+  const body: Record<string, unknown> = {
+    name,
+    framework: "nextjs",
+    gitRepository: {
+      type: "github",
+      repo: repoFullName,
+    },
+  };
+
+  const doCreate = async (tid: string | null | undefined) => {
+    const url = tid
+      ? `${VERCEL_API}/v1/projects?teamId=${tid}`
+      : `${VERCEL_API}/v1/projects`;
+    return fetchWithTimeout(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+  };
+
+  let response = await doCreate(teamId);
+
+  if (
+    !response.ok &&
+    response.status === 403 &&
+    !teamId &&
+    isVercelIntegrationToken(token)
+  ) {
+    const errText = await response.text();
+    const match = errText.match(/"teamId"\s*:\s*"(team_[^"]+)"/);
+    if (match) {
+      const detectedTeamId = match[1]!;
+      response = await doCreate(detectedTeamId);
+      if (response.ok) {
+        const data = (await response.json()) as Record<string, any>;
+        const slug = await resolveVercelDashboardSlug(token, detectedTeamId);
+        return {
+          projectId: data.id,
+          projectName: data.name,
+          projectUrl: `https://vercel.com/${slug}/${data.name}`,
+          resolvedTeamId: detectedTeamId,
+          repoId: data.link?.repoId ?? null,
+        };
+      }
+    }
+    throw new Error(
+      `Vercel create project failed (${response.status}): ${errText}`,
+    );
+  }
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`Vercel create project failed (${response.status}): ${err}`);
+  }
+
+  const data = (await response.json()) as Record<string, any>;
+  const slug = await resolveVercelDashboardSlug(token, teamId);
+  return {
+    projectId: data.id,
+    projectName: data.name,
+    projectUrl: `https://vercel.com/${slug}/${data.name}`,
+    resolvedTeamId: teamId,
+    repoId: data.link?.repoId ?? null,
+  };
+}
+
+export async function triggerFirstDeployment(
+  token: string,
+  projectName: string,
+  repoId: number | null | undefined,
+  ref = "main",
+  teamId?: string | null,
+): Promise<void> {
+  const url = teamId
+    ? `${VERCEL_API}/v13/deployments?teamId=${teamId}&forceNew=1`
+    : `${VERCEL_API}/v13/deployments?forceNew=1`;
+
+  const body: Record<string, unknown> = {
+    name: projectName,
+    target: "production",
+    gitSource: repoId
+      ? { type: "github", repoId, ref }
+      : { type: "github", ref },
+  };
+
+  const response = await fetchWithTimeout(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(
+      `Vercel trigger deployment failed (${response.status}): ${err.slice(0, 300)}`,
+    );
+  }
+}
+
 export interface VercelEnvVar {
   id: string;
   key: string;

@@ -7,6 +7,7 @@ import type {
 
 import { CORE_WEBSITE_HANDLERS } from "./ported-core";
 import { GENERATION_WEBSITE_HANDLERS } from "./ported-generation";
+import { ORCHESTRATION_WEBSITE_HANDLERS } from "./ported-orchestration";
 import { PROVIDER_WEBSITE_HANDLERS } from "./ported-provider";
 import { SITE_WEBSITE_HANDLERS } from "./ported-sites";
 
@@ -122,6 +123,7 @@ const PORTED_HANDLERS: Readonly<Record<string, PluginRouteHandler>> =
     ...PROVIDER_WEBSITE_HANDLERS,
     ...SITE_WEBSITE_HANDLERS,
     ...GENERATION_WEBSITE_HANDLERS,
+    ...ORCHESTRATION_WEBSITE_HANDLERS,
   });
 
 const PENDING_BLOCKERS: Readonly<Record<string, string>> = Object.freeze({
@@ -139,14 +141,8 @@ const PENDING_BLOCKERS: Readonly<Record<string, string>> = Object.freeze({
     "requires the complete remote-server deploy pipeline and prerequisite reporting",
   "/api/sites/[id]/backend/ops":
     "requires remote process, log, restart, and health operations over server-ssh",
-  "/api/sites/[id]/overrides/sync":
-    "requires GitHub tree commits plus template-slot merge and deployment synchronization",
-  "/api/sites/[id]/transfer-out":
-    "requires platform source export and ownership transfer into a user GitHub repository",
   "/api/sites/[id]/vibe-code-hosted":
     "requires source discovery and Cursor execution against a privileged remote SSH checkout",
-  "/api/sites/import":
-    "requires GitHub/Vercel/remote-server ownership discovery and credential validation",
 });
 
 export interface WebsiteHandlerDescriptor {
@@ -188,6 +184,7 @@ export const WEBSITE_HANDLER_DESCRIPTORS: readonly WebsiteHandlerDescriptor[] =
                   "packages/migration-website-privileged/src/ported-provider.ts",
                   "packages/migration-website-privileged/src/ported-sites.ts",
                   "packages/migration-website-privileged/src/ported-generation.ts",
+                  "packages/migration-website-privileged/src/ported-orchestration.ts",
                   "packages/migration-website-privileged/tests/website-privileged.test.ts",
                 ]
               : [
