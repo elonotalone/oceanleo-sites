@@ -294,7 +294,20 @@ export class CutoverController {
 
   private async gateW0NoCustomDomains(
     projects: Readonly<Record<AppProfile, ProjectInfo>>,
+    ledger: CutoverLedger | null = null,
   ): Promise<void> {
+    if (
+      ledger &&
+      (Object.values(ledger.waves).some((wave) => wave.state === "complete") ||
+        Object.values(ledger.domains).some(
+          (domain) =>
+            domain.state === "smoke-passed" ||
+            domain.state === "owner-verified",
+        ))
+    ) {
+      // Custom domains are expected after W1+; W0 emptiness only applies before moves.
+      return;
+    }
     for (const profile of PROFILES) {
       const domains = await this.provider.listProjectDomains(
         projects[profile].id,
@@ -1036,7 +1049,8 @@ export class CutoverController {
     await this.gateInventory();
     const projects = await this.discoverProjects();
     await this.gateEnvironment(projects);
-    await this.gateW0NoCustomDomains(projects);
+    const existingLedger = await this.ledgerStore.load();
+    await this.gateW0NoCustomDomains(projects, existingLedger);
     if (!execute) {
       return Object.freeze({
         dryRun: true,
@@ -1050,8 +1064,8 @@ export class CutoverController {
       await this.gateInventory();
       const lockedProjects = await this.discoverProjects();
       await this.gateEnvironment(lockedProjects);
-      await this.gateW0NoCustomDomains(lockedProjects);
       const ledger = await this.loadOrCreateLedger(sourceSha);
+      await this.gateW0NoCustomDomains(lockedProjects, ledger);
       const readyEntries: [AppProfile, DeploymentInfo][] = [];
       for (const profile of PROFILES) {
         const project = lockedProjects[profile];
@@ -1108,7 +1122,7 @@ export class CutoverController {
         Object.fromEntries(readyEntries) as Record<AppProfile, DeploymentInfo>,
       );
       await this.probeW0(ready);
-      await this.gateW0NoCustomDomains(lockedProjects);
+      await this.gateW0NoCustomDomains(lockedProjects, ledger);
       return Object.freeze({
         dryRun: false,
         sourceSha,
@@ -1132,8 +1146,7 @@ export class CutoverController {
     wave: WaveId,
     execute = false,
   ): Promise<Readonly<Record<string, unknown>>> {
-    const ledger = await this.loadLedger(sourceSha);
-    if (!ledger) throw new CutoverGateError("ledger-missing");
+    const ledger = await this.loadOrCreateLedger(sourceSha);
     const targets = await this.gateMove(sourceSha, wave, ledger);
     const waveDomains = this.loaded.domains.filter(
       (domain) => domain.wave === wave,
