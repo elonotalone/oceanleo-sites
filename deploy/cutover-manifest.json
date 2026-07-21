@@ -76,19 +76,21 @@
           "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
           "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
           "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "WEBSITE_ALIYUN_ACCESS_KEY_ID",
-          "WEBSITE_ALIYUN_ACCESS_KEY_SECRET",
-          "WEBSITE_CLOUDFLARE_API_TOKEN",
-          "WEBSITE_GITHUB_TOKEN",
-          "WEBSITE_RAILWAY_TOKEN",
-          "WEBSITE_SERVER_SSH_KEY",
-          "WEBSITE_SUPABASE_MANAGEMENT_TOKEN",
-          "WEBSITE_VERCEL_TOKEN"
+          "WEBSITE_SERVER_SSH_KEY"
         ],
         "forbidden": [
           "SUPABASE_SERVICE_ROLE_KEY",
           "TRIAL_CHAT_EMAIL",
           "TRIAL_CHAT_PASSWORD"
+        ],
+        "optional": [
+          "WEBSITE_ALIYUN_ACCESS_KEY_ID",
+          "WEBSITE_ALIYUN_ACCESS_KEY_SECRET",
+          "WEBSITE_CLOUDFLARE_API_TOKEN",
+          "WEBSITE_GITHUB_TOKEN",
+          "WEBSITE_RAILWAY_TOKEN",
+          "WEBSITE_SUPABASE_MANAGEMENT_TOKEN",
+          "WEBSITE_VERCEL_TOKEN"
         ]
       }
     }
@@ -694,5 +696,8 @@
         }
       ]
     }
+  ],
+  "notes": [
+    "Operator-held website privileged provider tokens remain optional until supplied out-of-band; they are blocked mappings with no legacy Vercel source."
   ]
 }

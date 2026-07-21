@@ -404,7 +404,7 @@ test("dry-run redacts every value and performs no provider mutation", async () =
 
   assert.equal(provider.upserts.length, 0);
   assert.equal(result.mutations, false);
-  assert.equal((result.wouldUpsert as readonly unknown[]).length, 14);
+  assert.equal((result.wouldUpsert as readonly unknown[]).length, 7);
   assert.doesNotMatch(JSON.stringify(result), new RegExp(sentinel));
 });
 
@@ -539,7 +539,7 @@ test("execute upserts once and an exact resume is idempotent", async () => {
     targetProjects(provider),
     true,
   );
-  assert.equal(provider.upserts.length, 14);
+  assert.equal(provider.upserts.length, 7);
   assert.equal(first.mutations, true);
 
   const second = await synchronizeEnvironment(
@@ -549,7 +549,7 @@ test("execute upserts once and an exact resume is idempotent", async () => {
     targetProjects(provider),
     true,
   );
-  assert.equal(provider.upserts.length, 14);
+  assert.equal(provider.upserts.length, 7);
   assert.equal(second.mutations, false);
   assert.deepEqual(second.upserted, []);
 });

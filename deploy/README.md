@@ -157,12 +157,19 @@ NEXT_PUBLIC_OCEANLEO_SUPABASE_URL
 The privileged profile additionally requires:
 
 ```text
+WEBSITE_SERVER_SSH_KEY
+```
+
+Seven provider tokens stay optional until supplied out-of-band (blocked
+mappings; no legacy Vercel source). Deploy proceeds without them; privileged
+provider features stay unavailable until an operator writes them:
+
+```text
 WEBSITE_ALIYUN_ACCESS_KEY_ID
 WEBSITE_ALIYUN_ACCESS_KEY_SECRET
 WEBSITE_CLOUDFLARE_API_TOKEN
 WEBSITE_GITHUB_TOKEN
 WEBSITE_RAILWAY_TOKEN
-WEBSITE_SERVER_SSH_KEY
 WEBSITE_SUPABASE_MANAGEMENT_TOKEN
 WEBSITE_VERCEL_TOKEN
 ```
@@ -180,7 +187,7 @@ website project. Its exact `OCEANLEO_PLATFORM_SSH_PRIVATE_KEY` usage in
 `resolvePlatformTarget` resolves `WEBSITE_SERVER_SSH_KEY`. The three
 website-profile shared public keys also have exact sources.
 
-Seven website mappings remain hard blockers, not guesses: GitHub, Vercel,
+Seven website mappings remain operator holds, not guesses: GitHub, Vercel,
 Cloudflare, Supabase-management, Railway, and both Aliyun values are per-user
 encrypted `vault_entries` in the legacy runtime, not legacy Vercel project
 environment keys. Authenticated local Vercel, Cloudflare, GitHub, and Aliyun

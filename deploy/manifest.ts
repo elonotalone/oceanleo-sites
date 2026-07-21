@@ -61,10 +61,11 @@ function assertEnvironmentNames(
   profile: AppProfile,
   required: readonly string[],
   forbidden: readonly string[],
+  optional: readonly string[] = [],
 ): void {
   const namePattern = /^[A-Z][A-Z0-9_]*$/;
   invariant(required.length > 0, `${profile} requires no environment names`);
-  for (const name of [...required, ...forbidden]) {
+  for (const name of [...required, ...forbidden, ...optional]) {
     invariant(
       typeof name === "string" && namePattern.test(name),
       `${profile} has invalid environment key name`,
@@ -79,8 +80,18 @@ function assertEnvironmentNames(
     `${profile} repeats a forbidden environment name`,
   );
   invariant(
+    new Set(optional).size === optional.length,
+    `${profile} repeats an optional environment name`,
+  );
+  invariant(
     required.every((name) => !forbidden.includes(name)),
     `${profile} both requires and forbids an environment name`,
+  );
+  invariant(
+    optional.every(
+      (name) => !required.includes(name) && !forbidden.includes(name),
+    ),
+    `${profile} optional environment name overlaps required or forbidden`,
   );
 }
 
@@ -157,6 +168,7 @@ function validateAndFlatten(raw: unknown): {
       profile,
       target.environment.required,
       target.environment.forbidden,
+      target.environment.optional ?? [],
     );
   }
 

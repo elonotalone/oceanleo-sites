@@ -5,6 +5,8 @@ export type DomainKind = "canonical" | "alias";
 export interface EnvironmentContract {
   readonly required: readonly string[];
   readonly forbidden: readonly string[];
+  /** Present on target but not gated for deploy; may have blocked mappings. */
+  readonly optional?: readonly string[];
 }
 
 export interface TargetProjectManifest {

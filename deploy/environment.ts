@@ -212,9 +212,11 @@ function validateContract(
     );
     const target =
       loaded.manifest.targets[mapping.targetProfile as AppProfile];
+    const optional = target.environment.optional ?? [];
     invariant(
-      target.environment.required.includes(mapping.targetKey),
-      `${mapping.id} does not map a required target key`,
+      target.environment.required.includes(mapping.targetKey) ||
+        optional.includes(mapping.targetKey),
+      `${mapping.id} does not map a required or optional target key`,
     );
     invariant(
       !target.environment.forbidden.includes(mapping.targetKey),
@@ -263,10 +265,20 @@ function validateContract(
     ),
   );
   invariant(
-    requiredPairs.length === targetPairs.size &&
-      requiredPairs.every((pair) => targetPairs.has(pair)),
-    "mapping coverage does not exactly match required target keys",
+    requiredPairs.every((pair) => targetPairs.has(pair)),
+    "mapping coverage misses one or more required target keys",
   );
+  for (const pair of targetPairs) {
+    const separator = pair.indexOf(":");
+    const profile = pair.slice(0, separator) as AppProfile;
+    const key = pair.slice(separator + 1);
+    const target = loaded.manifest.targets[profile];
+    const optional = target.environment.optional ?? [];
+    invariant(
+      target.environment.required.includes(key) || optional.includes(key),
+      `${pair} is mapped but not required or optional`,
+    );
+  }
   return deepFreeze(contract);
 }
 
