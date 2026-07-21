@@ -1,13 +1,17 @@
 import crypto from "node:crypto";
 
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type {
   PluginHandlerContext,
   PluginHandlerResult,
   PluginRouteHandler,
 } from "@oceanleo/plugin-runtime";
 
-export type WebsiteSupabaseClient = ReturnType<typeof createClient>;
+/**
+ * Untyped client: website privileged tables are not generated into a Database
+ * schema here. Prefer `any` over Supabase's default `never` row/update types.
+ */
+export type WebsiteSupabaseClient = SupabaseClient<any, "public", any>;
 export type WebsiteRouteParams = PluginHandlerContext["params"];
 export type WebsiteMethodHandler = (
   request: Request,
@@ -53,7 +57,7 @@ export function supabaseFor(request: Request): WebsiteSupabaseClient {
         },
       },
     },
-  );
+  ) as WebsiteSupabaseClient;
 }
 
 export async function authenticated(
