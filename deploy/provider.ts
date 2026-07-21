@@ -253,24 +253,28 @@ export class VercelOpsProvider implements CutoverProvider {
   async listProjectDomains(
     projectId: string,
   ): Promise<readonly ProjectDomainInfo[]> {
-    const response = await this.rawApi(
-      "GET",
-      this.teamPath(
-        `/v9/projects/${encodeURIComponent(projectId)}/domains`,
-      ),
-    );
-    const errorCode = providerErrorCode(response);
-    if (errorCode) {
-      throw new ProviderOperationError("list-project-domains", errorCode);
-    }
-    if (!isRecord(response) || !Array.isArray(response.domains)) {
-      throw new ProviderOperationError(
-        "list-project-domains",
-        "invalid-response",
+    const collected: ProjectDomainInfo[] = [];
+    let until: number | undefined;
+    for (;;) {
+      const query = new URLSearchParams({ limit: "100" });
+      if (until !== undefined) query.set("until", String(until));
+      const response = await this.rawApi(
+        "GET",
+        this.teamPath(
+          `/v9/projects/${encodeURIComponent(projectId)}/domains?${query.toString()}`,
+        ),
       );
-    }
-    return Object.freeze(
-      response.domains.map((item): ProjectDomainInfo => {
+      const errorCode = providerErrorCode(response);
+      if (errorCode) {
+        throw new ProviderOperationError("list-project-domains", errorCode);
+      }
+      if (!isRecord(response) || !Array.isArray(response.domains)) {
+        throw new ProviderOperationError(
+          "list-project-domains",
+          "invalid-response",
+        );
+      }
+      for (const item of response.domains) {
         if (!isRecord(item) || !stringOrNull(item.name)) {
           throw new ProviderOperationError(
             "list-project-domains",
@@ -278,19 +282,34 @@ export class VercelOpsProvider implements CutoverProvider {
           );
         }
         const status = item.redirectStatusCode;
-        return Object.freeze({
-          host: item.name as string,
-          verified: item.verified === true,
-          projectId,
-          gitBranch: stringOrNull(item.gitBranch),
-          redirect: stringOrNull(item.redirect),
-          redirectStatusCode:
-            status === 301 || status === 302 || status === 307 || status === 308
-              ? status
-              : null,
-        });
-      }),
-    );
+        collected.push(
+          Object.freeze({
+            host: item.name as string,
+            verified: item.verified === true,
+            projectId,
+            gitBranch: stringOrNull(item.gitBranch),
+            redirect: stringOrNull(item.redirect),
+            redirectStatusCode:
+              status === 301 ||
+              status === 302 ||
+              status === 307 ||
+              status === 308
+                ? status
+                : null,
+          }),
+        );
+      }
+      const pagination = isRecord(response.pagination)
+        ? response.pagination
+        : null;
+      const next =
+        pagination && typeof pagination.next === "number"
+          ? pagination.next
+          : null;
+      if (next === null) break;
+      until = next;
+    }
+    return Object.freeze(collected);
   }
 
   async listEnvironmentKeys(
