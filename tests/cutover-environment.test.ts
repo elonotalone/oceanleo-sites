@@ -298,19 +298,60 @@ test("reviewed mapping covers exact target names without values", async () => {
   assert.deepEqual(
     environment.contract.mappings
       .filter((mapping) => mapping.targetProfile === "standard")
-      .map((mapping) => mapping.sources.length),
-    [27, 26, 27],
+      .map((mapping) => ({
+        key: mapping.targetKey,
+        sourcePolicy: mapping.sourcePolicy,
+        sources: mapping.sources,
+      })),
+    [
+      {
+        key: "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
+        sourcePolicy: "all-sources-equal",
+        sources: [
+          {
+            projectName: "skill",
+            projectId: "prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo",
+            key: "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
+            target: "production",
+          },
+        ],
+      },
+      {
+        key: "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
+        sourcePolicy: "all-sources-equal",
+        sources: [
+          {
+            projectName: "skill",
+            projectId: "prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo",
+            key: "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
+            target: "production",
+          },
+        ],
+      },
+      {
+        key: "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
+        sourcePolicy: "all-sources-equal",
+        sources: [
+          {
+            projectName: "skill",
+            projectId: "prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo",
+            key: "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
+            target: "production",
+          },
+        ],
+      },
+    ],
   );
+  const blockedWebsite = environment.contract.mappings
+    .filter(
+      (mapping) =>
+        mapping.targetProfile === "website-privileged" &&
+        mapping.targetKey.startsWith("WEBSITE_") &&
+        mapping.status === "blocked",
+    )
+    .sort((left, right) => left.targetKey.localeCompare(right.targetKey));
   assert.deepEqual(
-    environment.contract.mappings
-      .filter(
-        (mapping) =>
-          mapping.targetProfile === "website-privileged" &&
-          mapping.targetKey.startsWith("WEBSITE_") &&
-          mapping.status === "blocked",
-      )
-      .map((mapping) => mapping.targetKey)
-      .sort(),
+    blockedWebsite.map((mapping) => mapping.targetKey),
     [
       "WEBSITE_ALIYUN_ACCESS_KEY_ID",
       "WEBSITE_ALIYUN_ACCESS_KEY_SECRET",
@@ -320,6 +361,15 @@ test("reviewed mapping covers exact target names without values", async () => {
       "WEBSITE_SUPABASE_MANAGEMENT_TOKEN",
       "WEBSITE_VERCEL_TOKEN",
     ],
+  );
+  assert.ok(
+    blockedWebsite.every(
+      (mapping) =>
+        mapping.sources.length === 0 &&
+        typeof mapping.blocker === "string" &&
+        mapping.blocker.includes("Operator-only") &&
+        mapping.blocker.includes("13 keys"),
+    ),
   );
   const sshMapping = environment.contract.mappings.find(
     (mapping) => mapping.targetKey === "WEBSITE_SERVER_SSH_KEY",

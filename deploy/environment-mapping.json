@@ -1,7 +1,7 @@
 {
   "schemaVersion": "oceanleo.environment-mapping.v1",
-  "contractVersion": "2026-07-21.1",
-  "reviewedAt": "2026-07-21T15:24:00Z",
+  "contractVersion": "2026-07-21.2",
+  "reviewedAt": "2026-07-21T17:05:00Z",
   "teamId": "team_Jk2R4jQ9GDtSbG2oOXqTRum9",
   "provider": "vercel-ops",
   "valueHandling": {
@@ -25,167 +25,12 @@
           "projectId": "prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo",
           "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
           "target": "production"
-        },
-        {
-          "projectName": "ecommerce-assets",
-          "projectId": "prj_CxdDA2wwLchBWhifVuCIXvWZQb6z",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "ppt-maker",
-          "projectId": "prj_fg9lw6bqU6y8fdrlho4tRQ1lqks4",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "excel-ai",
-          "projectId": "prj_BMpaAMd1l93r4AGlgO67nFc0SJF3",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "word-ai",
-          "projectId": "prj_Ls4e3jgAbyfULtKsIQUUhfAzqwxe",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "converter-suite",
-          "projectId": "prj_irJcqq4OYf6QuxqWOma7Is5M09iZ",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "aihuman-studio",
-          "projectId": "prj_STY31vfacHf9EwT94xsoEpySSU0S",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "video",
-          "projectId": "prj_fL2HXBjq1vy3Lg8M9pynSz0oLBDX",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "resume",
-          "projectId": "prj_pHf6q3mNk7SL1zY2VZJSBO6MMGL0",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "bizdev",
-          "projectId": "prj_9f2LiGjl60KPGz1UKpkxY1YFwggG",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "logo",
-          "projectId": "prj_KfpZVQSA9F1DgamGXEYweKjLZfwR",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "interior",
-          "projectId": "prj_iD0gbYfgb2WSAgmIWo8d1FbtLN8r",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "chat",
-          "projectId": "prj_hrsYhiD7JsdCQBbFlRFbkThnNDt8",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "threed",
-          "projectId": "prj_pRg3mRmEGBwq9o4i13HpF3K7lENQ",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "music",
-          "projectId": "prj_UDTSmZjOw9m6OQ7vFoeGFMtEPCbI",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "meeting",
-          "projectId": "prj_ofG2j6zreM8Ai32tZZwSO8MBt7H4",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "paper",
-          "projectId": "prj_dZUDcrgdqIKnD5nXV3v8R36gXDyB",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "law",
-          "projectId": "prj_Mh2rmPFaGhkxv3s6bU2LqZUDPEDV",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "study",
-          "projectId": "prj_jSiaQIQBIp2mNt1tQhRnlkIohKBI",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "edu",
-          "projectId": "prj_YHIsv2LvNhiMR8jszFJdGphkbWQv",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "novel",
-          "projectId": "prj_aIrZeIvHdgP78zsdFqDmuWZt1AIt",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "script",
-          "projectId": "prj_LyRLZyrI2KN4byYAZedsfuF3j1FF",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "design",
-          "projectId": "prj_AqsWpNFVnmQB5kEuak9RRhjP6uLz",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "make",
-          "projectId": "prj_n1ugKK5Vbcol7jZptQkEoCJf9VPf",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "search",
-          "projectId": "prj_R6ZnDNb4PXbkBKqHz7caGccl7CCX",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "money",
-          "projectId": "prj_8nqgiHjeRgmackwJ9u1GyC31f5SD",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
-        },
-        {
-          "projectName": "game",
-          "projectId": "prj_f57D46LMVqerRVbH4pD8zLFjyA6q",
-          "key": "NEXT_PUBLIC_OCEANLEO_ANON_KEY",
-          "target": "production"
         }
       ],
       "provenance": [
-        "/root/projects/oceanleo-sites/deploy/cutover-manifest.json#legacyProjects",
-        "vercel-ops GET /v10/projects/{projectId}/env?target=production&decrypt=true",
+        "/root/projects/oceanleo-sites/deploy/cutover-manifest.json#legacyProjects[siteKey=agent,projectName=skill]",
+        "vercel-ops GET /v10/projects/prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo/env?target=production&decrypt=true",
+        "authoritative single source: skill digest matches majority across former multi-site sources; outliers (video/law/study/novel/script/design/make and site-specific digests) excluded for shared multi-tenant standard app",
         "/root/projects/website/front/lib/oceanleo-auth/config.ts"
       ]
     },
@@ -202,161 +47,12 @@
           "projectId": "prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo",
           "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
           "target": "production"
-        },
-        {
-          "projectName": "ecommerce-assets",
-          "projectId": "prj_CxdDA2wwLchBWhifVuCIXvWZQb6z",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "ppt-maker",
-          "projectId": "prj_fg9lw6bqU6y8fdrlho4tRQ1lqks4",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "excel-ai",
-          "projectId": "prj_BMpaAMd1l93r4AGlgO67nFc0SJF3",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "word-ai",
-          "projectId": "prj_Ls4e3jgAbyfULtKsIQUUhfAzqwxe",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "converter-suite",
-          "projectId": "prj_irJcqq4OYf6QuxqWOma7Is5M09iZ",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "aihuman-studio",
-          "projectId": "prj_STY31vfacHf9EwT94xsoEpySSU0S",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "video",
-          "projectId": "prj_fL2HXBjq1vy3Lg8M9pynSz0oLBDX",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "resume",
-          "projectId": "prj_pHf6q3mNk7SL1zY2VZJSBO6MMGL0",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "bizdev",
-          "projectId": "prj_9f2LiGjl60KPGz1UKpkxY1YFwggG",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "logo",
-          "projectId": "prj_KfpZVQSA9F1DgamGXEYweKjLZfwR",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "interior",
-          "projectId": "prj_iD0gbYfgb2WSAgmIWo8d1FbtLN8r",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "chat",
-          "projectId": "prj_hrsYhiD7JsdCQBbFlRFbkThnNDt8",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "threed",
-          "projectId": "prj_pRg3mRmEGBwq9o4i13HpF3K7lENQ",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "music",
-          "projectId": "prj_UDTSmZjOw9m6OQ7vFoeGFMtEPCbI",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "meeting",
-          "projectId": "prj_ofG2j6zreM8Ai32tZZwSO8MBt7H4",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "paper",
-          "projectId": "prj_dZUDcrgdqIKnD5nXV3v8R36gXDyB",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "law",
-          "projectId": "prj_Mh2rmPFaGhkxv3s6bU2LqZUDPEDV",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "study",
-          "projectId": "prj_jSiaQIQBIp2mNt1tQhRnlkIohKBI",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "edu",
-          "projectId": "prj_YHIsv2LvNhiMR8jszFJdGphkbWQv",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "novel",
-          "projectId": "prj_aIrZeIvHdgP78zsdFqDmuWZt1AIt",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "script",
-          "projectId": "prj_LyRLZyrI2KN4byYAZedsfuF3j1FF",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "design",
-          "projectId": "prj_AqsWpNFVnmQB5kEuak9RRhjP6uLz",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "make",
-          "projectId": "prj_n1ugKK5Vbcol7jZptQkEoCJf9VPf",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "search",
-          "projectId": "prj_R6ZnDNb4PXbkBKqHz7caGccl7CCX",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "money",
-          "projectId": "prj_8nqgiHjeRgmackwJ9u1GyC31f5SD",
-          "key": "NEXT_PUBLIC_OCEANLEO_GATEWAY_URL",
-          "target": "production"
         }
       ],
       "provenance": [
-        "/root/projects/oceanleo-sites/deploy/cutover-manifest.json#legacyProjects",
-        "vercel-ops GET /v10/projects/{projectId}/env?target=production&decrypt=true",
+        "/root/projects/oceanleo-sites/deploy/cutover-manifest.json#legacyProjects[siteKey=agent,projectName=skill]",
+        "vercel-ops GET /v10/projects/prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo/env?target=production&decrypt=true",
+        "authoritative single source: skill digest matches majority across former multi-site sources; outliers (video/law/study/novel/script/design/make and site-specific digests) excluded for shared multi-tenant standard app",
         "/root/projects/website/front/lib/oceanleo-auth/config.ts"
       ]
     },
@@ -373,167 +69,12 @@
           "projectId": "prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo",
           "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
           "target": "production"
-        },
-        {
-          "projectName": "ecommerce-assets",
-          "projectId": "prj_CxdDA2wwLchBWhifVuCIXvWZQb6z",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "ppt-maker",
-          "projectId": "prj_fg9lw6bqU6y8fdrlho4tRQ1lqks4",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "excel-ai",
-          "projectId": "prj_BMpaAMd1l93r4AGlgO67nFc0SJF3",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "word-ai",
-          "projectId": "prj_Ls4e3jgAbyfULtKsIQUUhfAzqwxe",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "converter-suite",
-          "projectId": "prj_irJcqq4OYf6QuxqWOma7Is5M09iZ",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "aihuman-studio",
-          "projectId": "prj_STY31vfacHf9EwT94xsoEpySSU0S",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "video",
-          "projectId": "prj_fL2HXBjq1vy3Lg8M9pynSz0oLBDX",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "resume",
-          "projectId": "prj_pHf6q3mNk7SL1zY2VZJSBO6MMGL0",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "bizdev",
-          "projectId": "prj_9f2LiGjl60KPGz1UKpkxY1YFwggG",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "logo",
-          "projectId": "prj_KfpZVQSA9F1DgamGXEYweKjLZfwR",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "interior",
-          "projectId": "prj_iD0gbYfgb2WSAgmIWo8d1FbtLN8r",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "chat",
-          "projectId": "prj_hrsYhiD7JsdCQBbFlRFbkThnNDt8",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "threed",
-          "projectId": "prj_pRg3mRmEGBwq9o4i13HpF3K7lENQ",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "music",
-          "projectId": "prj_UDTSmZjOw9m6OQ7vFoeGFMtEPCbI",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "meeting",
-          "projectId": "prj_ofG2j6zreM8Ai32tZZwSO8MBt7H4",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "paper",
-          "projectId": "prj_dZUDcrgdqIKnD5nXV3v8R36gXDyB",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "law",
-          "projectId": "prj_Mh2rmPFaGhkxv3s6bU2LqZUDPEDV",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "study",
-          "projectId": "prj_jSiaQIQBIp2mNt1tQhRnlkIohKBI",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "edu",
-          "projectId": "prj_YHIsv2LvNhiMR8jszFJdGphkbWQv",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "novel",
-          "projectId": "prj_aIrZeIvHdgP78zsdFqDmuWZt1AIt",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "script",
-          "projectId": "prj_LyRLZyrI2KN4byYAZedsfuF3j1FF",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "design",
-          "projectId": "prj_AqsWpNFVnmQB5kEuak9RRhjP6uLz",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "make",
-          "projectId": "prj_n1ugKK5Vbcol7jZptQkEoCJf9VPf",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "search",
-          "projectId": "prj_R6ZnDNb4PXbkBKqHz7caGccl7CCX",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "money",
-          "projectId": "prj_8nqgiHjeRgmackwJ9u1GyC31f5SD",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
-        },
-        {
-          "projectName": "game",
-          "projectId": "prj_f57D46LMVqerRVbH4pD8zLFjyA6q",
-          "key": "NEXT_PUBLIC_OCEANLEO_SUPABASE_URL",
-          "target": "production"
         }
       ],
       "provenance": [
-        "/root/projects/oceanleo-sites/deploy/cutover-manifest.json#legacyProjects",
-        "vercel-ops GET /v10/projects/{projectId}/env?target=production&decrypt=true",
+        "/root/projects/oceanleo-sites/deploy/cutover-manifest.json#legacyProjects[siteKey=agent,projectName=skill]",
+        "vercel-ops GET /v10/projects/prj_tPPZb5PSwykt00Ia4DIKSIBLtQeo/env?target=production&decrypt=true",
+        "authoritative single source: skill digest matches majority across former multi-site sources; outliers (video/law/study/novel/script/design/make and site-specific digests) excluded for shared multi-tenant standard app",
         "/root/projects/website/front/lib/oceanleo-auth/config.ts"
       ]
     },
@@ -608,9 +149,10 @@
       "provenance": [
         "/root/projects/website/front/app/api/oauth/aliyun/route.ts",
         "/root/projects/website/front/app/api/servers/provision/route.ts",
-        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.aliyun-access-key-id"
+        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.aliyun-access-key-id",
+        "vercel-ops GET /v10/projects/prj_pTBArlyTCa46sVq6n9R8enGIdho8/env?decrypt=true#production-key-names-only"
       ],
-      "blocker": "Legacy runtime stores per-user Aliyun credentials in encrypted vault_entries; no legacy Vercel project environment key exists. The aliyun-sg helper uses operator ECS credentials and is not the same runtime principal."
+      "blocker": "No legacy Vercel key for Aliyun access key id. Operator-only: vercel-ops rediscovery on legacy website prj_pTBArlyTCa46sVq6n9R8enGIdho8 production env found exactly these 13 keys (DASHSCOPE_API_KEY, NEXT_PUBLIC_OCEANLEO_ANON_KEY, NEXT_PUBLIC_OCEANLEO_GATEWAY_URL, NEXT_PUBLIC_OCEANLEO_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_SUPABASE_URL, OCEANLEO_PLATFORM_SSH_HOST, OCEANLEO_PLATFORM_SSH_PORT, OCEANLEO_PLATFORM_SSH_PRIVATE_KEY, OCEANLEO_PLATFORM_SSH_USER, OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL); none maps to this WEBSITE_* runtime secret. Legacy runtime stores per-user provider credentials in encrypted vault_entries. Operator helpers (vercel-ops/cf/aliyun-sg/supabase-sql/host-gh) are different principals and are not accepted as mapping sources. An operator must supply the target value out-of-band."
     },
     {
       "id": "website-privileged.website_aliyun_access_key_secret",
@@ -623,9 +165,10 @@
       "provenance": [
         "/root/projects/website/front/app/api/oauth/aliyun/route.ts",
         "/root/projects/website/front/app/api/servers/provision/route.ts",
-        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.aliyun-access-key-secret"
+        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.aliyun-access-key-secret",
+        "vercel-ops GET /v10/projects/prj_pTBArlyTCa46sVq6n9R8enGIdho8/env?decrypt=true#production-key-names-only"
       ],
-      "blocker": "Legacy runtime stores per-user Aliyun credentials in encrypted vault_entries; no legacy Vercel project environment key exists. The aliyun-sg helper uses operator ECS credentials and is not the same runtime principal."
+      "blocker": "No legacy Vercel key for Aliyun access key secret. Operator-only: vercel-ops rediscovery on legacy website prj_pTBArlyTCa46sVq6n9R8enGIdho8 production env found exactly these 13 keys (DASHSCOPE_API_KEY, NEXT_PUBLIC_OCEANLEO_ANON_KEY, NEXT_PUBLIC_OCEANLEO_GATEWAY_URL, NEXT_PUBLIC_OCEANLEO_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_SUPABASE_URL, OCEANLEO_PLATFORM_SSH_HOST, OCEANLEO_PLATFORM_SSH_PORT, OCEANLEO_PLATFORM_SSH_PRIVATE_KEY, OCEANLEO_PLATFORM_SSH_USER, OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL); none maps to this WEBSITE_* runtime secret. Legacy runtime stores per-user provider credentials in encrypted vault_entries. Operator helpers (vercel-ops/cf/aliyun-sg/supabase-sql/host-gh) are different principals and are not accepted as mapping sources. An operator must supply the target value out-of-band."
     },
     {
       "id": "website-privileged.website_cloudflare_api_token",
@@ -638,9 +181,10 @@
       "provenance": [
         "/root/projects/website/front/app/api/oauth/cloudflare/route.ts",
         "/root/projects/website/front/app/api/domain/purchase/route.ts",
-        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.cloudflare-token"
+        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.cloudflare-token",
+        "vercel-ops GET /v10/projects/prj_pTBArlyTCa46sVq6n9R8enGIdho8/env?decrypt=true#production-key-names-only"
       ],
-      "blocker": "Legacy runtime stores per-user Cloudflare API tokens in encrypted vault_entries; no legacy Vercel project environment key exists. The cf helper token is an operator credential with unproven runtime scope."
+      "blocker": "No legacy Vercel key for Cloudflare API token. Operator-only: vercel-ops rediscovery on legacy website prj_pTBArlyTCa46sVq6n9R8enGIdho8 production env found exactly these 13 keys (DASHSCOPE_API_KEY, NEXT_PUBLIC_OCEANLEO_ANON_KEY, NEXT_PUBLIC_OCEANLEO_GATEWAY_URL, NEXT_PUBLIC_OCEANLEO_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_SUPABASE_URL, OCEANLEO_PLATFORM_SSH_HOST, OCEANLEO_PLATFORM_SSH_PORT, OCEANLEO_PLATFORM_SSH_PRIVATE_KEY, OCEANLEO_PLATFORM_SSH_USER, OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL); none maps to this WEBSITE_* runtime secret. Legacy runtime stores per-user provider credentials in encrypted vault_entries. Operator helpers (vercel-ops/cf/aliyun-sg/supabase-sql/host-gh) are different principals and are not accepted as mapping sources. An operator must supply the target value out-of-band."
     },
     {
       "id": "website-privileged.website_github_token",
@@ -653,9 +197,10 @@
       "provenance": [
         "/root/projects/website/front/app/api/oauth/github/route.ts",
         "/root/projects/website/front/app/api/github/repos/route.ts",
-        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.github-token"
+        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.github-token",
+        "vercel-ops GET /v10/projects/prj_pTBArlyTCa46sVq6n9R8enGIdho8/env?decrypt=true#production-key-names-only"
       ],
-      "blocker": "Legacy runtime stores per-user GitHub OAuth tokens in encrypted vault_entries; no legacy Vercel project environment key exists. Host gh authentication is a different principal and is not accepted as a mapping."
+      "blocker": "No legacy Vercel key for GitHub token. Operator-only: vercel-ops rediscovery on legacy website prj_pTBArlyTCa46sVq6n9R8enGIdho8 production env found exactly these 13 keys (DASHSCOPE_API_KEY, NEXT_PUBLIC_OCEANLEO_ANON_KEY, NEXT_PUBLIC_OCEANLEO_GATEWAY_URL, NEXT_PUBLIC_OCEANLEO_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_SUPABASE_URL, OCEANLEO_PLATFORM_SSH_HOST, OCEANLEO_PLATFORM_SSH_PORT, OCEANLEO_PLATFORM_SSH_PRIVATE_KEY, OCEANLEO_PLATFORM_SSH_USER, OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL); none maps to this WEBSITE_* runtime secret. Legacy runtime stores per-user provider credentials in encrypted vault_entries. Operator helpers (vercel-ops/cf/aliyun-sg/supabase-sql/host-gh) are different principals and are not accepted as mapping sources. An operator must supply the target value out-of-band."
     },
     {
       "id": "website-privileged.website_railway_token",
@@ -668,9 +213,10 @@
       "provenance": [
         "/root/projects/website/front/app/api/oauth/railway/route.ts",
         "/root/projects/website/front/app/api/sites/[id]/backend/route.ts",
-        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.railway-token"
+        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.railway-token",
+        "vercel-ops GET /v10/projects/prj_pTBArlyTCa46sVq6n9R8enGIdho8/env?decrypt=true#production-key-names-only"
       ],
-      "blocker": "Legacy runtime stores per-user Railway API tokens in encrypted vault_entries; no legacy Vercel project environment key or local Railway helper exists."
+      "blocker": "No legacy Vercel key for Railway token. Operator-only: vercel-ops rediscovery on legacy website prj_pTBArlyTCa46sVq6n9R8enGIdho8 production env found exactly these 13 keys (DASHSCOPE_API_KEY, NEXT_PUBLIC_OCEANLEO_ANON_KEY, NEXT_PUBLIC_OCEANLEO_GATEWAY_URL, NEXT_PUBLIC_OCEANLEO_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_SUPABASE_URL, OCEANLEO_PLATFORM_SSH_HOST, OCEANLEO_PLATFORM_SSH_PORT, OCEANLEO_PLATFORM_SSH_PRIVATE_KEY, OCEANLEO_PLATFORM_SSH_USER, OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL); none maps to this WEBSITE_* runtime secret. Legacy runtime stores per-user provider credentials in encrypted vault_entries. Operator helpers (vercel-ops/cf/aliyun-sg/supabase-sql/host-gh) are different principals and are not accepted as mapping sources. An operator must supply the target value out-of-band."
     },
     {
       "id": "website-privileged.website_server_ssh_key",
@@ -704,9 +250,10 @@
       "provenance": [
         "/root/projects/website/front/app/api/oauth/supabase/route.ts",
         "/root/projects/website/front/lib/deploy/supabase.ts",
-        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.supabase-management-token"
+        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.supabase-management-token",
+        "vercel-ops GET /v10/projects/prj_pTBArlyTCa46sVq6n9R8enGIdho8/env?decrypt=true#production-key-names-only"
       ],
-      "blocker": "Legacy runtime stores per-user Supabase OAuth tokens in encrypted vault_entries; no legacy Vercel project environment key exists. The supabase-sql PAT is an operator credential with unproven runtime scope."
+      "blocker": "No legacy Vercel key for Supabase management token. Operator-only: vercel-ops rediscovery on legacy website prj_pTBArlyTCa46sVq6n9R8enGIdho8 production env found exactly these 13 keys (DASHSCOPE_API_KEY, NEXT_PUBLIC_OCEANLEO_ANON_KEY, NEXT_PUBLIC_OCEANLEO_GATEWAY_URL, NEXT_PUBLIC_OCEANLEO_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_SUPABASE_URL, OCEANLEO_PLATFORM_SSH_HOST, OCEANLEO_PLATFORM_SSH_PORT, OCEANLEO_PLATFORM_SSH_PRIVATE_KEY, OCEANLEO_PLATFORM_SSH_USER, OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL); none maps to this WEBSITE_* runtime secret. Legacy runtime stores per-user provider credentials in encrypted vault_entries. Operator helpers (vercel-ops/cf/aliyun-sg/supabase-sql/host-gh) are different principals and are not accepted as mapping sources. An operator must supply the target value out-of-band."
     },
     {
       "id": "website-privileged.website_vercel_token",
@@ -719,9 +266,10 @@
       "provenance": [
         "/root/projects/website/front/app/api/oauth/vercel/route.ts",
         "/root/projects/website/front/lib/deploy/vercel.ts",
-        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.vercel-token"
+        "/root/projects/oceanleo-sites/packages/capabilities/src/server.ts#website.vercel-token",
+        "vercel-ops GET /v10/projects/prj_pTBArlyTCa46sVq6n9R8enGIdho8/env?decrypt=true#production-key-names-only"
       ],
-      "blocker": "Legacy runtime stores per-user Vercel OAuth tokens in encrypted vault_entries; no legacy Vercel project environment key exists. The vercel-ops token is an operator credential and is not accepted as a runtime mapping."
+      "blocker": "No legacy Vercel key for Vercel token. Operator-only: vercel-ops rediscovery on legacy website prj_pTBArlyTCa46sVq6n9R8enGIdho8 production env found exactly these 13 keys (DASHSCOPE_API_KEY, NEXT_PUBLIC_OCEANLEO_ANON_KEY, NEXT_PUBLIC_OCEANLEO_GATEWAY_URL, NEXT_PUBLIC_OCEANLEO_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, NEXT_PUBLIC_SUPABASE_URL, OCEANLEO_PLATFORM_SSH_HOST, OCEANLEO_PLATFORM_SSH_PORT, OCEANLEO_PLATFORM_SSH_PRIVATE_KEY, OCEANLEO_PLATFORM_SSH_USER, OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL); none maps to this WEBSITE_* runtime secret. Legacy runtime stores per-user provider credentials in encrypted vault_entries. Operator helpers (vercel-ops/cf/aliyun-sg/supabase-sql/host-gh) are different principals and are not accepted as mapping sources. An operator must supply the target value out-of-band."
     }
   ],
   "excluded": [

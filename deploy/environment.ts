@@ -315,12 +315,15 @@ export async function synchronizeEnvironment(
 
   const blockers: Array<Readonly<Record<string, unknown>>> = [];
   const equality: Array<Readonly<Record<string, unknown>>> = [];
+  const operatorHolds: Array<Readonly<Record<string, unknown>>> = [];
   const resolved = new Map<string, ResolvedMapping>();
 
   for (const mapping of environment.contract.mappings) {
     const pair = `${mapping.targetProfile}:${mapping.targetKey}`;
     if (mapping.status === "blocked") {
-      blockers.push(
+      // Documented operator-only secrets must not block sync of mapped keys
+      // (standard shared config and any website keys that do resolve).
+      operatorHolds.push(
         Object.freeze({
           code: "mapping-unresolved",
           profile: mapping.targetProfile,
@@ -335,6 +338,7 @@ export async function synchronizeEnvironment(
           sourceCount: 0,
           uniqueDigests: [],
           equal: false,
+          operatorHold: true,
         }),
       );
       continue;
@@ -545,6 +549,7 @@ export async function synchronizeEnvironment(
     throw new EnvironmentSyncError("preflight-blocked", {
       mappingSha256: environment.digest,
       blockers: Object.freeze(blockers),
+      operatorHolds: Object.freeze(operatorHolds),
       equality: Object.freeze(equality),
       mutations: false,
     });
@@ -565,6 +570,7 @@ export async function synchronizeEnvironment(
       dryRun: true,
       mappingSha256: environment.digest,
       equality: Object.freeze(equality),
+      operatorHolds: Object.freeze(operatorHolds),
       wouldUpsert: sanitizedWrites,
       unchanged: Object.freeze(unchanged),
       mutations: false,
@@ -588,7 +594,10 @@ export async function synchronizeEnvironment(
     const target = loaded.manifest.targets[profile];
     for (const key of target.environment.required) {
       const mapping = resolved.get(`${profile}:${key}`);
-      invariant(mapping, `${profile}:${key} lost its resolved mapping`);
+      if (!mapping) {
+        // Required keys with blocked mappings stay on operator hold.
+        continue;
+      }
       const matches = productionRecords(records, key);
       if (
         matches.length !== 1 ||
@@ -620,6 +629,7 @@ export async function synchronizeEnvironment(
     dryRun: false,
     mappingSha256: environment.digest,
     equality: Object.freeze(equality),
+    operatorHolds: Object.freeze(operatorHolds),
     upserted: sanitizedWrites,
     unchanged: Object.freeze(unchanged),
     mutations: writes.length > 0,
