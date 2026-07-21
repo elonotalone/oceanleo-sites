@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://oceanleo.com/schemas/route-handler-inventory.v1.json",
+  "title": "OceanLeo route and handler inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "sourceRevision", "summary", "entries"],
+  "properties": {
+    "schema": {
+      "const": "oceanleo.route-handler-inventory.v1"
+    },
+    "sourceRevision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tenants",
+        "standardTenants",
+        "privilegedTenants",
+        "domains",
+        "entries",
+        "parity"
+      ],
+      "properties": {
+        "tenants": { "const": 31 },
+        "standardTenants": { "const": 30 },
+        "privilegedTenants": { "const": 1 },
+        "domains": { "const": 37 },
+        "entries": { "type": "integer", "minimum": 1 },
+        "parity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "foundation",
+            "pending",
+            "partial",
+            "verified",
+            "retired"
+          ],
+          "properties": {
+            "foundation": { "type": "integer", "minimum": 0 },
+            "pending": { "type": "integer", "minimum": 0 },
+            "partial": { "type": "integer", "minimum": 0 },
+            "verified": { "type": "integer", "minimum": 0 },
+            "retired": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "appProfile",
+          "tenantKey",
+          "route",
+          "kind",
+          "methods",
+          "capabilities",
+          "extensionId",
+          "migrationBatch",
+          "parity"
+        ],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "appProfile": {
+            "enum": ["standard", "website-privileged"]
+          },
+          "tenantKey": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "route": {
+            "type": ["string", "null"]
+          },
+          "kind": {
+            "enum": [
+              "page",
+              "route-handler",
+              "metadata",
+              "plugin-extension"
+            ]
+          },
+          "methods": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "uniqueItems": true
+          },
+          "capabilities": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "uniqueItems": true
+          },
+          "extensionId": {
+            "type": ["string", "null"]
+          },
+          "migrationBatch": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "parity": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["status", "source", "evidence"],
+            "properties": {
+              "status": {
+                "enum": [
+                  "foundation",
+                  "pending",
+                  "partial",
+                  "verified",
+                  "retired"
+                ]
+              },
+              "source": { "type": "string", "minLength": 1 },
+              "evidence": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

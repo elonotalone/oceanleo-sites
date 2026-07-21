@@ -1,0 +1,13 @@
+packages:
+  - apps/*
+  - packages/*
+
+allowBuilds:
+  '@parcel/watcher': false
+  '@swc/core': true
+  canvas: false
+  esbuild: true
+  sharp: true
+
+catalog:
+  "@oceanleo/ui": "github:elonotalone/oceanleo-ui#v0.186.0"

@@ -1,0 +1,4680 @@
+{
+  "schema": "oceanleo.route-handler-inventory.v1",
+  "sourceRevision": "foundation-2026-07-21.1",
+  "summary": {
+    "tenants": 31,
+    "standardTenants": 30,
+    "privilegedTenants": 1,
+    "domains": 37,
+    "entries": 233,
+    "parity": {
+      "foundation": 155,
+      "pending": 78,
+      "partial": 0,
+      "verified": 0,
+      "retired": 0
+    }
+  },
+  "entries": [
+    {
+      "id": "foundation:standard:agent:/",
+      "appProfile": "standard",
+      "tenantKey": "agent",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:agent:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "agent",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:agent:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "agent",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:agent:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "agent",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:agent:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "agent",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aihuman:/",
+      "appProfile": "standard",
+      "tenantKey": "aihuman",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aihuman:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "aihuman",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aihuman:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "aihuman",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aihuman:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "aihuman",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aihuman:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "aihuman",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aitools:/",
+      "appProfile": "standard",
+      "tenantKey": "aitools",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aitools:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "aitools",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aitools:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "aitools",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aitools:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "aitools",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:aitools:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "aitools",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:asset:/",
+      "appProfile": "standard",
+      "tenantKey": "asset",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:asset:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "asset",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:asset:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "asset",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:asset:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "asset",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:asset:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "asset",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:bizdev:/",
+      "appProfile": "standard",
+      "tenantKey": "bizdev",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:bizdev:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "bizdev",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:bizdev:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "bizdev",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:bizdev:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "bizdev",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:bizdev:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "bizdev",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:chat:/",
+      "appProfile": "standard",
+      "tenantKey": "chat",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:chat:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "chat",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:chat:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "chat",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:chat:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "chat",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:chat:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "chat",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:converter:/",
+      "appProfile": "standard",
+      "tenantKey": "converter",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:converter:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "converter",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:converter:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "converter",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:converter:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "converter",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:converter:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "converter",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:design:/",
+      "appProfile": "standard",
+      "tenantKey": "design",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:design:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "design",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:design:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "design",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:design:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "design",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:design:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "design",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ecommerce:/",
+      "appProfile": "standard",
+      "tenantKey": "ecommerce",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ecommerce:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "ecommerce",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ecommerce:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "ecommerce",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ecommerce:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "ecommerce",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ecommerce:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "ecommerce",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:edu:/",
+      "appProfile": "standard",
+      "tenantKey": "edu",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:edu:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "edu",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:edu:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "edu",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:edu:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "edu",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:edu:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "edu",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:excel:/",
+      "appProfile": "standard",
+      "tenantKey": "excel",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:excel:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "excel",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:excel:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "excel",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:excel:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "excel",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:excel:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "excel",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:game:/",
+      "appProfile": "standard",
+      "tenantKey": "game",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:game:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "game",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:game:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "game",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:game:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "game",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:game:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "game",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:image:/",
+      "appProfile": "standard",
+      "tenantKey": "image",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:image:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "image",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:image:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "image",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:image:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "image",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:image:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "image",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:interior:/",
+      "appProfile": "standard",
+      "tenantKey": "interior",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:interior:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "interior",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:interior:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "interior",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:interior:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "interior",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:interior:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "interior",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:law:/",
+      "appProfile": "standard",
+      "tenantKey": "law",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:law:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "law",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:law:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "law",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:law:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "law",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:law:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "law",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:logo:/",
+      "appProfile": "standard",
+      "tenantKey": "logo",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:logo:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "logo",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:logo:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "logo",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:logo:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "logo",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:logo:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "logo",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:make:/",
+      "appProfile": "standard",
+      "tenantKey": "make",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:make:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "make",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:make:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "make",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:make:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "make",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:make:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "make",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:meeting:/",
+      "appProfile": "standard",
+      "tenantKey": "meeting",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:meeting:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "meeting",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:meeting:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "meeting",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:meeting:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "meeting",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:meeting:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "meeting",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:money:/",
+      "appProfile": "standard",
+      "tenantKey": "money",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:money:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "money",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:money:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "money",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:money:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "money",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:money:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "money",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:music:/",
+      "appProfile": "standard",
+      "tenantKey": "music",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:music:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "music",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:music:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "music",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:music:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "music",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:music:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "music",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:novel:/",
+      "appProfile": "standard",
+      "tenantKey": "novel",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:novel:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "novel",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:novel:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "novel",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:novel:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "novel",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:novel:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "novel",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:paper:/",
+      "appProfile": "standard",
+      "tenantKey": "paper",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:paper:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "paper",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:paper:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "paper",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:paper:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "paper",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:paper:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "paper",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ppt:/",
+      "appProfile": "standard",
+      "tenantKey": "ppt",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ppt:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "ppt",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ppt:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "ppt",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ppt:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "ppt",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:ppt:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "ppt",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:resume:/",
+      "appProfile": "standard",
+      "tenantKey": "resume",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:resume:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "resume",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:resume:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "resume",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:resume:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "resume",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:resume:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "resume",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:script:/",
+      "appProfile": "standard",
+      "tenantKey": "script",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:script:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "script",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:script:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "script",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:script:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "script",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:script:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "script",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 4,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:search:/",
+      "appProfile": "standard",
+      "tenantKey": "search",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:search:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "search",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:search:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "search",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:search:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "search",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:search:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "search",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 5,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:study:/",
+      "appProfile": "standard",
+      "tenantKey": "study",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:study:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "study",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:study:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "study",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:study:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "study",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:study:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "study",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 3,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:threed:/",
+      "appProfile": "standard",
+      "tenantKey": "threed",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:threed:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "threed",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:threed:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "threed",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:threed:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "threed",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:threed:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "threed",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:video:/",
+      "appProfile": "standard",
+      "tenantKey": "video",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:video:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "video",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:video:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "video",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:video:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "video",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:video:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "video",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 2,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:word:/",
+      "appProfile": "standard",
+      "tenantKey": "word",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:word:/api/health",
+      "appProfile": "standard",
+      "tenantKey": "word",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:word:/api/tenant",
+      "appProfile": "standard",
+      "tenantKey": "word",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:word:/robots.txt",
+      "appProfile": "standard",
+      "tenantKey": "word",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:standard:word:/sitemap.xml",
+      "appProfile": "standard",
+      "tenantKey": "word",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 1,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/standard",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:website-privileged:website:/",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": null,
+      "migrationBatch": 6,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/website-privileged",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:website-privileged:website:/api/health",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/health",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 6,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/website-privileged",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:website-privileged:website:/api/tenant",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/tenant",
+      "kind": "route-handler",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 6,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/website-privileged",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:website-privileged:website:/robots.txt",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/robots.txt",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 6,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/website-privileged",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "foundation:website-privileged:website:/sitemap.xml",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/sitemap.xml",
+      "kind": "metadata",
+      "methods": [
+        "GET"
+      ],
+      "capabilities": [],
+      "extensionId": null,
+      "migrationBatch": 6,
+      "parity": {
+        "status": "foundation",
+        "source": "apps/website-privileged",
+        "evidence": [
+          "tests/app-profiles.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/cursor-agent",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/cursor-agent",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/cursor-agent/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/cursor-agent/[id]",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/cursor-agent/[id]",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/cursor-agent/[id]/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/cursor-agent/models",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/cursor-agent/models",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/cursor-agent/models/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/deploy",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/deploy",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:deploy"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/deploy/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/deploy/[id]/status",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/deploy/[id]/status",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:deploy"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/deploy/[id]/status/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/domain/brainstorm",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/domain/brainstorm",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:domain-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/domain/brainstorm/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/domain/purchase",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/domain/purchase",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:domain-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/domain/purchase/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/domain/search",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/domain/search",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:domain-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/domain/search/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/generate-site",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/generate-site",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/generate-site/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/generate-site/stream",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/generate-site/stream",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/generate-site/stream/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/github/repos",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/github/repos",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/github/repos/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/oauth/aliyun",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/oauth/aliyun",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:provider-oauth"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/oauth/aliyun/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/oauth/cloudflare",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/oauth/cloudflare",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:provider-oauth"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/oauth/cloudflare/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/oauth/github",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/oauth/github",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:provider-oauth"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/oauth/github/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/oauth/railway",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/oauth/railway",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:provider-oauth"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/oauth/railway/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/oauth/supabase",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/oauth/supabase",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:provider-oauth"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/oauth/supabase/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/oauth/vercel",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/oauth/vercel",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:provider-oauth"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/oauth/vercel/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/preview/quota",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/preview/quota",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/preview/quota/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/servers",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/servers",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:server-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/servers/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/servers/[id]/test",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/servers/[id]/test",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:server-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/servers/[id]/test/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/servers/provision",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/servers/provision",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:server-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/servers/provision/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/setup/check-db",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/setup/check-db",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:vault"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/setup/check-db/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/setup/init-db",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/setup/init-db",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:vault"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/setup/init-db/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/backend",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/backend",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:server-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/backend/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/backend/deploy",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/backend/deploy",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:server-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/backend/deploy/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/backend/ops",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/backend/ops",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:server-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/backend/ops/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/domain",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/domain",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:domain-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/domain/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/domain/dns",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/domain/dns",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:domain-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/domain/dns/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/domain/purchase-and-bind",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/domain/purchase-and-bind",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:domain-admin"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/domain/purchase-and-bind/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/env",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/env",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:vault"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/env/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/overrides/sync",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/overrides/sync",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/overrides/sync/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/toggle",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/toggle",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/toggle/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/transfer-out",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/transfer-out",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:deploy"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/transfer-out/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/vibe-code",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/vibe-code",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/vibe-code/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/vibe-code-hosted",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/vibe-code-hosted",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/vibe-code-hosted/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/vibe-code/pr",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/vibe-code/pr",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/vibe-code/pr/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/[id]/virtual-config",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/[id]/virtual-config",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/[id]/virtual-config/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/import",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/import",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/import/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/sites/platform-deploy",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/sites/platform-deploy",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/sites/platform-deploy/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/templates",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/templates",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/templates/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/user-templates",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/user-templates",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/user-templates/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/user-templates/[id]",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/user-templates/[id]",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/user-templates/[id]/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/user-templates/[id]/snapshot",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/user-templates/[id]/snapshot",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/user-templates/[id]/snapshot/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/vault",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/vault",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:vault"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/vault/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/vault/diagnose",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/vault/diagnose",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:vault"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/vault/diagnose/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "legacy:website-privileged:website:/api/vercel/projects",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/api/vercel/projects",
+      "kind": "route-handler",
+      "methods": [
+        "UNMIGRATED"
+      ],
+      "capabilities": [
+        "website:deploy"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "website:front/app/api/vercel/projects/route.ts",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:agent:agent-orchestration",
+      "appProfile": "standard",
+      "tenantKey": "agent",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "agent-orchestration",
+      "migrationBatch": 5,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:agent",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:aihuman:digital-human-studio",
+      "appProfile": "standard",
+      "tenantKey": "aihuman",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "digital-human-studio",
+      "migrationBatch": 2,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:aihuman",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:aitools:ai-tools-directory",
+      "appProfile": "standard",
+      "tenantKey": "aitools",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "ai-tools-directory",
+      "migrationBatch": 5,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:aitools",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:asset:asset-library",
+      "appProfile": "standard",
+      "tenantKey": "asset",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "asset-library",
+      "migrationBatch": 5,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:asset",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:bizdev:business-development-workbench",
+      "appProfile": "standard",
+      "tenantKey": "bizdev",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "business-development-workbench",
+      "migrationBatch": 3,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:bizdev",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:chat:multi-model-chat",
+      "appProfile": "standard",
+      "tenantKey": "chat",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "multi-model-chat",
+      "migrationBatch": 5,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:chat",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:converter:conversion-workbench",
+      "appProfile": "standard",
+      "tenantKey": "converter",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "conversion-workbench",
+      "migrationBatch": 1,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:converter",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:design:design-canvas",
+      "appProfile": "standard",
+      "tenantKey": "design",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "design-canvas",
+      "migrationBatch": 4,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:design",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:ecommerce:ecommerce-asset-studio",
+      "appProfile": "standard",
+      "tenantKey": "ecommerce",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "ecommerce-asset-studio",
+      "migrationBatch": 4,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:ecommerce",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:edu:education-workbench",
+      "appProfile": "standard",
+      "tenantKey": "edu",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "education-workbench",
+      "migrationBatch": 3,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:edu",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:excel:spreadsheet-workbench",
+      "appProfile": "standard",
+      "tenantKey": "excel",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "spreadsheet-workbench",
+      "migrationBatch": 1,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:excel",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:game:game-platform",
+      "appProfile": "standard",
+      "tenantKey": "game",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "game-platform",
+      "migrationBatch": 5,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:game",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:image:image-workbench",
+      "appProfile": "standard",
+      "tenantKey": "image",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "image-workbench",
+      "migrationBatch": 2,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:image",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:interior:interior-workbench",
+      "appProfile": "standard",
+      "tenantKey": "interior",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "interior-workbench",
+      "migrationBatch": 2,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:interior",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:law:law-workbench",
+      "appProfile": "standard",
+      "tenantKey": "law",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "law-workbench",
+      "migrationBatch": 3,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:law",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:logo:logo-workbench",
+      "appProfile": "standard",
+      "tenantKey": "logo",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "logo-workbench",
+      "migrationBatch": 2,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:logo",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:make:custom-commerce-workbench",
+      "appProfile": "standard",
+      "tenantKey": "make",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "custom-commerce-workbench",
+      "migrationBatch": 4,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:make",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:meeting:meeting-workbench",
+      "appProfile": "standard",
+      "tenantKey": "meeting",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "meeting-workbench",
+      "migrationBatch": 3,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:meeting",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:money:money-workbench",
+      "appProfile": "standard",
+      "tenantKey": "money",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "money-workbench",
+      "migrationBatch": 5,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:money",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:music:music-workbench",
+      "appProfile": "standard",
+      "tenantKey": "music",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "music-workbench",
+      "migrationBatch": 5,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:music",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:novel:novel-workbench",
+      "appProfile": "standard",
+      "tenantKey": "novel",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "novel-workbench",
+      "migrationBatch": 4,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:novel",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:paper:paper-workbench",
+      "appProfile": "standard",
+      "tenantKey": "paper",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "paper-workbench",
+      "migrationBatch": 3,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:paper",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:ppt:presentation-workbench",
+      "appProfile": "standard",
+      "tenantKey": "ppt",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "presentation-workbench",
+      "migrationBatch": 1,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:ppt",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:resume:resume-workbench",
+      "appProfile": "standard",
+      "tenantKey": "resume",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "resume-workbench",
+      "migrationBatch": 1,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:resume",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:script:script-workbench",
+      "appProfile": "standard",
+      "tenantKey": "script",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "script-workbench",
+      "migrationBatch": 4,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:script",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:search:search-workbench",
+      "appProfile": "standard",
+      "tenantKey": "search",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "search-workbench",
+      "migrationBatch": 5,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:search",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:study:study-workbench",
+      "appProfile": "standard",
+      "tenantKey": "study",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "study-workbench",
+      "migrationBatch": 3,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:study",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:threed:three-dimensional-workbench",
+      "appProfile": "standard",
+      "tenantKey": "threed",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "three-dimensional-workbench",
+      "migrationBatch": 2,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:threed",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:video:video-canvas",
+      "appProfile": "standard",
+      "tenantKey": "video",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "video-canvas",
+      "migrationBatch": 2,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:video",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:standard:word:document-workbench",
+      "appProfile": "standard",
+      "tenantKey": "word",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "document-workbench",
+      "migrationBatch": 1,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:word",
+        "evidence": []
+      }
+    },
+    {
+      "id": "plugin:website-privileged:website:website-source-workbench",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": null,
+      "kind": "plugin-extension",
+      "methods": [],
+      "capabilities": [
+        "workbench:advanced"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "pending",
+        "source": "legacy:website",
+        "evidence": []
+      }
+    }
+  ]
+}

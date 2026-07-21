@@ -1,0 +1,16 @@
+{
+  "name": "@oceanleo/capabilities",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./server": "./src/server.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@oceanleo/tenant-registry": "workspace:*",
+    "server-only": "^0.0.1"
+  }
+}

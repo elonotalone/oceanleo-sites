@@ -1,0 +1,37 @@
+{
+  "name": "oceanleo-sites",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.6.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "inventory:generate": "tsx scripts/generate-inventory.ts",
+    "inventory:check": "tsx scripts/check-inventory.ts",
+    "test": "node --conditions=react-server --import tsx --test tests/*.test.ts",
+    "typecheck": "pnpm typecheck:tools && pnpm -r --if-present typecheck",
+    "typecheck:tools": "tsc -p tsconfig.tools.json",
+    "check": "pnpm inventory:check && pnpm test && pnpm typecheck"
+  },
+  "devDependencies": {
+    "@oceanleo/capabilities": "workspace:*",
+    "@oceanleo/runtime": "workspace:*",
+    "@oceanleo/tenant-registry": "workspace:*",
+    "@supabase/ssr": "^0.12.3",
+    "@supabase/supabase-js": "^2.110.7",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "ajv": "^8.20.0",
+    "next": "^16.2.10",
+    "next-intl": "^4.13.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "server-only": "^0.0.1",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}
