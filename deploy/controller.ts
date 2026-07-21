@@ -601,7 +601,13 @@ export class CutoverController {
       }
     }
     if (
-      !["pending", "in-progress", "complete", "rolled-back"].includes(
+      ![
+        "pending",
+        "in-progress",
+        "complete",
+        "rolled-back",
+        "rollback-failed",
+      ].includes(
         ledger.waves[wave].state,
       )
     ) {
@@ -700,60 +706,96 @@ export class CutoverController {
   }
 
   private async smokeCanonical(domain: CutoverDomain): Promise<void> {
-    const health = await this.provider.probe({
-      url: `https://${domain.host}/api/health`,
-      redirect: "manual",
-    });
-    const healthJson = isRecord(health.json) ? health.json : {};
-    if (
-      health.status !== 200 ||
-      healthJson.ok !== true ||
-      healthJson.appProfile !== domain.profile ||
-      healthJson.siteKey !== domain.siteKey ||
-      healthJson.canonicalHost !== domain.host ||
-      healthJson.matchedHost !== domain.host ||
-      healthJson.matchedDomainKind !== "canonical"
-    ) {
+    const health = await this.probeWithRetries(
+      `https://${domain.host}/api/health`,
+      (response) => {
+        const healthJson = isRecord(response.json) ? response.json : {};
+        return (
+          response.status === 200 &&
+          healthJson.ok === true &&
+          healthJson.appProfile === domain.profile &&
+          healthJson.siteKey === domain.siteKey &&
+          healthJson.canonicalHost === domain.host &&
+          healthJson.matchedHost === domain.host &&
+          healthJson.matchedDomainKind === "canonical" &&
+          response.headers["x-oceanleo-app-profile"] === domain.profile &&
+          response.headers["x-oceanleo-tenant"] === domain.siteKey
+        );
+      },
+    );
+    if (!health.ok) {
       throw new CutoverGateError("health-smoke", {
         host: domain.host,
-        status: health.status,
+        status: health.response.status,
       });
     }
-    this.assertIsolationHeaders(health, domain);
 
-    const tenant = await this.provider.probe({
-      url: `https://${domain.host}/api/tenant`,
-      redirect: "manual",
-    });
-    const tenantJson = isRecord(tenant.json) ? tenant.json : {};
-    if (
-      tenant.status !== 200 ||
-      tenantJson.siteKey !== domain.siteKey ||
-      tenantJson.profile !== domain.profile ||
-      tenantJson.canonicalHost !== domain.host
-    ) {
+    const tenant = await this.probeWithRetries(
+      `https://${domain.host}/api/tenant`,
+      (response) => {
+        const tenantJson = isRecord(response.json) ? response.json : {};
+        return (
+          response.status === 200 &&
+          tenantJson.siteKey === domain.siteKey &&
+          tenantJson.profile === domain.profile &&
+          tenantJson.canonicalHost === domain.host &&
+          response.headers["x-oceanleo-app-profile"] === domain.profile &&
+          response.headers["x-oceanleo-tenant"] === domain.siteKey
+        );
+      },
+    );
+    if (!tenant.ok) {
       throw new CutoverGateError("tenant-smoke", {
         host: domain.host,
-        status: tenant.status,
+        status: tenant.response.status,
       });
     }
-    this.assertIsolationHeaders(tenant, domain);
 
-    const specialized = await this.provider.probe({
-      url: `https://${domain.host}${domain.specializedPath}`,
-      redirect: "manual",
-    });
-    if (
-      specialized.status < 200 ||
-      specialized.status >= 500 ||
-      [404, 421, 501].includes(specialized.status)
-    ) {
+    const specialized = await this.probeWithRetries(
+      `https://${domain.host}${domain.specializedPath}`,
+      (response) =>
+        response.status >= 200 &&
+        response.status < 500 &&
+        ![404, 421, 501].includes(response.status) &&
+        response.headers["x-oceanleo-app-profile"] === domain.profile &&
+        response.headers["x-oceanleo-tenant"] === domain.siteKey,
+    );
+    if (!specialized.ok) {
       throw new CutoverGateError("specialized-route-smoke", {
         host: domain.host,
-        status: specialized.status,
+        status: specialized.response.status,
       });
     }
-    this.assertIsolationHeaders(specialized, domain);
+  }
+
+  private async probeWithRetries(
+    url: string,
+    accept: (response: {
+      readonly status: number;
+      readonly headers: Readonly<Record<string, string>>;
+      readonly json: unknown;
+    }) => boolean,
+    attempts = 8,
+    delayMilliseconds = 1500,
+  ): Promise<
+    Readonly<{
+      ok: boolean;
+      response: {
+        readonly status: number;
+        readonly headers: Readonly<Record<string, string>>;
+        readonly json: unknown;
+      };
+    }>
+  > {
+    let response = await this.provider.probe({ url, redirect: "manual" });
+    for (let attempt = 1; attempt < attempts; attempt += 1) {
+      if (accept(response)) {
+        return Object.freeze({ ok: true, response });
+      }
+      await this.clock.sleep(delayMilliseconds);
+      response = await this.provider.probe({ url, redirect: "manual" });
+    }
+    return Object.freeze({ ok: accept(response), response });
   }
 
   private async smokeDomain(domain: CutoverDomain): Promise<void> {
@@ -772,10 +814,9 @@ export class CutoverController {
     const waveRecord = ledger.waves[wave];
     waveRecord.state = "rolling-back";
     await this.save(ledger);
-    const domains = this.loaded.domains
-      .filter((domain) => domain.wave === wave)
-      .slice()
-      .reverse();
+    const domains = this.loaded.domains.filter(
+      (domain) => domain.wave === wave,
+    );
     let succeeded = true;
     for (const domain of domains) {
       const record = ledger.domains[domain.host] as DomainLedgerRecord;
