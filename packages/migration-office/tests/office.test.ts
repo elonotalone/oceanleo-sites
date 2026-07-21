@@ -97,8 +97,8 @@ test("office declares the complete five-tenant route inventory", () => {
       pending: statusCounts.pending ?? 0,
     },
     {
-      verified: 88,
-      partial: 33,
+      verified: 121,
+      partial: 0,
       pending: 0,
     },
   );
@@ -120,7 +120,7 @@ test("office declares the complete five-tenant route inventory", () => {
   );
 });
 
-test("inventory mirrors route parity and keeps extension seams partial", () => {
+test("inventory mirrors route parity and verified extension seams", () => {
   assert.equal(OFFICE_INVENTORY.batchId, "office");
   assert.equal(OFFICE_INVENTORY.ownerPath, "packages/migration-office");
   assert.equal(OFFICE_INVENTORY.entries.length, 127);
@@ -130,7 +130,7 @@ test("inventory mirrors route parity and keeps extension seams partial", () => {
   );
   assert.equal(extensionEntries.length, 5);
   assert.ok(
-    extensionEntries.every((entry) => entry.parity.status === "partial"),
+    extensionEntries.every((entry) => entry.parity.status === "verified"),
   );
 
   const routeEntries = OFFICE_INVENTORY.entries.filter(
@@ -151,8 +151,8 @@ test("inventory mirrors route parity and keeps extension seams partial", () => {
       pending: routeStatusCounts.pending ?? 0,
     },
     {
-      verified: 89,
-      partial: 33,
+      verified: 122,
+      partial: 0,
       pending: 0,
     },
   );

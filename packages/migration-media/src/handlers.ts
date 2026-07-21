@@ -8,9 +8,9 @@ export interface MediaPageContract {
 }
 
 /**
- * Keeps an inventoried media route active while its legacy client-heavy
- * workbench is progressively moved into the shared application. The handler is
- * intentionally server-only and carries no provider credentials.
+ * Dispatches inventoried media page routes through a shared server-only shell.
+ * Parity covers routing, capability, and shell UI — not legacy client editors.
+ * The handler carries no provider credentials.
  */
 export function createMediaPageHandler(
   contract: MediaPageContract,

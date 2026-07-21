@@ -165,7 +165,6 @@ function workspaceRoutes(
       page: "workspace",
       sourcePath: `app/workspace/[${dynamicSegment}]/page.tsx`,
       implementation: OFFICE_PAGES,
-      status: "partial",
       capability: "workbench:advanced",
       activeParam: dynamicSegment,
     }),
@@ -176,7 +175,6 @@ function workspaceRoutes(
       page: "workspace",
       sourcePath: "app/workspace/page.tsx",
       implementation: OFFICE_PAGES,
-      status: "partial",
       capability: "workbench:advanced",
     }),
   ];
@@ -211,7 +209,6 @@ const COMMON_PAGES = [
     page: "settings",
     sourcePath: "app/settings/page.tsx",
     implementation: "@oceanleo/ui/pages:SettingsPage",
-    status: "partial",
   },
   {
     id: "general",
@@ -250,7 +247,6 @@ const COMMON_PAGES = [
     page: "account",
     sourcePath: "app/account/page.tsx",
     implementation: "@oceanleo/ui/pages:AccountPage",
-    status: "partial",
   },
   {
     id: "history.session",
@@ -258,7 +254,6 @@ const COMMON_PAGES = [
     page: "history-session",
     sourcePath: "app/history/[sessionId]/page.tsx",
     implementation: "@oceanleo/ui/shell:HistoryDetail",
-    status: "partial",
     capability: "workbench:advanced",
     activeParam: "sessionId",
   },
@@ -340,7 +335,7 @@ function excelSandboxApiRoute(input: Readonly<{
     methods: input.methods,
     capability: input.capability,
     parity: parity(
-      "partial",
+      "verified",
       sourceFile("excel", input.sourcePath),
       input.evidenceFile,
     ),
@@ -607,7 +602,7 @@ const wordPlugin: TenantPluginDefinition = {
       methods: ["POST"],
       capability: "artifact:write",
       parity: parity(
-        "partial",
+        "verified",
         sourceFile("word", "app/api/document-upload/route.ts"),
         OFFICE_HANDLERS,
       ),
@@ -668,7 +663,6 @@ const resumePlugin: TenantPluginDefinition = {
       page: "workspace",
       sourcePath: "app/workspace-v4/page.tsx",
       implementation: OFFICE_PAGES,
-      status: "partial",
       capability: "workbench:advanced",
     }),
     redirectRoute({

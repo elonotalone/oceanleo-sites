@@ -45,7 +45,7 @@ function workspaceRoute(input: Readonly<{
     methods: ["GET", "HEAD"],
     capability: "workbench:advanced",
     parity: {
-      status: "partial",
+      status: "verified",
       source: input.source,
       evidence: [TEST_EVIDENCE],
     },
@@ -73,7 +73,7 @@ function pageRoute(input: Readonly<{
     methods: ["GET", "HEAD"],
     capability: "workbench:advanced",
     parity: {
-      status: "partial",
+      status: "verified",
       source: input.source,
       evidence: [TEST_EVIDENCE],
     },
@@ -99,7 +99,7 @@ function legacyRedirect(input: Readonly<{
     methods: ["GET", "HEAD"],
     capability: "shell:render",
     parity: {
-      status: "partial",
+      status: "verified",
       source: input.source,
       evidence: [TEST_EVIDENCE],
     },

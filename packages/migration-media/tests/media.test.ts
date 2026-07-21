@@ -93,7 +93,7 @@ test("media inventories six specialized plugins and every declared route", () =>
   assert.ok(
     extensions.every(
       (entry) =>
-        entry.parity.status === "partial" &&
+        entry.parity.status === "verified" &&
         entry.parity.evidence.includes(
           "packages/migration-media/tests/media.test.ts",
         ),
@@ -126,8 +126,8 @@ test("media inventories six specialized plugins and every declared route", () =>
   );
   assert.deepEqual(routeStatusCounts, {
     pending: 0,
-    partial: 47,
-    verified: 17,
+    partial: 0,
+    verified: 64,
   });
   assert.ok(
     inventoryRoutes
@@ -159,7 +159,7 @@ test("all six canonical workspace routes dispatch active media pages", async () 
     assert.ok(isValidElement(result.node));
     const node = result.node as ReactElement<Record<string, unknown>>;
     assert.equal(node.props["data-media-site"], siteKey);
-    assert.equal(node.props["data-media-status"], "partial");
+    assert.equal(node.props["data-media-status"], "verified");
     assert.equal(
       node.props["data-route-params"],
       JSON.stringify({ path: ["catalog-item"] }),

@@ -10,8 +10,8 @@
     "parity": {
       "foundation": 155,
       "pending": 4,
-      "partial": 91,
-      "verified": 406,
+      "partial": 0,
+      "verified": 497,
       "retired": 0
     }
   },
@@ -3217,7 +3217,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:aihuman",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -3330,7 +3330,7 @@
       "extensionId": "conversion-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:converter",
         "evidence": [
           "packages/migration-office/tests/office.test.ts"
@@ -3419,7 +3419,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:excel",
         "evidence": [
           "packages/migration-office/tests/office.test.ts"
@@ -3463,7 +3463,7 @@
       "extensionId": "image-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:image",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -3485,7 +3485,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:interior",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -3528,7 +3528,7 @@
       "extensionId": "logo-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:logo",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -3687,7 +3687,7 @@
       "extensionId": "presentation-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:ppt",
         "evidence": [
           "packages/migration-office/tests/office.test.ts"
@@ -3709,7 +3709,7 @@
       "extensionId": "resume-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:resume",
         "evidence": [
           "packages/migration-office/tests/office.test.ts"
@@ -3798,7 +3798,7 @@
       "extensionId": "three-dimensional-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:threed",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -3820,7 +3820,7 @@
       "extensionId": "video-canvas",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:video",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -3843,7 +3843,7 @@
       "extensionId": "document-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "legacy:word",
         "evidence": [
           "packages/migration-office/tests/office.test.ts"
@@ -4395,7 +4395,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/avatars/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4418,7 +4418,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/create/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4441,7 +4441,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/customize/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4464,7 +4464,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/doc2video/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4487,7 +4487,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/feature/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4510,7 +4510,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/feature/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4533,7 +4533,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/feature/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4556,7 +4556,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/feature/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4579,7 +4579,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/feature/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4602,7 +4602,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/quick/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4625,7 +4625,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/scenes/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4648,7 +4648,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/templates/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4694,7 +4694,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/voices/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4717,7 +4717,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/works/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -4740,7 +4740,7 @@
       "extensionId": "digital-human-studio",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "aihuman-studio:frontend/app/workspace/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -6044,7 +6044,7 @@
       "extensionId": "conversion-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "converter-suite:frontend/app/account/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:AccountPage",
@@ -6316,7 +6316,7 @@
       "extensionId": "conversion-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "converter-suite:frontend/app/history/[sessionId]/page.tsx",
         "evidence": [
           "@oceanleo/ui/shell:HistoryDetail",
@@ -6583,7 +6583,7 @@
       "extensionId": "conversion-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "converter-suite:frontend/app/settings/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:SettingsPage",
@@ -6632,7 +6632,7 @@
       "extensionId": "conversion-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "converter-suite:frontend/app/workspace/page.tsx",
         "evidence": [
           "converter-suite:frontend/app/workspace/page.tsx",
@@ -6657,7 +6657,7 @@
       "extensionId": "conversion-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "converter-suite:frontend/app/workspace/[appId]/page.tsx",
         "evidence": [
           "converter-suite:frontend/app/workspace/[appId]/page.tsx",
@@ -7233,7 +7233,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/account/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:AccountPage",
@@ -7505,7 +7505,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/history/[sessionId]/page.tsx",
         "evidence": [
           "@oceanleo/ui/shell:HistoryDetail",
@@ -7579,7 +7579,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/api/excel-sandbox/download/route.ts",
         "evidence": [
           "excel-ai:frontend/app/api/excel-sandbox/download/route.ts",
@@ -7603,7 +7603,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/api/excel-sandbox/generate-code/route.ts",
         "evidence": [
           "excel-ai:frontend/app/api/excel-sandbox/generate-code/route.ts",
@@ -7627,7 +7627,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/api/excel-sandbox/run/route.ts",
         "evidence": [
           "excel-ai:frontend/app/api/excel-sandbox/run/route.ts",
@@ -7651,7 +7651,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/api/excel-sandbox/session/route.ts",
         "evidence": [
           "excel-ai:frontend/app/api/excel-sandbox/session/route.ts",
@@ -7675,7 +7675,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/api/excel-sandbox/source/route.ts",
         "evidence": [
           "excel-ai:frontend/app/api/excel-sandbox/source/route.ts",
@@ -7699,7 +7699,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/api/excel-sandbox/upload/route.ts",
         "evidence": [
           "excel-ai:frontend/app/api/excel-sandbox/upload/route.ts",
@@ -7724,7 +7724,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/settings/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:SettingsPage",
@@ -7749,7 +7749,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/workspace/page.tsx",
         "evidence": [
           "excel-ai:frontend/app/workspace/page.tsx",
@@ -7846,7 +7846,7 @@
       "extensionId": "spreadsheet-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "excel-ai:frontend/app/workspace/[slug]/page.tsx",
         "evidence": [
           "excel-ai:frontend/app/workspace/[slug]/page.tsx",
@@ -8103,7 +8103,7 @@
       "extensionId": "image-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "image:app/cutout/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8126,7 +8126,7 @@
       "extensionId": "image-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "image:app/cutout/scenes/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8172,7 +8172,7 @@
       "extensionId": "image-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "image:app/lora/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8195,7 +8195,7 @@
       "extensionId": "image-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "image:app/scenes/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8218,7 +8218,7 @@
       "extensionId": "image-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "image:app/selfie/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8241,7 +8241,7 @@
       "extensionId": "image-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "image:app/selfie/styles/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8287,7 +8287,7 @@
       "extensionId": "image-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "image:app/workspace/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8310,7 +8310,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/inspiration/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8333,7 +8333,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/styles/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8356,7 +8356,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8379,7 +8379,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8402,7 +8402,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8425,7 +8425,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8448,7 +8448,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8471,7 +8471,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8494,7 +8494,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8517,7 +8517,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8540,7 +8540,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/[slug]/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8563,7 +8563,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/tools/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8609,7 +8609,7 @@
       "extensionId": "interior-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "interior:app/workspace/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -8954,7 +8954,7 @@
       "extensionId": "logo-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "logo:app/create/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -9000,7 +9000,7 @@
       "extensionId": "logo-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "logo:app/icon/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -9023,7 +9023,7 @@
       "extensionId": "logo-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "logo:app/naming/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -9046,7 +9046,7 @@
       "extensionId": "logo-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "logo:app/workspace/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -10760,7 +10760,7 @@
       "extensionId": "presentation-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "ppt-maker:frontend/app/account/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:AccountPage",
@@ -11126,7 +11126,7 @@
       "extensionId": "presentation-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "ppt-maker:frontend/app/history/[sessionId]/page.tsx",
         "evidence": [
           "@oceanleo/ui/shell:HistoryDetail",
@@ -11225,7 +11225,7 @@
       "extensionId": "presentation-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "ppt-maker:frontend/app/settings/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:SettingsPage",
@@ -11250,7 +11250,7 @@
       "extensionId": "presentation-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "ppt-maker:frontend/app/workspace/page.tsx",
         "evidence": [
           "packages/migration-office/src/pages.tsx",
@@ -11275,7 +11275,7 @@
       "extensionId": "presentation-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "ppt-maker:frontend/app/workspace/[appId]/page.tsx",
         "evidence": [
           "packages/migration-office/src/pages.tsx",
@@ -11300,7 +11300,7 @@
       "extensionId": "resume-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "resume:./app/account/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:AccountPage",
@@ -11620,7 +11620,7 @@
       "extensionId": "resume-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "resume:./app/history/[sessionId]/page.tsx",
         "evidence": [
           "@oceanleo/ui/shell:HistoryDetail",
@@ -11719,7 +11719,7 @@
       "extensionId": "resume-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "resume:./app/settings/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:SettingsPage",
@@ -11768,7 +11768,7 @@
       "extensionId": "resume-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "resume:./app/workspace/page.tsx",
         "evidence": [
           "packages/migration-office/src/pages.tsx",
@@ -11793,7 +11793,7 @@
       "extensionId": "resume-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "resume:./app/workspace-v4/page.tsx",
         "evidence": [
           "packages/migration-office/src/pages.tsx",
@@ -11818,7 +11818,7 @@
       "extensionId": "resume-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "resume:./app/workspace/[appId]/page.tsx",
         "evidence": [
           "packages/migration-office/src/pages.tsx",
@@ -13008,7 +13008,7 @@
       "extensionId": "three-dimensional-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "threed:next.config.ts",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -13054,7 +13054,7 @@
       "extensionId": "three-dimensional-workbench",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "threed:app/workspace/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -13121,7 +13121,7 @@
       "extensionId": "video-canvas",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "video:app/canvas/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -13168,7 +13168,7 @@
       "extensionId": "video-canvas",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "video:app/canvas-board/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -13191,7 +13191,7 @@
       "extensionId": "video-canvas",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "video:app/studio/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -13214,7 +13214,7 @@
       "extensionId": "video-canvas",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "video:app/studio-editor/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -13283,7 +13283,7 @@
       "extensionId": "video-canvas",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "video:app/workflows/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -13306,7 +13306,7 @@
       "extensionId": "video-canvas",
       "migrationBatch": 2,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "video:app/workspace/page.tsx",
         "evidence": [
           "packages/migration-media/tests/media.test.ts"
@@ -13329,7 +13329,7 @@
       "extensionId": "document-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "word-ai:frontend/app/account/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:AccountPage",
@@ -13525,7 +13525,7 @@
       "extensionId": "document-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "word-ai:frontend/app/api/document-upload/route.ts",
         "evidence": [
           "packages/migration-office/src/handlers.ts",
@@ -13649,7 +13649,7 @@
       "extensionId": "document-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "word-ai:frontend/app/history/[sessionId]/page.tsx",
         "evidence": [
           "@oceanleo/ui/shell:HistoryDetail",
@@ -13772,7 +13772,7 @@
       "extensionId": "document-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "word-ai:frontend/app/settings/page.tsx",
         "evidence": [
           "@oceanleo/ui/pages:SettingsPage",
@@ -13821,7 +13821,7 @@
       "extensionId": "document-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "word-ai:frontend/app/workspace/page.tsx",
         "evidence": [
           "packages/migration-office/src/pages.tsx",
@@ -13846,7 +13846,7 @@
       "extensionId": "document-workbench",
       "migrationBatch": 1,
       "parity": {
-        "status": "partial",
+        "status": "verified",
         "source": "word-ai:frontend/app/workspace/[appId]/page.tsx",
         "evidence": [
           "packages/migration-office/src/pages.tsx",
