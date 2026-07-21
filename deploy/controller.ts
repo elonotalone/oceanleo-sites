@@ -9,6 +9,7 @@ import type {
 } from "./local-state";
 import {
   assertLedgerCompatible,
+  advanceLedgerBinding,
   createInitialLedger,
   rematerializePreDomainMoveLedger,
   type CutoverLedger,
@@ -435,7 +436,18 @@ export class CutoverController {
         await this.save(rematerialized);
         return rematerialized;
       } catch {
-        throw new CutoverGateError("ledger-incompatible");
+        try {
+          const advanced = advanceLedgerBinding(
+            existing,
+            this.loaded,
+            sourceSha,
+            this.clock.now(),
+          );
+          await this.save(advanced);
+          return advanced;
+        } catch {
+          throw new CutoverGateError("ledger-incompatible");
+        }
       }
     }
   }
@@ -1163,14 +1175,21 @@ export class CutoverController {
           let owner = await this.locateDomain(domain, targetProjectId);
           if (owner?.projectId === targetProjectId) {
             if (
-              !["move-requested", "owner-verified", "smoke-passed"].includes(
-                record.state,
-              )
+              ![
+                "pending",
+                "rolled-back",
+                "move-requested",
+                "owner-verified",
+                "smoke-passed",
+              ].includes(record.state)
             ) {
               throw new CutoverGateError("unledgered-target-owner", {
                 host: domain.host,
+                state: record.state,
               });
             }
+            // Redirect aliases can auto-follow their canonical onto the target
+            // project; adopt that ownership into the ledger before smoke.
             this.assertDomainConfiguration(owner, domain, "forward");
             record.state = "owner-verified";
             record.currentOwnerProjectId = targetProjectId;

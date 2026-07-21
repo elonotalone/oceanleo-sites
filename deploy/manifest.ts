@@ -234,9 +234,16 @@ function validateAndFlatten(raw: unknown): {
       invariant(
         tenant.domains.every(
           (domain, index) =>
-            domain.kind !== "alias" || index < canonicalIndex,
+            domain.kind !== "canonical" || index === canonicalIndex,
         ),
-        `${tenant.siteKey} aliases must precede its canonical domain`,
+        `${tenant.siteKey} must declare its canonical domain once`,
+      );
+      invariant(
+        tenant.domains.every(
+          (domain, index) =>
+            domain.kind !== "alias" || index > canonicalIndex,
+        ),
+        `${tenant.siteKey} aliases must follow its canonical domain`,
       );
       for (const domain of tenant.domains) {
         invariant(

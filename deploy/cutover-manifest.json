@@ -311,6 +311,10 @@
           "specializedPath": "/workspace",
           "domains": [
             {
+              "host": "slide.oceanleo.com",
+              "kind": "canonical"
+            },
+            {
               "host": "ppt.oceanleo.com",
               "kind": "alias",
               "configuration": {
@@ -318,10 +322,6 @@
                 "redirect": "slide.oceanleo.com",
                 "redirectStatusCode": 308
               }
-            },
-            {
-              "host": "slide.oceanleo.com",
-              "kind": "canonical"
             }
           ]
         },
@@ -392,16 +392,16 @@
           "specializedPath": "/workspace",
           "domains": [
             {
+              "host": "image.oceanleo.com",
+              "kind": "canonical"
+            },
+            {
               "host": "myselfie.oceanleo.com",
               "kind": "alias"
             },
             {
               "host": "remove.oceanleo.com",
               "kind": "alias"
-            },
-            {
-              "host": "image.oceanleo.com",
-              "kind": "canonical"
             }
           ]
         },
@@ -411,12 +411,12 @@
           "specializedPath": "/workspace",
           "domains": [
             {
-              "host": "studio.oceanleo.com",
-              "kind": "alias"
-            },
-            {
               "host": "video.oceanleo.com",
               "kind": "canonical"
+            },
+            {
+              "host": "studio.oceanleo.com",
+              "kind": "alias"
             }
           ]
         },
@@ -448,12 +448,12 @@
           "specializedPath": "/workspace",
           "domains": [
             {
-              "host": "threed.oceanleo.com",
-              "kind": "alias"
-            },
-            {
               "host": "3d.oceanleo.com",
               "kind": "canonical"
+            },
+            {
+              "host": "threed.oceanleo.com",
+              "kind": "alias"
             }
           ]
         }
@@ -602,12 +602,12 @@
           "specializedPath": "/workspace",
           "domains": [
             {
-              "host": "skill.oceanleo.com",
-              "kind": "alias"
-            },
-            {
               "host": "agent.oceanleo.com",
               "kind": "canonical"
+            },
+            {
+              "host": "skill.oceanleo.com",
+              "kind": "alias"
             }
           ]
         },
@@ -699,6 +699,7 @@
   ],
   "notes": [
     "Operator-held website privileged provider tokens remain optional until supplied out-of-band; they are blocked mappings with no legacy Vercel source.",
-    "Utility tenants smoke specialized paths that exist in migration-platform routes (asset/materials, aitools/all, game/play), not a generic /workspace."
+    "Utility tenants smoke specialized paths that exist in migration-platform routes (asset/materials, aitools/all, game/play), not a generic /workspace.",
+    "Domain move order is canonical-first so Vercel redirect aliases auto-follow; aliases no longer precede canonicals in the manifest."
   ]
 }

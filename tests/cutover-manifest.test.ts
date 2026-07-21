@@ -116,7 +116,7 @@ test("immutable manifest covers every exact domain and legacy owner once", async
   );
 });
 
-test("waves are ordered, aliases lead canonicals, and ppt rollback restores 308", async () => {
+test("waves are ordered, canonicals lead aliases, and ppt rollback restores 308", async () => {
   const loaded = await loadCutoverManifest();
   assert.deepEqual(
     loaded.manifest.waves.map((wave) => wave.id),
@@ -142,7 +142,7 @@ test("waves are ordered, aliases lead canonicals, and ppt rollback restores 308"
     assert.ok(
       domains.every(
         (domain, index) =>
-          domain.kind !== "alias" || index < canonical,
+          domain.kind !== "alias" || index > canonical,
       ),
       siteKey,
     );

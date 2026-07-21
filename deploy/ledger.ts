@@ -203,6 +203,61 @@ export function rematerializePreDomainMoveLedger(
   return next;
 }
 
+function domainHostsMatch(
+  ledger: CutoverLedger,
+  loaded: LoadedManifest,
+): boolean {
+  const expected = loaded.domains.map((domain) => domain.host).sort();
+  const actual = Object.keys(ledger.domains).sort();
+  return (
+    expected.length === actual.length &&
+    expected.every((host, index) => host === actual[index])
+  );
+}
+
+/**
+ * Advance manifest digest / source SHA while preserving wave progress when the
+ * domain host set is unchanged (for example canonical/alias reorder).
+ */
+export function advanceLedgerBinding(
+  existing: CutoverLedger,
+  loaded: LoadedManifest,
+  sourceSha: string,
+  now: string,
+): CutoverLedger {
+  if (!domainHostsMatch(existing, loaded)) {
+    throw new Error("Cannot advance ledger when the domain host set changed.");
+  }
+  if (
+    Object.values(existing.waves).some((wave) =>
+      ["in-progress", "rolling-back"].includes(wave.state),
+    )
+  ) {
+    throw new Error("Cannot advance ledger while a wave is mid-flight.");
+  }
+  const next: CutoverLedger = structuredClone(existing);
+  next.manifestVersion = loaded.manifest.manifestVersion;
+  next.manifestSha256 = loaded.digest;
+  next.sourceSha = sourceSha;
+  next.updatedAt = now;
+  for (const domain of loaded.domains) {
+    const record = next.domains[domain.host];
+    if (!record) {
+      throw new Error(`Ledger missing domain ${domain.host}`);
+    }
+    record.wave = domain.wave;
+    record.sequence = domain.sequence;
+    record.expectedLegacyProjectId = domain.legacyProjectId;
+  }
+  for (const profile of ["standard", "website-privileged"] as const) {
+    const deployment = next.targets[profile]?.deployment;
+    if (deployment && deployment.sourceSha !== sourceSha) {
+      delete next.targets[profile].deployment;
+    }
+  }
+  return next;
+}
+
 function isProcessAlive(pid: number): boolean {
   try {
     process.kill(pid, 0);
