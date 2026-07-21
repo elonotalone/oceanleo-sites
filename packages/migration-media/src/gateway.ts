@@ -68,7 +68,10 @@ function jsonError(error: string, status: number): Response {
 }
 
 export function resolveGatewayBase(
-  environment: GatewayEnvironment = process.env,
+  environment: GatewayEnvironment = {
+    NEXT_PUBLIC_OCEANLEO_GATEWAY_URL:
+      process.env.NEXT_PUBLIC_OCEANLEO_GATEWAY_URL,
+  },
 ): string {
   const configured = clean(environment.NEXT_PUBLIC_OCEANLEO_GATEWAY_URL);
   if (!configured) return DEFAULT_GATEWAY_BASE;
