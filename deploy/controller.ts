@@ -661,32 +661,35 @@ export class CutoverController {
 
   private async smokeAlias(domain: CutoverDomain): Promise<void> {
     const probePath = "/__cutover_alias_probe__?cutover=1";
-    const response = await this.provider.probe({
-      url: `https://${domain.host}${probePath}`,
-      redirect: "manual",
-    });
-    const location = response.headers.location;
-    let target: URL | null = null;
-    try {
-      target = location
-        ? new URL(location, `https://${domain.host}${probePath}`)
-        : null;
-    } catch {
-      target = null;
-    }
     const canonical = expectedCanonicalHost(
       this.loaded.domains,
       domain.siteKey,
     );
-    if (
-      response.status !== 308 ||
-      target?.protocol !== "https:" ||
-      target.host !== canonical ||
-      target.pathname !== "/__cutover_alias_probe__"
-    ) {
+    const result = await this.probeWithRetries(
+      `https://${domain.host}${probePath}`,
+      (response) => {
+        const location = response.headers.location;
+        let target: URL | null = null;
+        try {
+          target = location
+            ? new URL(location, `https://${domain.host}${probePath}`)
+            : null;
+        } catch {
+          target = null;
+        }
+        return (
+          response.status === 308 &&
+          target?.protocol === "https:" &&
+          target.host === canonical &&
+          target.pathname === "/__cutover_alias_probe__"
+        );
+      },
+    );
+    if (!result.ok) {
       throw new CutoverGateError("alias-smoke", {
         host: domain.host,
-        status: response.status,
+        status: result.response.status,
+        location: result.response.headers.location ?? null,
       });
     }
   }
