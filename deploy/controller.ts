@@ -10,6 +10,7 @@ import type {
 import {
   assertLedgerCompatible,
   createInitialLedger,
+  rematerializePreDomainMoveLedger,
   type CutoverLedger,
   type DomainLedgerRecord,
   type LedgerStore,
@@ -405,15 +406,33 @@ export class CutoverController {
   }
 
   private async loadOrCreateLedger(sourceSha: string): Promise<CutoverLedger> {
-    const existing = await this.loadLedger(sourceSha, false);
-    if (existing) return existing;
-    const ledger = createInitialLedger(
-      this.loaded,
-      sourceSha,
-      this.clock.now(),
-    );
-    await this.save(ledger);
-    return ledger;
+    const existing = await this.ledgerStore.load();
+    if (!existing) {
+      const ledger = createInitialLedger(
+        this.loaded,
+        sourceSha,
+        this.clock.now(),
+      );
+      await this.save(ledger);
+      return ledger;
+    }
+    try {
+      assertLedgerCompatible(existing, this.loaded, sourceSha);
+      return existing;
+    } catch {
+      try {
+        const rematerialized = rematerializePreDomainMoveLedger(
+          existing,
+          this.loaded,
+          sourceSha,
+          this.clock.now(),
+        );
+        await this.save(rematerialized);
+        return rematerialized;
+      } catch {
+        throw new CutoverGateError("ledger-incompatible");
+      }
+    }
   }
 
   private async targetStateForMove(

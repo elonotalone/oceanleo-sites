@@ -161,6 +161,37 @@ export function assertLedgerCompatible(
   }
 }
 
+/** True when no domain wave has left the initial pending state. */
+export function isPreDomainMoveLedger(ledger: CutoverLedger): boolean {
+  return (
+    WAVE_IDS.every((wave) => ledger.waves[wave]?.state === "pending") &&
+    Object.values(ledger.domains).every((domain) => domain.state === "pending")
+  );
+}
+
+/**
+ * Rebuild a pre-wave ledger for a new manifest digest / source SHA while
+ * preserving already-created target project IDs. Deployment records are dropped
+ * because they are SHA-bound.
+ */
+export function rematerializePreDomainMoveLedger(
+  existing: CutoverLedger,
+  loaded: LoadedManifest,
+  sourceSha: string,
+  now: string,
+): CutoverLedger {
+  if (!isPreDomainMoveLedger(existing)) {
+    throw new Error("Cannot rematerialize a ledger after domain moves started.");
+  }
+  const next = createInitialLedger(loaded, sourceSha, now);
+  next.createdAt = existing.createdAt;
+  for (const profile of ["standard", "website-privileged"] as const) {
+    const projectId = existing.targets[profile]?.projectId;
+    if (projectId) next.targets[profile].projectId = projectId;
+  }
+  return next;
+}
+
 function isProcessAlive(pid: number): boolean {
   try {
     process.kill(pid, 0);

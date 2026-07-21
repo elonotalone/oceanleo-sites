@@ -586,3 +586,33 @@ test("dry-run project creation never mutates and execute is idempotent", async (
     "website-privileged",
   ]);
 });
+
+test("pre-wave ledger rematerializes for a new source SHA", async () => {
+  const state = await harness();
+  const priorSha = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  const prior = createInitialLedger(state.loaded, priorSha, FIXED_TIME);
+  prior.targets.standard.projectId = TARGET_IDS.standard;
+  prior.targets["website-privileged"].projectId =
+    TARGET_IDS["website-privileged"];
+  prior.targets.standard.deployment = {
+    id: "dpl_old",
+    url: "https://old.example",
+    sourceSha: priorSha,
+    state: "READY",
+    observedAt: FIXED_TIME,
+  };
+  state.ledgerStore.ledger = prior;
+
+  const result = await state.controller.deploy(SOURCE_SHA, true);
+  assert.equal(result.mutations, true);
+  const next = state.ledgerStore.ledger;
+  assert.ok(next);
+  assert.equal(next.sourceSha, SOURCE_SHA);
+  assert.equal(next.manifestSha256, state.loaded.digest);
+  assert.equal(next.targets.standard.projectId, TARGET_IDS.standard);
+  assert.equal(
+    next.targets["website-privileged"].projectId,
+    TARGET_IDS["website-privileged"],
+  );
+  assert.notEqual(next.targets.standard.deployment?.id, "dpl_old");
+});
