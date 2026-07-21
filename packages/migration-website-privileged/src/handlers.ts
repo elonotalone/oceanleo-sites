@@ -9,6 +9,7 @@ import { CORE_WEBSITE_HANDLERS } from "./ported-core";
 import { GENERATION_WEBSITE_HANDLERS } from "./ported-generation";
 import { ORCHESTRATION_WEBSITE_HANDLERS } from "./ported-orchestration";
 import { PROVIDER_WEBSITE_HANDLERS } from "./ported-provider";
+import { SERVER_WEBSITE_HANDLERS } from "./ported-servers";
 import { SITE_WEBSITE_HANDLERS } from "./ported-sites";
 
 export const WEBSITE_HANDLER_PATHS: readonly string[] = Object.freeze([
@@ -124,25 +125,16 @@ const PORTED_HANDLERS: Readonly<Record<string, PluginRouteHandler>> =
     ...SITE_WEBSITE_HANDLERS,
     ...GENERATION_WEBSITE_HANDLERS,
     ...ORCHESTRATION_WEBSITE_HANDLERS,
+    ...SERVER_WEBSITE_HANDLERS,
   });
 
 const PENDING_BLOCKERS: Readonly<Record<string, string>> = Object.freeze({
   "/api/deploy":
-    "requires the deploy pipeline, provider refresh, template-slot resolution, and background completion contract",
-  "/api/servers":
-    "requires encrypted SSH credentials and the server-ssh connection/prerequisite implementation",
-  "/api/servers/[id]/test":
-    "requires the server-ssh connection, Docker, and prerequisite probe implementation",
-  "/api/servers/provision":
-    "requires Alibaba instance provisioning plus SSH bootstrap and long-running progress behavior",
+    "requires createRepoFromTemplate/applyTemplatePlaceholders, Supabase Management project APIs, token-refresh wiring, and the Next.js after() background completion contract from the full deploy pipeline",
   "/api/sites/[id]/backend":
-    "requires encrypted server credentials and server-ssh backend discovery",
+    "POST needs Aliyun SWAS deployBackend (RunCommand) plus Railway deployFromGitHub async workers and SSH forward into backend/deploy; not just vault/OpenSSH probes",
   "/api/sites/[id]/backend/deploy":
-    "requires the complete remote-server deploy pipeline and prerequisite reporting",
-  "/api/sites/[id]/backend/ops":
-    "requires remote process, log, restart, and health operations over server-ssh",
-  "/api/sites/[id]/vibe-code-hosted":
-    "requires source discovery and Cursor execution against a privileged remote SSH checkout",
+    "requires the complete remote SSH deploy chain (prereq install, clone, PM2/venv, Caddy, Cloudflare DNS, webhook, Vercel BACKEND_URL) beyond connection/ops helpers",
 });
 
 export interface WebsiteHandlerDescriptor {
@@ -185,6 +177,7 @@ export const WEBSITE_HANDLER_DESCRIPTORS: readonly WebsiteHandlerDescriptor[] =
                   "packages/migration-website-privileged/src/ported-sites.ts",
                   "packages/migration-website-privileged/src/ported-generation.ts",
                   "packages/migration-website-privileged/src/ported-orchestration.ts",
+                  "packages/migration-website-privileged/src/ported-servers.ts",
                   "packages/migration-website-privileged/tests/website-privileged.test.ts",
                 ]
               : [

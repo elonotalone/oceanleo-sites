@@ -193,7 +193,8 @@ export function runRootConsoleShellCommand(
   timeoutMs = 120_000,
 ): Promise<CommandResult> {
   if (target === "local") return runLocalCommand(command, timeoutMs);
-  return runSshCommand(target, command, timeoutMs);
+  // Password + key auth for user-owned boxes; key-only for platform hosts.
+  return runUserSshCommand(target, command, timeoutMs);
 }
 
 export const PLATFORM_DOMAIN = "oceanleo.app";
@@ -432,6 +433,42 @@ done`;
   return out;
 }
 
+export interface PrerequisiteCheck {
+  docker: boolean;
+  caddy: boolean;
+  python3: boolean;
+  git: boolean;
+  systemctl: boolean;
+}
+
+export interface RootConsoleLaunchOptions {
+  baseDir: string;
+  workdir: string;
+  prompt: string;
+  model?: string;
+  apiKey: string;
+}
+
+export interface RootConsoleTaskStatus {
+  taskId: string;
+  status: "queued" | "running" | "finished" | "error" | "unknown";
+  pid: number | null;
+  startedAt: string | null;
+  finishedAt: string | null;
+  exitCode: number | null;
+  workdir: string | null;
+  model: string | null;
+  prompt: string | null;
+  summary: string | null;
+  lastLines: string[];
+  gitSummary: {
+    branch: string | null;
+    status: string[];
+    diffStat: string[];
+    latestCommit: string | null;
+  };
+}
+
 /**
  * Probe a user-owned SSH host (import remote_server). Uses OpenSSH + sshpass
  * so we do not depend on the ssh2 native package.
@@ -457,7 +494,361 @@ export async function testUserSshConnection(
   }
 }
 
-async function runUserSshCommand(
+export async function checkUserSshPrerequisites(
+  creds: SSHCredentials,
+): Promise<PrerequisiteCheck> {
+  const result = await runUserSshCommand(
+    creds,
+    [
+      'command -v docker >/dev/null 2>&1 && echo "docker:yes" || echo "docker:no"',
+      'command -v caddy >/dev/null 2>&1 && echo "caddy:yes" || echo "caddy:no"',
+      'command -v python3 >/dev/null 2>&1 && echo "python3:yes" || echo "python3:no"',
+      'command -v git >/dev/null 2>&1 && echo "git:yes" || echo "git:no"',
+      'command -v systemctl >/dev/null 2>&1 && echo "systemctl:yes" || echo "systemctl:no"',
+    ].join(" && "),
+    15_000,
+  );
+  const lines = result.stdout;
+  return {
+    docker: lines.includes("docker:yes"),
+    caddy: lines.includes("caddy:yes"),
+    python3: lines.includes("python3:yes"),
+    git: lines.includes("git:yes"),
+    systemctl: lines.includes("systemctl:yes"),
+  };
+}
+
+export async function getUserSshServiceStatus(
+  creds: SSHCredentials,
+  siteSlug: string,
+): Promise<{ active: boolean; uptime: string; memory: string; logs: string }> {
+  const serviceName = `${siteSlug}-backend`;
+  const result = await runUserSshCommand(
+    creds,
+    `systemctl is-active ${serviceName} 2>/dev/null || echo "inactive"; ` +
+      `systemctl show ${serviceName} --property=ActiveEnterTimestamp --no-pager 2>/dev/null || true; ` +
+      `ps aux | grep "${serviceName}\\|uvicorn.*${siteSlug}" | grep -v grep | awk '{print $6}' | head -1; ` +
+      `journalctl -u ${serviceName} --no-pager -n 30 2>/dev/null || true`,
+    15_000,
+  );
+  const lines = result.stdout.split("\n");
+  const active = lines[0]?.trim() === "active";
+  const uptimeLine =
+    lines.find((line) => line.startsWith("ActiveEnterTimestamp=")) || "";
+  const memKb = lines.find((line) => /^\d+$/.test(line.trim())) || "0";
+  return {
+    active,
+    uptime: uptimeLine.replace("ActiveEnterTimestamp=", "").trim(),
+    memory: `${Math.round(Number.parseInt(memKb || "0", 10) / 1024)}MB`,
+    logs: lines.slice(3).join("\n").trim(),
+  };
+}
+
+export async function restartUserSshService(
+  creds: SSHCredentials,
+  siteSlug: string,
+): Promise<CommandResult> {
+  return runUserSshCommand(
+    creds,
+    `systemctl restart ${siteSlug}-backend`,
+    30_000,
+  );
+}
+
+function toShellAssignment(name: string, value: string): string {
+  return `${name}=${shellSingleQuote(value)}`;
+}
+
+function parseTaskStatusPayload(
+  raw: string,
+  taskId: string,
+): RootConsoleTaskStatus {
+  const empty: RootConsoleTaskStatus = {
+    taskId,
+    status: "unknown",
+    pid: null,
+    startedAt: null,
+    finishedAt: null,
+    exitCode: null,
+    workdir: null,
+    model: null,
+    prompt: null,
+    summary: null,
+    lastLines: [],
+    gitSummary: {
+      branch: null,
+      status: [],
+      diffStat: [],
+      latestCommit: null,
+    },
+  };
+  if (!raw.trim()) return empty;
+  try {
+    const parsed = JSON.parse(raw) as RootConsoleTaskStatus;
+    return {
+      ...empty,
+      ...parsed,
+      gitSummary: {
+        ...empty.gitSummary,
+        ...(parsed.gitSummary || {}),
+      },
+    };
+  } catch {
+    return {
+      ...empty,
+      summary: raw.trim(),
+      lastLines: raw.trim().split("\n").slice(-20),
+    };
+  }
+}
+
+/**
+ * Launch a detached Cursor `agent` CLI task on a platform or user SSH host.
+ * Mirrors website:front/lib/deploy/server-ssh.ts launchRootConsoleTask over
+ * OpenSSH (no ssh2).
+ */
+export async function launchRootConsoleTask(
+  target: RootConsoleTarget,
+  options: RootConsoleLaunchOptions,
+): Promise<{ taskId: string; status: RootConsoleTaskStatus }> {
+  const taskId = `task_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+  const command = `
+set -e
+${toShellAssignment("BASE_DIR", options.baseDir)}
+${toShellAssignment("TASK_ID", taskId)}
+${toShellAssignment("WORKDIR", options.workdir)}
+${toShellAssignment("PROMPT_TEXT", options.prompt)}
+${toShellAssignment("MODEL_NAME", options.model || "")}
+${toShellAssignment("CURSOR_API_KEY_VALUE", options.apiKey)}
+export BASE_DIR TASK_ID WORKDIR PROMPT_TEXT MODEL_NAME CURSOR_API_KEY_VALUE
+
+TASK_DIR="$BASE_DIR/tasks/$TASK_ID"
+export TASK_DIR
+mkdir -p "$TASK_DIR"
+mkdir -p "$WORKDIR"
+
+printf '%s' "$PROMPT_TEXT" > "$TASK_DIR/prompt.txt"
+
+python3 - <<'PY'
+import json
+import os
+from pathlib import Path
+
+task_dir = Path(os.environ["TASK_DIR"])
+payload = {
+    "taskId": os.environ["TASK_ID"],
+    "status": "queued",
+    "pid": None,
+    "startedAt": None,
+    "finishedAt": None,
+    "exitCode": None,
+    "workdir": os.environ["WORKDIR"],
+    "model": os.environ["MODEL_NAME"] or None,
+    "prompt": os.environ["PROMPT_TEXT"],
+    "summary": None,
+    "lastLines": [],
+    "gitSummary": {
+        "branch": None,
+        "status": [],
+        "diffStat": [],
+        "latestCommit": None,
+    },
+}
+(task_dir / "status.json").write_text(json.dumps(payload, ensure_ascii=True), encoding="utf-8")
+PY
+
+cat > "$TASK_DIR/run-task.sh" <<'SCRIPT_EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+TASK_DIR="$(cd "$(dirname "$0")" && pwd)"
+WORKDIR_FILE="$TASK_DIR/workdir.txt"
+WORKDIR="$(cat "$WORKDIR_FILE")"
+PROMPT_FILE="$TASK_DIR/prompt.txt"
+LOG_FILE="$TASK_DIR/output.log"
+STATUS_FILE="$TASK_DIR/status.json"
+MODEL_FILE="$TASK_DIR/model.txt"
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
+export CURSOR_API_KEY="$CURSOR_API_KEY_VALUE"
+export MYCREATOR_LOCAL_SERVER=1
+export MYCREATOR_EXECUTION_CONTEXT=server-local
+
+python3 - "$STATUS_FILE" "$WORKDIR" "$PROMPT_FILE" "$MODEL_FILE" <<'PY'
+import json
+import pathlib
+import sys
+import time
+
+status_path = pathlib.Path(sys.argv[1])
+workdir = sys.argv[2]
+prompt_path = pathlib.Path(sys.argv[3])
+model_path = pathlib.Path(sys.argv[4])
+payload = json.loads(status_path.read_text(encoding="utf-8"))
+payload["status"] = "running"
+payload["pid"] = None
+payload["startedAt"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+payload["workdir"] = workdir
+payload["prompt"] = prompt_path.read_text(encoding="utf-8").strip()
+payload["model"] = model_path.read_text(encoding="utf-8").strip() or None
+status_path.write_text(json.dumps(payload, ensure_ascii=True), encoding="utf-8")
+PY
+
+if ! command -v agent >/dev/null 2>&1; then
+  echo "[root-console] agent CLI not found in PATH" >> "$LOG_FILE"
+  python3 - "$STATUS_FILE" <<'PY'
+import json
+import pathlib
+import sys
+import time
+
+status_path = pathlib.Path(sys.argv[1])
+payload = json.loads(status_path.read_text(encoding="utf-8"))
+payload["status"] = "error"
+payload["finishedAt"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+payload["exitCode"] = 127
+payload["summary"] = "Cursor CLI agent was not found on the server host."
+status_path.write_text(json.dumps(payload, ensure_ascii=True), encoding="utf-8")
+PY
+  exit 127
+fi
+
+cd "$WORKDIR"
+
+MODEL_NAME="$(cat "$MODEL_FILE")"
+set +e
+if [ -n "$MODEL_NAME" ]; then
+  agent --model "$MODEL_NAME" -p --force --trust --output-format text "$(cat "$PROMPT_FILE")" >> "$LOG_FILE" 2>&1
+else
+  agent -p --force --trust --output-format text "$(cat "$PROMPT_FILE")" >> "$LOG_FILE" 2>&1
+fi
+EXIT_CODE=$?
+set -e
+
+python3 - "$STATUS_FILE" "$WORKDIR" "$LOG_FILE" "$EXIT_CODE" <<'PY'
+import json
+import pathlib
+import subprocess
+import sys
+import time
+
+status_path = pathlib.Path(sys.argv[1])
+workdir = pathlib.Path(sys.argv[2])
+log_path = pathlib.Path(sys.argv[3])
+exit_code = int(sys.argv[4])
+
+payload = json.loads(status_path.read_text(encoding="utf-8"))
+payload["finishedAt"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+payload["exitCode"] = exit_code
+payload["status"] = "finished" if exit_code == 0 else "error"
+
+if log_path.exists():
+    lines = log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+    payload["lastLines"] = lines[-40:]
+    payload["summary"] = "\\n".join(lines[-20:]).strip() or payload.get("summary")
+
+def run_git(args):
+    try:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=str(workdir),
+            capture_output=True,
+            text=True,
+            timeout=15,
+            check=False,
+        )
+        if result.returncode != 0:
+            return []
+        return [line for line in result.stdout.splitlines() if line.strip()]
+    except Exception:
+        return []
+
+if (workdir / ".git").exists():
+    branch = run_git(["branch", "--show-current"])
+    payload["gitSummary"] = {
+        "branch": branch[0] if branch else None,
+        "status": run_git(["status", "--short"])[:50],
+        "diffStat": run_git(["diff", "--stat"])[:50],
+        "latestCommit": (run_git(["log", "-1", "--oneline"]) or [None])[0],
+    }
+
+status_path.write_text(json.dumps(payload, ensure_ascii=True), encoding="utf-8")
+PY
+
+exit "$EXIT_CODE"
+SCRIPT_EOF
+
+printf '%s' "$WORKDIR" > "$TASK_DIR/workdir.txt"
+printf '%s' "$MODEL_NAME" > "$TASK_DIR/model.txt"
+chmod +x "$TASK_DIR/run-task.sh"
+
+nohup bash "$TASK_DIR/run-task.sh" > /dev/null 2>&1 &
+PID=$!
+
+python3 - "$TASK_DIR/status.json" "$PID" <<'PY'
+import json
+import pathlib
+import sys
+
+status_path = pathlib.Path(sys.argv[1])
+pid = int(sys.argv[2])
+payload = json.loads(status_path.read_text(encoding="utf-8"))
+payload["pid"] = pid
+status_path.write_text(json.dumps(payload, ensure_ascii=True), encoding="utf-8")
+PY
+
+python3 - "$TASK_DIR/status.json" <<'PY'
+import pathlib
+import sys
+print(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+PY
+`;
+
+  const result = await runRootConsoleShellCommand(target, command, 30_000);
+  if (result.code !== 0) {
+    throw new Error(
+      result.stderr || result.stdout || "Failed to launch root console task.",
+    );
+  }
+  return {
+    taskId,
+    status: parseTaskStatusPayload(result.stdout, taskId),
+  };
+}
+
+export async function getRootConsoleTaskStatus(
+  target: RootConsoleTarget,
+  baseDir: string,
+  taskId: string,
+): Promise<RootConsoleTaskStatus> {
+  const command = `
+set -e
+${toShellAssignment("BASE_DIR", baseDir)}
+${toShellAssignment("TASK_ID", taskId)}
+TASK_DIR="$BASE_DIR/tasks/$TASK_ID"
+STATUS_FILE="$TASK_DIR/status.json"
+LOG_FILE="$TASK_DIR/output.log"
+if [ ! -f "$STATUS_FILE" ]; then
+  echo ""
+  exit 0
+fi
+python3 - "$STATUS_FILE" "$LOG_FILE" <<'PY'
+import json
+import pathlib
+import sys
+
+status_path = pathlib.Path(sys.argv[1])
+log_path = pathlib.Path(sys.argv[2])
+payload = json.loads(status_path.read_text(encoding="utf-8"))
+if log_path.exists():
+    payload["lastLines"] = log_path.read_text(encoding="utf-8", errors="replace").splitlines()[-40:]
+print(json.dumps(payload, ensure_ascii=True))
+PY
+`;
+  const result = await runRootConsoleShellCommand(target, command, 15_000);
+  return parseTaskStatusPayload(result.stdout, taskId);
+}
+
+export async function runUserSshCommand(
   creds: SSHCredentials,
   command: string,
   timeoutMs: number,

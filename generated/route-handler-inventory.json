@@ -9,9 +9,9 @@
     "entries": 656,
     "parity": {
       "foundation": 155,
-      "pending": 9,
+      "pending": 4,
       "partial": 91,
-      "verified": 401,
+      "verified": 406,
       "retired": 0
     }
   },
@@ -13901,6 +13901,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -13928,6 +13929,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -13955,6 +13957,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14005,6 +14008,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14032,6 +14036,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14059,6 +14064,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14086,6 +14092,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14113,6 +14120,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14140,6 +14148,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14167,6 +14176,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14194,6 +14204,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14221,6 +14232,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14248,6 +14260,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14275,6 +14288,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14302,6 +14316,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14329,6 +14344,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14356,6 +14372,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14378,10 +14395,15 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/servers/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-orchestration.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14401,10 +14423,15 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/servers/[id]/test/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-orchestration.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14425,10 +14452,15 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/servers/provision/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-orchestration.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14455,6 +14487,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14482,6 +14515,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14511,6 +14545,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14579,10 +14614,15 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/sites/[id]/backend/ops/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-orchestration.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14611,6 +14651,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14638,6 +14679,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14665,6 +14707,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14695,6 +14738,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14722,6 +14766,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14749,6 +14794,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14776,6 +14822,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14804,6 +14851,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14825,10 +14873,15 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/sites/[id]/vibe-code-hosted/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-orchestration.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14856,6 +14909,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14884,6 +14938,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14911,6 +14966,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14938,6 +14994,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14965,6 +15022,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -14993,6 +15051,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -15022,6 +15081,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -15050,6 +15110,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -15078,6 +15139,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -15105,6 +15167,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
@@ -15132,6 +15195,7 @@
           "packages/migration-website-privileged/src/ported-generation.ts",
           "packages/migration-website-privileged/src/ported-orchestration.ts",
           "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]

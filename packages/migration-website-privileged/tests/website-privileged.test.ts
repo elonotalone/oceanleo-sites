@@ -63,15 +63,15 @@ test("website inventory partitions all 47 handlers into verified and blocked pat
   assert.equal(WEBSITE_HANDLER_PATHS.length, 47);
   assert.equal(WEBSITE_HANDLER_DESCRIPTORS.length, 47);
   assert.equal(handlers.length, 47);
-  assert.equal(WEBSITE_VERIFIED_HANDLER_PATHS.length, 39);
-  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 8);
+  assert.equal(WEBSITE_VERIFIED_HANDLER_PATHS.length, 44);
+  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 3);
   assert.equal(
     handlers.filter((entry) => entry.parity.status === "verified").length,
-    39,
+    44,
   );
   assert.equal(
     handlers.filter((entry) => entry.parity.status === "pending").length,
-    8,
+    3,
   );
   assert.ok(
     WEBSITE_HANDLER_DESCRIPTORS.every(
@@ -152,10 +152,11 @@ test("verified handlers dispatch while blocked handlers retain exact params", as
 
   const pending = await dispatcher.dispatch({
     tenant,
-    pathname: "/api/sites/site-7/backend",
+    pathname: "/api/sites/site-7/backend/deploy",
     surface: "api",
     request: new Request(
-      "https://website.oceanleo.com/api/sites/site-7/backend",
+      "https://website.oceanleo.com/api/sites/site-7/backend/deploy",
+      { method: "POST" },
     ),
   });
   assert.equal(pending.kind, "pending");
@@ -163,9 +164,27 @@ test("verified handlers dispatch while blocked handlers retain exact params", as
     assert.deepEqual(pending.params, { id: "site-7" });
     assert.equal(
       pending.source,
-      "website:front/app/api/sites/[id]/backend/route.ts",
+      "website:front/app/api/sites/[id]/backend/deploy/route.ts",
     );
   }
+
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/servers"),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/servers/[id]/test"),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/servers/provision"),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/[id]/backend/ops"),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes(
+      "/api/sites/[id]/vibe-code-hosted",
+    ),
+  );
 
   assert.ok(
     WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/[id]/toggle"),
@@ -193,6 +212,19 @@ test("verified handlers dispatch while blocked handlers retain exact params", as
     ),
     true,
   );
+  assert.equal(
+    WEBSITE_PENDING_HANDLER_INVENTORY.some(
+      ({ route }) => route === "/api/sites/[id]/backend",
+    ),
+    true,
+  );
+  assert.equal(
+    WEBSITE_PENDING_HANDLER_INVENTORY.some(
+      ({ route }) => route === "/api/sites/[id]/backend/deploy",
+    ),
+    true,
+  );
+  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 3);
   assert.equal(
     typeof WEBSITE_HANDLER_DESCRIPTORS.find(
       ({ route }) => route === "/api/sites/[id]/toggle",
