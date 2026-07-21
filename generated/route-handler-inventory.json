@@ -9,9 +9,9 @@
     "entries": 656,
     "parity": {
       "foundation": 155,
-      "pending": 15,
+      "pending": 12,
       "partial": 91,
-      "verified": 395,
+      "verified": 398,
       "retired": 0
     }
   },
@@ -14636,10 +14636,13 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/sites/[id]/domain/purchase-and-bind/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14711,10 +14714,13 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/sites/[id]/toggle/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }
@@ -14809,10 +14815,13 @@
       "extensionId": "website-source-workbench",
       "migrationBatch": 6,
       "parity": {
-        "status": "pending",
+        "status": "verified",
         "source": "website:front/app/api/sites/[id]/vibe-code/pr/route.ts",
         "evidence": [
-          "packages/migration-website-privileged/src/handlers.ts",
+          "packages/migration-website-privileged/src/ported-core.ts",
+          "packages/migration-website-privileged/src/ported-generation.ts",
+          "packages/migration-website-privileged/src/ported-provider.ts",
+          "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
         ]
       }

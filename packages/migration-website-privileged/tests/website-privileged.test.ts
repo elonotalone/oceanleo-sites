@@ -63,15 +63,15 @@ test("website inventory partitions all 47 handlers into verified and blocked pat
   assert.equal(WEBSITE_HANDLER_PATHS.length, 47);
   assert.equal(WEBSITE_HANDLER_DESCRIPTORS.length, 47);
   assert.equal(handlers.length, 47);
-  assert.equal(WEBSITE_VERIFIED_HANDLER_PATHS.length, 33);
-  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 14);
+  assert.equal(WEBSITE_VERIFIED_HANDLER_PATHS.length, 36);
+  assert.equal(WEBSITE_PENDING_HANDLER_INVENTORY.length, 11);
   assert.equal(
     handlers.filter((entry) => entry.parity.status === "verified").length,
-    33,
+    36,
   );
   assert.equal(
     handlers.filter((entry) => entry.parity.status === "pending").length,
-    14,
+    11,
   );
   assert.ok(
     WEBSITE_HANDLER_DESCRIPTORS.every(
@@ -166,6 +166,24 @@ test("verified handlers dispatch while blocked handlers retain exact params", as
       "website:front/app/api/sites/[id]/backend/route.ts",
     );
   }
+
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/[id]/toggle"),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes(
+      "/api/sites/[id]/domain/purchase-and-bind",
+    ),
+  );
+  assert.ok(
+    WEBSITE_VERIFIED_HANDLER_PATHS.includes("/api/sites/[id]/vibe-code/pr"),
+  );
+  assert.equal(
+    typeof WEBSITE_HANDLER_DESCRIPTORS.find(
+      ({ route }) => route === "/api/sites/[id]/toggle",
+    )?.handler,
+    "function",
+  );
 
   const previousVercelClient = process.env.VERCEL_CLIENT_ID;
   delete process.env.VERCEL_CLIENT_ID;

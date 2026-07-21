@@ -161,3 +161,161 @@ export async function upsertVercelDnsRecord(
     proxied: false,
   });
 }
+
+export class DnsZoneNotFoundError extends Error {
+  readonly domain: string;
+
+  constructor(domain: string) {
+    super(`No Cloudflare zone found for "${domain}"`);
+    this.name = "DnsZoneNotFoundError";
+    this.domain = domain;
+  }
+}
+
+export async function getAccountId(token: string): Promise<string> {
+  const result = await cloudflareJson<Array<{ id?: string }>>(
+    token,
+    "/accounts?per_page=1",
+  );
+  const id = Array.isArray(result) ? stringValue(result[0]?.id) : undefined;
+  if (!id) throw new Error("No Cloudflare accounts found for this token");
+  return id;
+}
+
+export async function createZone(
+  token: string,
+  accountId: string,
+  domainName: string,
+): Promise<CloudflareZone> {
+  const existing = await listZones(token, domainName);
+  if (existing.length > 0) return existing[0]!;
+  return cloudflareJson<CloudflareZone>(token, "/zones", {
+    method: "POST",
+    body: JSON.stringify({
+      name: domainName,
+      account: { id: accountId },
+      type: "full",
+    }),
+  });
+}
+
+export async function waitForZoneActive(
+  token: string,
+  zoneId: string,
+  maxWaitMs = 3 * 60 * 1000,
+  intervalMs = 5000,
+): Promise<CloudflareZone> {
+  const deadline = Date.now() + maxWaitMs;
+  while (Date.now() < deadline) {
+    const zone = await cloudflareJson<CloudflareZone>(
+      token,
+      `/zones/${zoneId}`,
+    );
+    if (zone.status === "active") return zone;
+    await new Promise((resolve) => setTimeout(resolve, intervalMs));
+  }
+  return cloudflareJson<CloudflareZone>(token, `/zones/${zoneId}`);
+}
+
+export interface DomainAvailability {
+  domain_name: string;
+  available: boolean;
+  can_register: boolean;
+  reason?: string;
+}
+
+export async function checkDomainAvailability(
+  token: string,
+  accountId: string,
+  domain: string,
+): Promise<DomainAvailability> {
+  const response = await fetchWithTimeout(
+    `${CLOUDFLARE_API}/accounts/${accountId}/registrar/domain-check`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ domains: [domain] }),
+    },
+  );
+  const body = await response.text();
+  const data = parseRecord(body) ?? {};
+  if (!response.ok || data.success === false) {
+    throw new Error(
+      `Cloudflare domain check failed (${response.status}): ${body.slice(0, 300)}`,
+    );
+  }
+  const domains = record(data.result)?.domains;
+  const first = Array.isArray(domains) ? record(domains[0]) : null;
+  if (!first) {
+    return {
+      domain_name: domain,
+      available: false,
+      can_register: false,
+      reason: "no_result",
+    };
+  }
+  return {
+    domain_name: stringValue(first.name) || domain,
+    available: first.registrable === true,
+    can_register: first.registrable === true && first.tier !== "premium",
+    reason: stringValue(first.reason),
+  };
+}
+
+export async function registerDomain(
+  token: string,
+  accountId: string,
+  domainName: string,
+  years = 1,
+  autoRenew = false,
+): Promise<{ status: string; completed: boolean }> {
+  const response = await fetchWithTimeout(
+    `${CLOUDFLARE_API}/accounts/${accountId}/registrar/registrations`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Prefer: "respond-async",
+      },
+      body: JSON.stringify({
+        domain_name: domainName,
+        years,
+        auto_renew: autoRenew,
+        privacy_mode: "redaction",
+      }),
+      timeoutMs: 90_000,
+    },
+  );
+  const body = await response.text();
+  const data = parseRecord(body) ?? {};
+  if (![200, 201, 202].includes(response.status)) {
+    throw new Error(
+      `Cloudflare registration failed (${response.status}): ${body.slice(0, 500)}`,
+    );
+  }
+  const result = record(data.result) ?? {};
+  const state = stringValue(result.state) || "pending";
+  return {
+    status: state,
+    completed: result.completed === true || state === "succeeded",
+  };
+}
+
+export async function getZoneForDomainOrThrow(
+  token: string,
+  domain: string,
+): Promise<CloudflareZone> {
+  try {
+    return await getZoneForDomain(token, domain);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (/No Cloudflare zone found/i.test(message)) {
+      throw new DnsZoneNotFoundError(domain);
+    }
+    throw error;
+  }
+}

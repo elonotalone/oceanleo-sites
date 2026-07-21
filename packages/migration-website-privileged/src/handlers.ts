@@ -139,18 +139,12 @@ const PENDING_BLOCKERS: Readonly<Record<string, string>> = Object.freeze({
     "requires the complete remote-server deploy pipeline and prerequisite reporting",
   "/api/sites/[id]/backend/ops":
     "requires remote process, log, restart, and health operations over server-ssh",
-  "/api/sites/[id]/domain/purchase-and-bind":
-    "requires registration polling followed by transactional Cloudflare/Vercel binding",
   "/api/sites/[id]/overrides/sync":
     "requires GitHub tree commits plus template-slot merge and deployment synchronization",
-  "/api/sites/[id]/toggle":
-    "requires Cloudflare and Aliyun DNS-provider mutation with rollback state",
   "/api/sites/[id]/transfer-out":
     "requires platform source export and ownership transfer into a user GitHub repository",
   "/api/sites/[id]/vibe-code-hosted":
     "requires source discovery and Cursor execution against a privileged remote SSH checkout",
-  "/api/sites/[id]/vibe-code/pr":
-    "requires encrypted GitHub credentials and pull-request diff/merge lifecycle parity",
   "/api/sites/import":
     "requires GitHub/Vercel/remote-server ownership discovery and credential validation",
 });

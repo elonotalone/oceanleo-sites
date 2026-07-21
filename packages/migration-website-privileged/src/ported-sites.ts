@@ -1,10 +1,17 @@
 import type { PluginRouteHandler } from "@oceanleo/plugin-runtime";
 
 import {
+  checkDomainAvailability,
+  createZone,
   deleteDnsRecord,
+  DnsZoneNotFoundError,
+  getAccountId,
   getZoneForDomain,
+  getZoneForDomainOrThrow,
   listDnsRecords,
+  registerDomain,
   upsertVercelDnsRecord,
+  waitForZoneActive,
 } from "./cloudflare-zones";
 import {
   getDefaultBranchSha,
@@ -22,6 +29,7 @@ import {
 import {
   authenticated,
   decryptVaultValue,
+  errorMessage,
   fetchWithTimeout,
   json,
   parameter,
@@ -1315,12 +1323,545 @@ const siteDomainHandler = responseHandler({
   },
 });
 
+const siteToggleHandler = responseHandler({
+  POST: async (request, params) => {
+    const auth = await authenticated(request);
+    if (!auth.ok) return auth.response;
+    const id = parameter(params, "id");
+    let body: { action?: "pause" | "resume" };
+    try {
+      body = (await request.json()) as typeof body;
+    } catch {
+      return json({ error: "Invalid JSON" }, 400);
+    }
+    const action = body.action;
+    if (action !== "pause" && action !== "resume") {
+      return json({ error: "action must be 'pause' or 'resume'" }, 400);
+    }
+
+    const { data: site } = await auth.supabase
+      .from("deployed_sites")
+      .select("id, status, custom_domain, dns_provider, capabilities")
+      .eq("id", id)
+      .eq("user_id", auth.user.id)
+      .single();
+    if (!site) return json({ error: "Site not found" }, 404);
+    if (!site.custom_domain) {
+      return json(
+        {
+          error: "no_custom_domain",
+          message:
+            "This site has no custom domain bound. Only the *.vercel.app address is live; bind a custom domain first if you want to use one-click offline.",
+        },
+        400,
+      );
+    }
+
+    const capabilities = record(site.capabilities) ?? {};
+    if (capabilities.toggle_dns === false) {
+      return json(
+        {
+          error: "toggle_disabled",
+          message:
+            "One-click offline is disabled for this site (likely imported with external DNS).",
+        },
+        400,
+      );
+    }
+
+    const providerName = stringValue(site.dns_provider) || "cloudflare";
+    if (providerName !== "cloudflare") {
+      return json(
+        {
+          error: "dns_provider_unsupported",
+          message: `DNS provider "${providerName}" has no toggle implementation. Use Cloudflare or manage DNS manually.`,
+        },
+        400,
+      );
+    }
+
+    if (action === "pause" && site.status === "paused") {
+      return json({ status: "paused", alreadyInState: true });
+    }
+    if (action === "resume" && site.status === "live") {
+      return json({ status: "live", alreadyInState: true });
+    }
+    if (
+      site.status === "toggling_pause" ||
+      site.status === "toggling_resume"
+    ) {
+      return json(
+        {
+          status: site.status,
+          error: "toggle_in_progress",
+          message:
+            "A previous toggle is still in progress. Wait a moment and recheck.",
+        },
+        409,
+      );
+    }
+
+    let dnsToken: string;
+    try {
+      dnsToken = await cloudflareVaultToken(auth.supabase, auth.user.id);
+    } catch (error) {
+      return json(
+        {
+          error: `${providerName}_not_connected`,
+          message: errorMessage(
+            error,
+            `${providerName} is required for one-click offline. Connect it in Vault.`,
+          ),
+          missingPlatform: providerName,
+        },
+        400,
+      );
+    }
+
+    const transitional =
+      action === "pause" ? "toggling_pause" : "toggling_resume";
+    await auth.supabase
+      .from("deployed_sites")
+      .update({
+        status: transitional,
+        toggle_error: null,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", id);
+
+    try {
+      const zone = await getZoneForDomainOrThrow(
+        dnsToken,
+        site.custom_domain,
+      );
+
+      if (action === "pause") {
+        const records = await listDnsRecords(
+          dnsToken,
+          zone.id,
+          site.custom_domain,
+        );
+        let removed = 0;
+        for (const dns of records) {
+          if (
+            dns.type === "A" ||
+            dns.type === "AAAA" ||
+            dns.type === "CNAME"
+          ) {
+            await deleteDnsRecord(dnsToken, zone.id, dns.id);
+            removed += 1;
+          }
+        }
+        await auth.supabase
+          .from("deployed_sites")
+          .update({
+            status: "paused",
+            paused_at: new Date().toISOString(),
+            custom_domain_status: "paused",
+            toggle_error: null,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", id);
+        return json({
+          status: "paused",
+          recordsRemoved: removed,
+          domain: site.custom_domain,
+          provider: providerName,
+          message:
+            "Site offline. DNS TTL may delay propagation by up to 5 minutes. The *.vercel.app fallback URL is still accessible.",
+        });
+      }
+
+      await upsertVercelDnsRecord(
+        dnsToken,
+        zone.id,
+        site.custom_domain,
+        zone.name,
+      );
+      await auth.supabase
+        .from("deployed_sites")
+        .update({
+          status: "live",
+          paused_at: null,
+          custom_domain_status: "verifying",
+          toggle_error: null,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", id);
+      return json({
+        status: "live",
+        domain: site.custom_domain,
+        provider: providerName,
+        message: "Site back online. DNS propagation may take a few minutes.",
+      });
+    } catch (error) {
+      const message = errorMessage(error, "Toggle failed");
+      const isZoneMissing = error instanceof DnsZoneNotFoundError;
+      await auth.supabase
+        .from("deployed_sites")
+        .update({
+          status: "toggle_error",
+          toggle_error: message,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", id);
+      const fallbackStatus =
+        site.status &&
+        site.status !== "toggling_pause" &&
+        site.status !== "toggling_resume"
+          ? site.status
+          : action === "pause"
+            ? "live"
+            : "paused";
+      return json(
+        {
+          error: isZoneMissing ? "dns_zone_not_found" : "toggle_failed",
+          status: "toggle_error",
+          previousStatus: fallbackStatus,
+          message,
+        },
+        isZoneMissing ? 400 : 500,
+      );
+    }
+  },
+});
+
+const sitePurchaseAndBindHandler = responseHandler({
+  POST: async (request, params) => {
+    const auth = await authenticated(request);
+    if (!auth.ok) return auth.response;
+    const siteId = parameter(params, "id");
+    let body: {
+      domainName?: string;
+      years?: number;
+      autoRenew?: boolean;
+    };
+    try {
+      body = (await request.json()) as typeof body;
+    } catch {
+      return json({ error: "Invalid JSON" }, 400);
+    }
+    const domainName = body.domainName?.trim().toLowerCase();
+    if (!domainName) {
+      return json({ error: "domainName is required" }, 400);
+    }
+
+    const { data: site } = await auth.supabase
+      .from("deployed_sites")
+      .select("vercel_project_id")
+      .eq("id", siteId)
+      .eq("user_id", auth.user.id)
+      .single();
+    if (!site) return json({ error: "Site not found" }, 404);
+
+    const steps: Array<{ name: string; status: string; detail?: string }> =
+      [];
+    const emit = (name: string, status: string, detail?: string) => {
+      steps.push({ name, status, detail });
+    };
+
+    try {
+      const cfToken = await cloudflareVaultToken(
+        auth.supabase,
+        auth.user.id,
+      );
+      const accountId = await getAccountId(cfToken);
+      emit("cloudflare_auth", "ok");
+
+      const check = await checkDomainAvailability(
+        cfToken,
+        accountId,
+        domainName,
+      );
+      if (!check.available || !check.can_register) {
+        return json(
+          {
+            error: "domain_unavailable",
+            message: `"${domainName}" is not available for registration.`,
+            steps,
+          },
+          409,
+        );
+      }
+
+      const registration = await registerDomain(
+        cfToken,
+        accountId,
+        domainName,
+        body.years ?? 1,
+        body.autoRenew ?? false,
+      );
+      emit("domain_purchased", "ok", registration.status);
+
+      const zone = await createZone(cfToken, accountId, domainName);
+      emit("zone_created", "ok", zone.status);
+
+      const activeZone = await waitForZoneActive(
+        cfToken,
+        zone.id,
+        2 * 60 * 1000,
+        5000,
+      );
+      const zoneReady = activeZone.status === "active";
+      emit("zone_active", zoneReady ? "ok" : "pending", activeZone.status);
+
+      const { token: vercelToken, teamId } = await vercelCredentials(
+        auth.supabase,
+        auth.user.id,
+      );
+      const qs = teamId ? `?teamId=${teamId}` : "";
+      const vercelRes = await fetchWithTimeout(
+        `${VERCEL_API}/v10/projects/${site.vercel_project_id}/domains${qs}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${vercelToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: domainName }),
+        },
+      );
+      if (!vercelRes.ok && vercelRes.status !== 409) {
+        const errText = await vercelRes.text();
+        throw new Error(
+          `Vercel add domain failed (${vercelRes.status}): ${errText.slice(0, 300)}`,
+        );
+      }
+      emit("vercel_domain", "ok");
+
+      if (zoneReady) {
+        await upsertVercelDnsRecord(
+          cfToken,
+          activeZone.id,
+          domainName,
+          activeZone.name,
+        );
+        emit("dns_configured", "ok");
+      } else {
+        emit(
+          "dns_configured",
+          "pending",
+          "Zone not yet active; DNS will need manual retry",
+        );
+      }
+
+      await auth.supabase
+        .from("deployed_sites")
+        .update({
+          custom_domain: domainName,
+          custom_domain_status: zoneReady ? "verifying" : "pending_zone",
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", siteId);
+      emit("db_updated", "ok");
+
+      return json({
+        status: "ok",
+        domain: domainName,
+        zoneReady,
+        steps,
+        message: zoneReady
+          ? "Domain purchased and bound. DNS propagation may take a few minutes."
+          : "Domain purchased and added to Vercel. The Cloudflare zone is still activating — DNS will be configured once it's ready. Try rebinding in a few minutes.",
+      });
+    } catch (error) {
+      emit("error", "error", errorMessage(error, "Unknown error"));
+      return json(
+        {
+          error: errorMessage(error, "Purchase and bind failed"),
+          steps,
+        },
+        500,
+      );
+    }
+  },
+});
+
+const siteVibeCodePrHandler = responseHandler({
+  GET: async (request, params) => {
+    const auth = await authenticated(request);
+    if (!auth.ok) return auth.response;
+    const id = parameter(params, "id");
+    let token: string;
+    let repo: { owner: string; repo: string };
+    try {
+      token = await githubAccessToken(auth.supabase, auth.user.id);
+      const { data: site } = await auth.supabase
+        .from("deployed_sites")
+        .select("github_repo_url")
+        .eq("id", id)
+        .eq("user_id", auth.user.id)
+        .single();
+      if (!site) throw new Error("Site not found");
+      if (!site.github_repo_url) {
+        throw new Error("Site has no GitHub repository.");
+      }
+      const parsed = parseRepoIdentifier(site.github_repo_url);
+      if (!parsed) throw new Error(`Unrecognized repo URL: ${site.github_repo_url}`);
+      repo = parsed;
+    } catch (error) {
+      return json(
+        { error: errorMessage(error, "Setup error") },
+        400,
+      );
+    }
+
+    const includeAll =
+      new URL(request.url).searchParams.get("all") === "true";
+    const response = await fetchWithTimeout(
+      `https://api.github.com/repos/${repo.owner}/${repo.repo}/pulls?state=open&per_page=30&sort=created&direction=desc`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+      },
+    );
+    if (!response.ok) {
+      const text = await response.text();
+      return json(
+        {
+          error: `GitHub API error (${response.status}): ${text.slice(0, 300)}`,
+        },
+        response.status,
+      );
+    }
+
+    const pulls = (await response.json()) as Array<Record<string, any>>;
+    const mapped = pulls
+      .map((pull) => ({
+        number: pull.number as number,
+        title: pull.title as string,
+        url: pull.html_url as string,
+        branch: pull.head?.ref as string | undefined,
+        baseBranch: pull.base?.ref as string | undefined,
+        author: pull.user?.login as string | undefined,
+        createdAt: pull.created_at as string,
+        mergeable: pull.mergeable as boolean | null | undefined,
+        draft: pull.draft as boolean | undefined,
+        isCursor:
+          typeof pull.head?.ref === "string" &&
+          (pull.head.ref.startsWith("cursor/") ||
+            pull.head.ref.startsWith("cursor-")),
+      }))
+      .filter((pull) => includeAll || pull.isCursor);
+
+    return json({ pulls: mapped });
+  },
+  POST: async (request, params) => {
+    const auth = await authenticated(request);
+    if (!auth.ok) return auth.response;
+    const id = parameter(params, "id");
+    let body: { number?: unknown; action?: unknown };
+    try {
+      body = (await request.json()) as typeof body;
+    } catch {
+      return json({ error: "Invalid JSON" }, 400);
+    }
+    const number = typeof body.number === "number" ? body.number : null;
+    const action = body.action === "close" ? "close" : "merge";
+    if (!number || number <= 0) {
+      return json({ error: "number is required" }, 400);
+    }
+
+    let token: string;
+    let repo: { owner: string; repo: string };
+    try {
+      token = await githubAccessToken(auth.supabase, auth.user.id);
+      const { data: site } = await auth.supabase
+        .from("deployed_sites")
+        .select("github_repo_url")
+        .eq("id", id)
+        .eq("user_id", auth.user.id)
+        .single();
+      if (!site) throw new Error("Site not found");
+      if (!site.github_repo_url) {
+        throw new Error("Site has no GitHub repository.");
+      }
+      const parsed = parseRepoIdentifier(site.github_repo_url);
+      if (!parsed) throw new Error(`Unrecognized repo URL: ${site.github_repo_url}`);
+      repo = parsed;
+    } catch (error) {
+      return json(
+        { error: errorMessage(error, "Setup error") },
+        400,
+      );
+    }
+
+    if (action === "close") {
+      const response = await fetchWithTimeout(
+        `https://api.github.com/repos/${repo.owner}/${repo.repo}/pulls/${number}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ state: "closed" }),
+        },
+      );
+      if (!response.ok) {
+        const text = await response.text();
+        return json(
+          {
+            error: `GitHub close failed (${response.status}): ${text.slice(0, 300)}`,
+          },
+          response.status,
+        );
+      }
+      return json({ status: "closed", number });
+    }
+
+    const response = await fetchWithTimeout(
+      `https://api.github.com/repos/${repo.owner}/${repo.repo}/pulls/${number}/merge`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ merge_method: "squash" }),
+      },
+    );
+    if (!response.ok) {
+      const text = await response.text();
+      let hint = "";
+      try {
+        hint = stringValue(parseRecord(text)?.message) || "";
+      } catch {
+        /* ignore */
+      }
+      return json(
+        {
+          error: `Merge failed (${response.status}): ${hint || text.slice(0, 300)}`,
+        },
+        response.status,
+      );
+    }
+    const data = (await response.json()) as Record<string, unknown>;
+    return json({
+      status: "merged",
+      number,
+      sha: data.sha,
+      message: data.message,
+    });
+  },
+});
+
 export const SITE_WEBSITE_HANDLERS: Readonly<
   Record<string, PluginRouteHandler>
 > = Object.freeze({
   "/api/sites": sitesHandler,
   "/api/sites/[id]/domain": siteDomainHandler,
+  "/api/sites/[id]/domain/purchase-and-bind": sitePurchaseAndBindHandler,
   "/api/sites/[id]/env": siteEnvHandler,
+  "/api/sites/[id]/toggle": siteToggleHandler,
+  "/api/sites/[id]/vibe-code/pr": siteVibeCodePrHandler,
   "/api/sites/[id]/virtual-config": virtualConfigHandler,
   "/api/sites/platform-deploy": platformDeployHandler,
   "/api/user-templates/[id]/snapshot": userTemplateSnapshotHandler,
