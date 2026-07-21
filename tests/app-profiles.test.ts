@@ -81,6 +81,8 @@ test("both Next apps expose the shared shell and secret-free metadata routes", (
   for (const app of ["standard", "website-privileged"]) {
     for (const relative of [
       "app/page.tsx",
+      "app/[...segments]/page.tsx",
+      "app/api/[...segments]/route.ts",
       "app/api/health/route.ts",
       "app/api/tenant/route.ts",
       "app/robots.ts",
@@ -97,10 +99,19 @@ test("both Next apps expose the shared shell and secret-free metadata routes", (
   }
 
   const standardSource = sourceBelow(`${root}/apps/standard`);
+  const privilegedSource = sourceBelow(`${root}/apps/website-privileged`);
   assert.doesNotMatch(standardSource, /WEBSITE_[A-Z0-9_]+/);
   assert.doesNotMatch(
     standardSource,
     /\/api\/(?:vault|servers|oauth|vercel|deploy)/,
+  );
+  assert.doesNotMatch(
+    standardSource,
+    /migration-website-privileged|plugin-registry\/website-privileged/,
+  );
+  assert.doesNotMatch(
+    privilegedSource,
+    /migration-(?:office|media|knowledge|creation|platform)|plugin-registry\/standard/,
   );
 });
 
@@ -114,6 +125,12 @@ test("workspace pins one shared UI release and one lockfile", () => {
   for (const manifest of [
     "apps/standard/package.json",
     "apps/website-privileged/package.json",
+    "packages/migration-office/package.json",
+    "packages/migration-media/package.json",
+    "packages/migration-knowledge/package.json",
+    "packages/migration-creation/package.json",
+    "packages/migration-platform/package.json",
+    "packages/migration-website-privileged/package.json",
     "packages/runtime/package.json",
     "packages/tenant-registry/package.json",
   ]) {

@@ -1,11 +1,10 @@
+import { ALL_BATCH_INVENTORIES } from "@oceanleo/plugin-registry/inventory";
 import { TENANTS, type AppProfile } from "@oceanleo/tenant-registry";
 
 import {
   FOUNDATION_ROUTES,
   INVENTORY_SCHEMA,
   INVENTORY_SOURCE_REVISION,
-  WEBSITE_LEGACY_HANDLERS,
-  websiteHandlerCapabilities,
   type InventoryKind,
   type ParityStatus,
 } from "./source";
@@ -46,10 +45,6 @@ function sorted(values: readonly string[]): readonly string[] {
 }
 
 export function buildInventory(): InventoryDocument {
-  if (WEBSITE_LEGACY_HANDLERS.length !== 47) {
-    throw new Error("Website privileged inventory must contain 47 handlers.");
-  }
-
   const entries: InventoryEntry[] = [];
   const tenants = [...TENANTS].sort((left, right) =>
     String(left.manifest.siteKey).localeCompare(
@@ -79,41 +74,42 @@ export function buildInventory(): InventoryDocument {
         },
       });
     }
-    entries.push({
-      id: `plugin:${tenant.profile}:${tenantKey}:${tenant.plugin.id}`,
-      appProfile: tenant.profile,
-      tenantKey,
-      route: null,
-      kind: "plugin-extension",
-      methods: [],
-      capabilities: ["workbench:advanced"],
-      extensionId: tenant.plugin.id,
-      migrationBatch: tenant.migrationBatch,
-      parity: {
-        status: "pending",
-        source: `legacy:${tenantKey}`,
-        evidence: [],
-      },
-    });
   }
 
-  for (const route of sorted(WEBSITE_LEGACY_HANDLERS)) {
-    entries.push({
-      id: `legacy:website-privileged:website:${route}`,
-      appProfile: "website-privileged",
-      tenantKey: "website",
-      route,
-      kind: "route-handler",
-      methods: ["UNMIGRATED"],
-      capabilities: sorted(websiteHandlerCapabilities(route)),
-      extensionId: "website-source-workbench",
-      migrationBatch: 6,
-      parity: {
-        status: "pending",
-        source: `website:front/app${route}/route.ts`,
-        evidence: [],
-      },
-    });
+  const tenantsByKey = new Map(
+    tenants.map((tenant) => [String(tenant.manifest.siteKey), tenant]),
+  );
+  for (const declaration of ALL_BATCH_INVENTORIES) {
+    for (const tenantKey of declaration.tenantKeys) {
+      const tenant = tenantsByKey.get(tenantKey);
+      if (
+        !tenant ||
+        tenant.profile !== declaration.profile ||
+        tenant.migrationBatch !== declaration.migrationBatch
+      ) {
+        throw new Error(
+          `${declaration.batchId}: inventory tenant ${tenantKey} violates ownership.`,
+        );
+      }
+    }
+    for (const entry of declaration.entries) {
+      entries.push({
+        id: entry.id,
+        appProfile: declaration.profile,
+        tenantKey: entry.tenantKey,
+        route: entry.route,
+        kind: entry.kind,
+        methods: sorted(entry.methods),
+        capabilities: sorted(entry.capabilities),
+        extensionId: entry.extensionId,
+        migrationBatch: declaration.migrationBatch,
+        parity: {
+          status: entry.parity.status,
+          source: entry.parity.source,
+          evidence: sorted(entry.parity.evidence),
+        },
+      });
+    }
   }
 
   entries.sort((left, right) => left.id.localeCompare(right.id));

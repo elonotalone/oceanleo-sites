@@ -1,0 +1,23 @@
+{
+  "name": "@oceanleo/plugin-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./dispatcher": "./src/dispatcher.ts",
+    "./next": "./src/next.tsx"
+  },
+  "scripts": {
+    "test": "node --conditions=react-server --import tsx --test tests/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@oceanleo/capabilities": "workspace:*",
+    "@oceanleo/runtime": "workspace:*",
+    "@oceanleo/tenant-registry": "workspace:*",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "server-only": "^0.0.1"
+  }
+}

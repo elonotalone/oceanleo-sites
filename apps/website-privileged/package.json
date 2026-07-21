@@ -9,6 +9,8 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@oceanleo/plugin-registry": "workspace:*",
+    "@oceanleo/plugin-runtime": "workspace:*",
     "@oceanleo/runtime": "workspace:*",
     "@oceanleo/tenant-registry": "workspace:*",
     "@oceanleo/ui": "catalog:",

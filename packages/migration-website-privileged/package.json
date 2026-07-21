@@ -1,15 +1,18 @@
 {
-  "name": "@oceanleo/standard-app",
+  "name": "@oceanleo/migration-website-privileged",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "exports": {
+    "./plugins": "./src/plugins.ts",
+    "./inventory": "./src/inventory.ts"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "test": "node --conditions=react-server --import tsx --test tests/*.test.ts",
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@oceanleo/plugin-registry": "workspace:*",
+    "@oceanleo/capabilities": "workspace:*",
     "@oceanleo/plugin-runtime": "workspace:*",
     "@oceanleo/runtime": "workspace:*",
     "@oceanleo/tenant-registry": "workspace:*",
@@ -17,9 +20,7 @@
     "@supabase/ssr": "^0.12.3",
     "@supabase/supabase-js": "^2.110.7",
     "next": "^16.2.10",
-    "next-intl": "^4.13.2",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+    "react-dom": "^19.2.7"
   }
 }

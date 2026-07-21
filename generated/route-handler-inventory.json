@@ -1,6 +1,6 @@
 {
   "schema": "oceanleo.route-handler-inventory.v1",
-  "sourceRevision": "foundation-2026-07-21.1",
+  "sourceRevision": "migration-seams-2026-07-21.2",
   "summary": {
     "tenants": 31,
     "standardTenants": 30,

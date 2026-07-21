@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import Ajv from "ajv";
+import { ALL_BATCH_INVENTORIES } from "@oceanleo/plugin-registry/inventory";
 
 import {
   buildInventory,
@@ -83,5 +84,29 @@ test("inventory reports foundation and pending parity without profile leakage", 
           )),
     ),
     false,
+  );
+
+  assert.deepEqual(
+    ALL_BATCH_INVENTORIES.map((declaration) => declaration.ownerPath),
+    [
+      "packages/migration-office",
+      "packages/migration-media",
+      "packages/migration-knowledge",
+      "packages/migration-creation",
+      "packages/migration-platform",
+      "packages/migration-website-privileged",
+    ],
+  );
+  const websiteDeclaration = ALL_BATCH_INVENTORIES.find(
+    (declaration) => declaration.batchId === "website-privileged",
+  );
+  assert.ok(websiteDeclaration);
+  assert.equal(
+    websiteDeclaration.entries.filter(
+      (entry) =>
+        entry.kind === "route-handler" &&
+        entry.parity.status === "pending",
+    ).length,
+    47,
   );
 });

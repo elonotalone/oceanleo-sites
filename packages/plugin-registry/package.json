@@ -1,0 +1,24 @@
+{
+  "name": "@oceanleo/plugin-registry",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./standard": "./src/standard.ts",
+    "./website-privileged": "./src/website-privileged.ts",
+    "./inventory": "./src/inventory.ts"
+  },
+  "scripts": {
+    "test": "node --conditions=react-server --import tsx --test tests/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@oceanleo/migration-creation": "workspace:*",
+    "@oceanleo/migration-knowledge": "workspace:*",
+    "@oceanleo/migration-media": "workspace:*",
+    "@oceanleo/migration-office": "workspace:*",
+    "@oceanleo/migration-platform": "workspace:*",
+    "@oceanleo/migration-website-privileged": "workspace:*",
+    "@oceanleo/plugin-runtime": "workspace:*"
+  }
+}

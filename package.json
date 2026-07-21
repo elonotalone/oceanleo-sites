@@ -10,13 +10,15 @@
   "scripts": {
     "inventory:generate": "tsx scripts/generate-inventory.ts",
     "inventory:check": "tsx scripts/check-inventory.ts",
-    "test": "node --conditions=react-server --import tsx --test tests/*.test.ts",
+    "test": "node --conditions=react-server --import tsx --test tests/*.test.ts && pnpm -r --filter './packages/**' --if-present run test",
     "typecheck": "pnpm typecheck:tools && pnpm -r --if-present typecheck",
     "typecheck:tools": "tsc -p tsconfig.tools.json",
     "check": "pnpm inventory:check && pnpm test && pnpm typecheck"
   },
   "devDependencies": {
     "@oceanleo/capabilities": "workspace:*",
+    "@oceanleo/plugin-registry": "workspace:*",
+    "@oceanleo/plugin-runtime": "workspace:*",
     "@oceanleo/runtime": "workspace:*",
     "@oceanleo/tenant-registry": "workspace:*",
     "@supabase/ssr": "^0.12.3",

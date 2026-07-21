@@ -17,6 +17,12 @@ importers:
       '@oceanleo/capabilities':
         specifier: workspace:*
         version: link:packages/capabilities
+      '@oceanleo/plugin-registry':
+        specifier: workspace:*
+        version: link:packages/plugin-registry
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:packages/plugin-runtime
       '@oceanleo/runtime':
         specifier: workspace:*
         version: link:packages/runtime
@@ -68,6 +74,12 @@ importers:
 
   apps/standard:
     dependencies:
+      '@oceanleo/plugin-registry':
+        specifier: workspace:*
+        version: link:../../packages/plugin-registry
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:../../packages/plugin-runtime
       '@oceanleo/runtime':
         specifier: workspace:*
         version: link:../../packages/runtime
@@ -101,6 +113,12 @@ importers:
 
   apps/website-privileged:
     dependencies:
+      '@oceanleo/plugin-registry':
+        specifier: workspace:*
+        version: link:../../packages/plugin-registry
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:../../packages/plugin-runtime
       '@oceanleo/runtime':
         specifier: workspace:*
         version: link:../../packages/runtime
@@ -137,6 +155,219 @@ importers:
       '@oceanleo/tenant-registry':
         specifier: workspace:*
         version: link:../tenant-registry
+      server-only:
+        specifier: ^0.0.1
+        version: 0.0.1
+
+  packages/migration-creation:
+    dependencies:
+      '@oceanleo/capabilities':
+        specifier: workspace:*
+        version: link:../capabilities
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:../plugin-runtime
+      '@oceanleo/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@oceanleo/tenant-registry':
+        specifier: workspace:*
+        version: link:../tenant-registry
+      '@oceanleo/ui':
+        specifier: 'catalog:'
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+      next:
+        specifier: ^16.2.10
+        version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.2.7
+        version: 19.2.7(react@19.2.7)
+
+  packages/migration-knowledge:
+    dependencies:
+      '@oceanleo/capabilities':
+        specifier: workspace:*
+        version: link:../capabilities
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:../plugin-runtime
+      '@oceanleo/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@oceanleo/tenant-registry':
+        specifier: workspace:*
+        version: link:../tenant-registry
+      '@oceanleo/ui':
+        specifier: 'catalog:'
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+      next:
+        specifier: ^16.2.10
+        version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.2.7
+        version: 19.2.7(react@19.2.7)
+
+  packages/migration-media:
+    dependencies:
+      '@oceanleo/capabilities':
+        specifier: workspace:*
+        version: link:../capabilities
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:../plugin-runtime
+      '@oceanleo/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@oceanleo/tenant-registry':
+        specifier: workspace:*
+        version: link:../tenant-registry
+      '@oceanleo/ui':
+        specifier: 'catalog:'
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+      next:
+        specifier: ^16.2.10
+        version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.2.7
+        version: 19.2.7(react@19.2.7)
+
+  packages/migration-office:
+    dependencies:
+      '@oceanleo/capabilities':
+        specifier: workspace:*
+        version: link:../capabilities
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:../plugin-runtime
+      '@oceanleo/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@oceanleo/tenant-registry':
+        specifier: workspace:*
+        version: link:../tenant-registry
+      '@oceanleo/ui':
+        specifier: 'catalog:'
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+      next:
+        specifier: ^16.2.10
+        version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.2.7
+        version: 19.2.7(react@19.2.7)
+
+  packages/migration-platform:
+    dependencies:
+      '@oceanleo/capabilities':
+        specifier: workspace:*
+        version: link:../capabilities
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:../plugin-runtime
+      '@oceanleo/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@oceanleo/tenant-registry':
+        specifier: workspace:*
+        version: link:../tenant-registry
+      '@oceanleo/ui':
+        specifier: 'catalog:'
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+      next:
+        specifier: ^16.2.10
+        version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.2.7
+        version: 19.2.7(react@19.2.7)
+
+  packages/migration-website-privileged:
+    dependencies:
+      '@oceanleo/capabilities':
+        specifier: workspace:*
+        version: link:../capabilities
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:../plugin-runtime
+      '@oceanleo/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@oceanleo/tenant-registry':
+        specifier: workspace:*
+        version: link:../tenant-registry
+      '@oceanleo/ui':
+        specifier: 'catalog:'
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@7.0.2))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+      '@supabase/ssr':
+        specifier: ^0.12.3
+        version: 0.12.3(@supabase/supabase-js@2.110.7)
+      '@supabase/supabase-js':
+        specifier: ^2.110.7
+        version: 2.110.7
+      next:
+        specifier: ^16.2.10
+        version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.2.7
+        version: 19.2.7(react@19.2.7)
+
+  packages/plugin-registry:
+    dependencies:
+      '@oceanleo/migration-creation':
+        specifier: workspace:*
+        version: link:../migration-creation
+      '@oceanleo/migration-knowledge':
+        specifier: workspace:*
+        version: link:../migration-knowledge
+      '@oceanleo/migration-media':
+        specifier: workspace:*
+        version: link:../migration-media
+      '@oceanleo/migration-office':
+        specifier: workspace:*
+        version: link:../migration-office
+      '@oceanleo/migration-platform':
+        specifier: workspace:*
+        version: link:../migration-platform
+      '@oceanleo/migration-website-privileged':
+        specifier: workspace:*
+        version: link:../migration-website-privileged
+      '@oceanleo/plugin-runtime':
+        specifier: workspace:*
+        version: link:../plugin-runtime
+
+  packages/plugin-runtime:
+    dependencies:
+      '@oceanleo/capabilities':
+        specifier: workspace:*
+        version: link:../capabilities
+      '@oceanleo/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@oceanleo/tenant-registry':
+        specifier: workspace:*
+        version: link:../tenant-registry
+      next:
+        specifier: ^16.2.10
+        version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
       server-only:
         specifier: ^0.0.1
         version: 0.0.1
