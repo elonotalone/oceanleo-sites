@@ -104,6 +104,10 @@ async function main(): Promise<void> {
     "w1-rollback-drill",
     "release-gate",
     "legacy-resource-seal",
+    // Post-cutover seals that refresh must not drop.
+    "shared-ui-release",
+    "git-archive",
+    "credential-status",
   ]);
   const foundational = bundle.receipts.filter((receipt) =>
     keepKinds.has(receipt.kind),
