@@ -6,7 +6,7 @@ import type { SelectionControlIcon } from "@oceanleo/ui/shell/selection-context"
 import {
   isStableEditorId,
   type WebsiteEditorBreakpoint,
-} from "./editor-runtime.ts";
+} from "./editor-runtime";
 
 type WebsiteSelectionControl = SelectionControl & {
   slot?: "compact" | "inspector" | "stage" | "context-menu";
