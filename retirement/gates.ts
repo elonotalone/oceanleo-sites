@@ -580,8 +580,9 @@ function validateCredentials(
     }
     if (
       record.targetCredentialId !== credential.targetCredentialId ||
+      record.legacyCredentialId !== credential.legacyCredentialId ||
       record.distinct !== true ||
-      record.legacyFingerprintSha256 === record.targetFingerprintSha256 ||
+      record.legacyCredentialId === record.targetCredentialId ||
       record.issuerRevocationReceiptId.length === 0 ||
       record.issuerRevocationProven !== true
     ) {

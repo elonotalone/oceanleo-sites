@@ -34,7 +34,8 @@
     "typecheck": "pnpm typecheck:tools && pnpm -r --if-present typecheck",
     "typecheck:cutover": "tsc -p deploy/tsconfig.json",
     "typecheck:tools": "tsc -p tsconfig.tools.json",
-    "check": "pnpm inventory:check && pnpm test && pnpm typecheck"
+    "check": "pnpm inventory:check && pnpm test && pnpm typecheck",
+    "retirement:accelerate-reseal": "tsx scripts/retirement-accelerate-reseal.ts"
   },
   "devDependencies": {
     "@oceanleo/capabilities": "workspace:*",

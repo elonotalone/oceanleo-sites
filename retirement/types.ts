@@ -16,14 +16,14 @@ export type AcceptedChangeKind =
   | "routing";
 
 export interface RetirementPolicy {
-  readonly soakDays: 30;
+  readonly soakDays: number;
   readonly probeIntervalMinutes: 15;
-  readonly minimumCompleteRunsPerUtcDay: 95;
+  readonly minimumCompleteRunsPerUtcDay: number;
   readonly minimumAvailability: 0.999;
   readonly maximumConsecutiveTransportFailures: 1;
-  readonly quietPeriodHours: 72;
-  readonly softRetireAfterDays: 30;
-  readonly providerDeleteAfterDays: 60;
+  readonly quietPeriodHours: number;
+  readonly softRetireAfterDays: number;
+  readonly providerDeleteAfterDays: number;
 }
 
 export interface ReplacementProject {

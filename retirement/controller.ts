@@ -60,7 +60,8 @@ export interface RetirementCommandResult {
 function deletionEligibleAt(
   ledger: RetirementLedger,
   evaluation: RetirementGateEvaluation,
-  policyDays: number,
+  providerDeleteAfterDays: number,
+  softRetireAfterDays: number,
 ): number {
   if (
     !["soft-retired", "deleting-provider-resources", "provider-resources-deleted"].includes(
@@ -77,8 +78,9 @@ function deletionEligibleAt(
     throw new RetirementGateError("retirement-boundary-invalid");
   }
   return Math.max(
-    softRetiredAt + 30 * DAY_MS,
-    soakSoftBoundary + (policyDays - 30) * DAY_MS,
+    softRetiredAt + providerDeleteAfterDays * DAY_MS,
+    soakSoftBoundary +
+      (providerDeleteAfterDays - softRetireAfterDays) * DAY_MS,
   );
 }
 
@@ -269,6 +271,7 @@ export class RetirementController {
       ledger,
       evaluation,
       this.loaded.manifest.policy.providerDeleteAfterDays,
+      this.loaded.manifest.policy.softRetireAfterDays,
     );
     if (Date.parse(now) < eligibleAt) {
       throw new RetirementGateError("provider-deletion-premature", {
@@ -301,6 +304,7 @@ export class RetirementController {
         lockedLedger,
         lockedEvaluation,
         this.loaded.manifest.policy.providerDeleteAfterDays,
+        this.loaded.manifest.policy.softRetireAfterDays,
       );
       if (Date.parse(lockedNow) < lockedEligibleAt) {
         throw new RetirementGateError("provider-deletion-premature", {

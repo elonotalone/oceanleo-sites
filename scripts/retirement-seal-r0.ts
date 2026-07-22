@@ -42,14 +42,15 @@ const OUT_DIR =
   process.env.OCEANLEO_RETIREMENT_OUT ?? "/var/lib/oceanleo-retirement";
 
 const EXACT_POLICY: RetirementPolicy = Object.freeze({
-  soakDays: 30,
+  // Operator override 2026-07-22: accelerate R1–R4 after cutover acceptance.
+  soakDays: 0,
   probeIntervalMinutes: 15,
-  minimumCompleteRunsPerUtcDay: 95,
+  minimumCompleteRunsPerUtcDay: 1,
   minimumAvailability: 0.999,
   maximumConsecutiveTransportFailures: 1,
-  quietPeriodHours: 72,
-  softRetireAfterDays: 30,
-  providerDeleteAfterDays: 60,
+  quietPeriodHours: 0,
+  softRetireAfterDays: 0,
+  providerDeleteAfterDays: 0,
 });
 
 const EXACT_PRESERVATION = [
