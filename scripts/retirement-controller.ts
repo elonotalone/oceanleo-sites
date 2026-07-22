@@ -3,8 +3,8 @@ import { pathToFileURL } from "node:url";
 
 import {
   RetirementController,
-  RetirementGateError,
 } from "../retirement/controller";
+import { RetirementGateError } from "../retirement/gates";
 import { AtomicRetirementLedgerStore } from "../retirement/ledger";
 import { loadRetirementManifest } from "../retirement/manifest";
 import type { RetirementProvider } from "../retirement/provider";
@@ -47,12 +47,18 @@ function parseArguments(argv: readonly string[]): ParsedArguments {
     throw new RetirementGateError("command-invalid");
   }
   let execute = false;
-  let manifestPath = process.env.OCEANLEO_RETIREMENT_MANIFEST;
+  let manifestPath =
+    process.env.OCEANLEO_RETIREMENT_MANIFEST ??
+    "/var/lib/oceanleo-retirement/retirement-manifest.json";
   let manifestDigestPath =
-    process.env.OCEANLEO_RETIREMENT_MANIFEST_SHA256;
-  let receiptsPath = process.env.OCEANLEO_RETIREMENT_RECEIPTS;
+    process.env.OCEANLEO_RETIREMENT_MANIFEST_SHA256 ??
+    "/var/lib/oceanleo-retirement/retirement-manifest.sha256";
+  let receiptsPath =
+    process.env.OCEANLEO_RETIREMENT_RECEIPTS ??
+    "/var/lib/oceanleo-retirement/retirement-receipts.json";
   let receiptsDigestPath =
-    process.env.OCEANLEO_RETIREMENT_RECEIPTS_SHA256;
+    process.env.OCEANLEO_RETIREMENT_RECEIPTS_SHA256 ??
+    "/var/lib/oceanleo-retirement/retirement-receipts.sha256";
   let ledgerPath =
     process.env.OCEANLEO_RETIREMENT_LEDGER ??
     "/var/lib/oceanleo-retirement/ledger.json";

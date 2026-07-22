@@ -15,6 +15,8 @@ import type {
 
 const DAY_MS = 24 * 60 * 60 * 1_000;
 const HOUR_MS = 60 * 60 * 1_000;
+/** Operational receipts may be sealed slightly before evaluation. */
+const OPS_RECEIPT_FRESHNESS_MS = 5 * 60 * 1_000;
 
 export interface RetirementGateBlocker {
   readonly code: string;
@@ -427,7 +429,7 @@ function validateQuietPeriod(
     "change log observedThrough",
     blockers,
   );
-  if (observedThrough !== null && observedThrough < now) {
+  if (observedThrough !== null && observedThrough < now - OPS_RECEIPT_FRESHNESS_MS) {
     addBlocker(blockers, "change-log-stale", {
       observedThrough: receipt.payload.observedThrough,
     });
@@ -465,7 +467,7 @@ function validateIncidentsAndHolds(
       "incident status observedThrough",
       blockers,
     );
-    if (observed !== null && observed < now) {
+    if (observed !== null && observed < now - OPS_RECEIPT_FRESHNESS_MS) {
       addBlocker(blockers, "incident-status-stale");
     }
     const unresolved = incidents.payload.incidents.filter(
@@ -484,7 +486,7 @@ function validateIncidentsAndHolds(
       "hold status observedThrough",
       blockers,
     );
-    if (observed !== null && observed < now) {
+    if (observed !== null && observed < now - OPS_RECEIPT_FRESHNESS_MS) {
       addBlocker(blockers, "hold-status-stale");
     }
     const active = holds.payload.holds.filter(
