@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@oceanleo/ui':
-      specifier: github:elonotalone/oceanleo-ui#v0.186.0
-      version: 0.186.0
+      specifier: github:elonotalone/oceanleo-ui#v0.187.0
+      version: 0.187.0
 
 importers:
 
@@ -88,7 +88,7 @@ importers:
         version: link:../../packages/tenant-registry
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
       '@supabase/ssr':
         specifier: ^0.12.3
         version: 0.12.3(@supabase/supabase-js@2.110.7)
@@ -140,7 +140,7 @@ importers:
         version: link:../../packages/tenant-registry
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
       '@supabase/ssr':
         specifier: ^0.12.3
         version: 0.12.3(@supabase/supabase-js@2.110.7)
@@ -201,7 +201,7 @@ importers:
         version: link:../tenant-registry
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
       next:
         specifier: ^16.2.10
         version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -228,7 +228,7 @@ importers:
         version: link:../tenant-registry
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
       next:
         specifier: ^16.2.10
         version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -255,7 +255,7 @@ importers:
         version: link:../tenant-registry
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
       next:
         specifier: ^16.2.10
         version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -282,7 +282,7 @@ importers:
         version: link:../tenant-registry
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
       mammoth:
         specifier: ^1.11.0
         version: 1.12.0
@@ -321,7 +321,7 @@ importers:
         version: link:../tenant-registry
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
       next:
         specifier: ^16.2.10
         version: 16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -348,7 +348,7 @@ importers:
         version: link:../tenant-registry
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
       '@supabase/ssr':
         specifier: ^0.12.3
         version: 0.12.3(@supabase/supabase-js@2.110.7)
@@ -420,7 +420,7 @@ importers:
         version: link:../tenant-registry
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
       '@supabase/ssr':
         specifier: ^0.12.3
         version: 0.12.3(@supabase/supabase-js@2.110.7)
@@ -450,7 +450,7 @@ importers:
     dependencies:
       '@oceanleo/ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
+        version: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)
 
 packages:
 
@@ -1016,9 +1016,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@oceanleo/ui@https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa':
-    resolution: {gitHosted: true, integrity: sha512-SH1By0BM1IT4B5bmtETV5zV/jH4dYMfwtpYkjKaAYXuPEO59C3kx5is0tBHRNXxiJx6olU6xNPcv4YhaQyKn/Q==, tarball: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa}
-    version: 0.186.0
+  '@oceanleo/ui@https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90}
+    version: 0.187.0
     peerDependencies:
       '@supabase/ssr': '>=0.5.0'
       '@supabase/supabase-js': '>=2.45.0'
@@ -3292,7 +3292,7 @@ snapshots:
   '@next/swc-win32-x64-msvc@16.2.10':
     optional: true
 
-  '@oceanleo/ui@https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/09907f6de8706987d0f421d7febbd13ab3feb2fa(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)':
+  '@oceanleo/ui@https://codeload.github.com/elonotalone/oceanleo-ui/tar.gz/72732a08be01aa5b73482902ba29fbfb969d2a90(@floating-ui/dom@1.8.0)(@supabase/ssr@0.12.3(@supabase/supabase-js@2.110.7))(@supabase/supabase-js@2.110.7)(@tiptap/extensions@3.28.0(@tiptap/core@3.28.0(@tiptap/pm@3.28.0))(@tiptap/pm@3.28.0))(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(next-intl@4.13.2(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@5.9.3))(next@16.2.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz)':
     dependencies:
       '@google/model-viewer': 4.3.1(three@0.183.2)
       '@supabase/ssr': 0.12.3(@supabase/supabase-js@2.110.7)

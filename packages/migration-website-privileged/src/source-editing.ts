@@ -22,6 +22,10 @@ export const WEBSITE_PROJECT_API_PATHS = Object.freeze({
   projects: "/v1/website-projects",
   project: (projectId: string) =>
     `/v1/website-projects/${encodeURIComponent(projectId)}`,
+  byArtifact: (artifactId: string) =>
+    `/v1/website-projects/by-artifact/${encodeURIComponent(artifactId)}`,
+  artifactLink: (projectId: string) =>
+    `/v1/website-projects/${encodeURIComponent(projectId)}/artifact-link`,
   migrateLegacy: (legacySiteId: string) =>
     `/v1/website-projects/legacy/deployed-sites/${encodeURIComponent(legacySiteId)}/migrate`,
   sessions: (projectId: string) =>

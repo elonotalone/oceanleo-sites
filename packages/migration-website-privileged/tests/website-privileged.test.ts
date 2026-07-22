@@ -362,6 +362,61 @@ test("privileged batch page routes have zero pending declarations", () => {
   assert.deepEqual(pendingPageRoutes, []);
 });
 
+test("embed site-editor mounts the ported WebsiteProjectWorkbench", async () => {
+  const result = await dispatchWorkspace("/embed/site-editor");
+  assert.equal(result.kind, "page");
+  if (result.kind !== "page") return;
+  const element = result.node as ReactElement;
+  assert.equal(typeof element.type, "object");
+  assert.ok(
+    element.type &&
+      typeof element.type === "object" &&
+      "$$typeof" in element.type,
+  );
+
+  const route = WEBSITE_PRIVILEGED_PLUGIN_BATCH.plugins[0]!.routes.find(
+    (entry) => entry.id === "website.embed.site-editor",
+  );
+  assert.ok(route);
+  assert.equal(route.pattern, "/embed/site-editor");
+  assert.equal(route.parity.status, "verified");
+  assert.equal(typeof route.handler, "function");
+  assert.ok(
+    WEBSITE_PRIVILEGED_INVENTORY.entries.some(
+      (entry) =>
+        entry.route === "/embed/site-editor" && entry.kind === "page",
+    ),
+  );
+});
+
+test("legacy product routes permanently redirect to /workspace", async () => {
+  const redirects = [
+    "/sites",
+    "/sites/new",
+    "/sites/import",
+    "/sites/legacy-1",
+    "/sites/legacy-1/domain-purchase",
+    "/vault",
+    "/templates",
+    "/templates/starter/preview",
+    "/explore",
+    "/library",
+    "/projects",
+  ] as const;
+
+  for (const path of redirects) {
+    const result = await dispatchWorkspace(path);
+    assert.equal(result.kind, "redirect", path);
+    if (result.kind !== "redirect") continue;
+    assert.equal(result.status, 307, path);
+    assert.equal(
+      result.location,
+      "https://website.oceanleo.com/workspace",
+      path,
+    );
+  }
+});
+
 test("source-editing contracts preserve canonical project and path safety", () => {
   assert.deepEqual(WEBSITE_WORKBENCH_VIEWS, [
     "preview",
@@ -401,5 +456,17 @@ test("source-editing contracts preserve canonical project and path safety", () =
   assert.equal(
     WEBSITE_PROJECT_API_PATHS.restoreRevision("project/a", "revision/b"),
     "/v1/website-projects/project%2Fa/revisions/revision%2Fb/restore",
+  );
+  assert.equal(
+    WEBSITE_PROJECT_API_PATHS.byArtifact(
+      "123e4567-e89b-42d3-a456-426614174000",
+    ),
+    "/v1/website-projects/by-artifact/123e4567-e89b-42d3-a456-426614174000",
+  );
+  assert.equal(
+    WEBSITE_PROJECT_API_PATHS.artifactLink(
+      "123e4567-e89b-42d3-a456-426614174000",
+    ),
+    "/v1/website-projects/123e4567-e89b-42d3-a456-426614174000/artifact-link",
   );
 });

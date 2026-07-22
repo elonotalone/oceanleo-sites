@@ -6,12 +6,12 @@
     "standardTenants": 30,
     "privilegedTenants": 1,
     "domains": 37,
-    "entries": 656,
+    "entries": 668,
     "parity": {
       "foundation": 155,
       "pending": 0,
       "partial": 0,
-      "verified": 501,
+      "verified": 513,
       "retired": 0
     }
   },
@@ -3858,6 +3858,7 @@
       "kind": "plugin-extension",
       "methods": [],
       "capabilities": [
+        "shell:render",
         "website:deploy",
         "website:domain-admin",
         "website:provider-oauth",
@@ -15307,6 +15308,298 @@
           "packages/migration-website-privileged/src/ported-servers.ts",
           "packages/migration-website-privileged/src/ported-sites.ts",
           "packages/migration-website-privileged/tests/website-privileged.test.ts"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.embed.site-editor",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/embed/site-editor",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "website:source-edit"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/embed/site-editor/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/src/site-editor/DevSiteEditorClient.tsx",
+          "packages/migration-website-privileged/src/site-editor/editor-core.ts",
+          "packages/migration-website-privileged/src/site-editor/project-workbench/core/project-api.ts",
+          "packages/migration-website-privileged/src/site-editor/WebsiteProjectWorkbench.tsx",
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/embed/site-editor/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.explore",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/explore",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/explore/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/explore/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.library",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/library",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/library/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/library/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.projects",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/projects",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/projects/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/projects/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.sites",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/sites",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/sites/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/sites/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.sites-domain-purchase",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/sites/:id/domain-purchase",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/sites/[id]/domain-purchase/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/sites/[id]/domain-purchase/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.sites-id",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/sites/:id",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/sites/[id]/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/sites/[id]/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.sites-import",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/sites/import",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/sites/import/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/sites/import/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.sites-new",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/sites/new",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/sites/new/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/sites/new/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.templates",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/templates",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/templates/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/templates/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.templates-preview",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/templates/:slug/preview",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/templates/[slug]/preview/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/templates/[slug]/preview/page.tsx"
+        ]
+      }
+    },
+    {
+      "id": "route:website-privileged:website:website.redirect.vault",
+      "appProfile": "website-privileged",
+      "tenantKey": "website",
+      "route": "/vault",
+      "kind": "page",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "capabilities": [
+        "shell:render"
+      ],
+      "extensionId": "website-source-workbench",
+      "migrationBatch": 6,
+      "parity": {
+        "status": "verified",
+        "source": "website:front/app/vault/page.tsx",
+        "evidence": [
+          "packages/migration-website-privileged/tests/website-privileged.test.ts",
+          "website:front/app/vault/page.tsx"
         ]
       }
     },

@@ -1,6 +1,8 @@
 import {
   defineBatchInventory,
   type BatchInventoryEntry,
+  type PluginRouteDeclaration,
+  type TenantPluginDefinition,
 } from "@oceanleo/plugin-runtime";
 
 import {
@@ -57,20 +59,28 @@ const handlerInventory = WEBSITE_HANDLER_DESCRIPTORS.map(
   }),
 );
 
-const workspaceInventory: BatchInventoryEntry = {
-  id: "route:website-privileged:website:website.workspace",
-  tenantKey: "website",
-  route: "/workspace/:path*",
-  kind: "page",
-  methods: ["GET", "HEAD"],
-  capabilities: ["website:source-edit"],
-  extensionId: "website-source-workbench",
-  parity: {
-    status: "verified",
-    source: "website:front/app/workspace/page.tsx",
-    evidence: WEBSITE_WORKSPACE_PARITY_EVIDENCE,
-  },
-};
+function pageRouteInventory(
+  plugin: TenantPluginDefinition,
+  route: PluginRouteDeclaration,
+): BatchInventoryEntry {
+  return {
+    id: `route:website-privileged:${plugin.siteKey}:${route.id}`,
+    tenantKey: plugin.siteKey,
+    route: route.pattern,
+    kind: "page",
+    methods: route.methods.includes("*") ? ["GET", "HEAD"] : [...route.methods],
+    capabilities: [route.capability],
+    extensionId: plugin.id,
+    parity: route.parity,
+  };
+}
+
+const pageInventory: readonly BatchInventoryEntry[] =
+  WEBSITE_PRIVILEGED_PLUGIN_BATCH.plugins.flatMap((plugin) =>
+    plugin.routes
+      .filter((route) => route.kind === "page" || route.kind === "redirect")
+      .map((route) => pageRouteInventory(plugin, route)),
+  );
 
 export const WEBSITE_PRIVILEGED_INVENTORY = defineBatchInventory({
   batchId: WEBSITE_PRIVILEGED_PLUGIN_BATCH.id,
@@ -82,5 +92,5 @@ export const WEBSITE_PRIVILEGED_INVENTORY = defineBatchInventory({
   tenantKeys: WEBSITE_PRIVILEGED_PLUGIN_BATCH.plugins.map(
     (plugin) => plugin.siteKey,
   ),
-  entries: [...pluginEntries, workspaceInventory, ...handlerInventory],
+  entries: [...pluginEntries, ...pageInventory, ...handlerInventory],
 });

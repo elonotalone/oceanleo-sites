@@ -10,4 +10,4 @@ allowBuilds:
   sharp: true
 
 catalog:
-  "@oceanleo/ui": "github:elonotalone/oceanleo-ui#v0.186.0"
+  "@oceanleo/ui": "github:elonotalone/oceanleo-ui#v0.187.0"
