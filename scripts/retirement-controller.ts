@@ -9,6 +9,7 @@ import { AtomicRetirementLedgerStore } from "../retirement/ledger";
 import { loadRetirementManifest } from "../retirement/manifest";
 import type { RetirementProvider } from "../retirement/provider";
 import { loadRetirementReceiptBundle } from "../retirement/receipts";
+import { VercelRetirementProvider } from "../retirement/vercel-provider";
 
 type Command =
   | "status"
@@ -150,9 +151,6 @@ export async function runRetirementCli(
 ): Promise<number> {
   try {
     const options = parseArguments(argv);
-    if (options.execute && !dependencies.provider) {
-      throw new RetirementGateError("mutation-provider-unconfigured");
-    }
     const loaded = await loadRetirementManifest({
       manifestPath: options.manifestPath,
       digestPath: options.manifestDigestPath,
@@ -162,11 +160,20 @@ export async function runRetirementCli(
       options.receiptsDigestPath,
       loaded.digest,
     );
+    const provider: RetirementProvider | undefined =
+      dependencies.provider ??
+      (options.execute
+        ? new VercelRetirementProvider({
+            protectedHosts: loaded.manifest.protectedDomains.map(
+              (domain) => domain.host,
+            ),
+          })
+        : undefined);
     const controller = new RetirementController({
       loaded,
       evidence,
       ledgerStore: new AtomicRetirementLedgerStore(options.ledgerPath),
-      provider: dependencies.provider,
+      provider,
     });
     const result =
       options.command === "status"

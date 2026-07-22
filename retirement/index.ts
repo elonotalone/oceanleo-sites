@@ -6,3 +6,4 @@ export * from "./manifest";
 export * from "./provider";
 export * from "./receipts";
 export * from "./types";
+export * from "./vercel-provider";
