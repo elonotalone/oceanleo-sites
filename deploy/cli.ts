@@ -17,6 +17,7 @@ import {
 import { loadCutoverManifest } from "./manifest";
 import { VercelOpsProvider } from "./provider";
 import type { WaveId } from "./types";
+import { assertDualAppMutationsAllowed } from "../scripts/assert-dual-app-retired";
 
 type Command =
   | "plan"
@@ -122,6 +123,16 @@ function parseArguments(argv: readonly string[]): ParsedArguments {
   ) {
     throw new CutoverGateError("execute-not-allowed", {
       command: typedCommand,
+    });
+  }
+  try {
+    assertDualAppMutationsAllowed({
+      command: typedCommand,
+      execute,
+    });
+  } catch (error) {
+    throw new CutoverGateError("dual-app-retired", {
+      message: error instanceof Error ? error.message : String(error),
     });
   }
   return Object.freeze({

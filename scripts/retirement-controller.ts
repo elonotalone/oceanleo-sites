@@ -10,6 +10,7 @@ import { loadRetirementManifest } from "../retirement/manifest";
 import type { RetirementProvider } from "../retirement/provider";
 import { loadRetirementReceiptBundle } from "../retirement/receipts";
 import { VercelRetirementProvider } from "../retirement/vercel-provider";
+import { assertDualAppMutationsAllowed } from "./assert-dual-app-retired";
 
 type Command =
   | "status"
@@ -101,6 +102,16 @@ function parseArguments(argv: readonly string[]): ParsedArguments {
     (command === "status" || command === "check")
   ) {
     throw new RetirementGateError("execute-not-allowed", { command });
+  }
+  try {
+    assertDualAppMutationsAllowed({
+      command: command as string,
+      execute,
+    });
+  } catch (error) {
+    throw new RetirementGateError("dual-app-retired", {
+      message: error instanceof Error ? error.message : String(error),
+    });
   }
   return Object.freeze({
     command: command as Command,

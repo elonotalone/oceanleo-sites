@@ -1,6 +1,14 @@
-# OceanLeo sites
+# OceanLeo sites — RETIRED dual-app path
 
-One pnpm monorepo for the OceanLeo tenant foundation:
+> **Production publish is retired here.** Independent GitHub repos →
+> independent Vercel projects are the only live topology. See
+> [`RETIRED.md`](./RETIRED.md). Mutating `pnpm cutover:*` /
+> `pnpm retirement:* --execute` commands fail closed while `RETIRED.md`
+> exists.
+
+# OceanLeo sites (historical)
+
+One pnpm monorepo that formerly hosted the OceanLeo tenant foundation:
 
 - `apps/standard`: 30 standard tenants and 36 exact hosts.
 - `apps/website-privileged`: the `website` tenant and its isolated server
